@@ -1,0 +1,30 @@
+<div class=" container justify-content-center row" >
+  <div class="">
+    <h2>
+      La liste des modules
+    </h2>
+  </div>
+  <div class="input-group col-6">
+    <input type="text" class="form-control" placeholder="Tapez le nom du Module" aria-label="" aria-describedby="button-addon2">
+    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Affiche</button>
+  </div>
+</div>
+
+
+<div class=" container-fluid justify-content-center row">
+
+  <div class="card col-sm-12 col-lg-auto m-3 shadow-lg" *ngFor="let module of modules">
+    <div class="card-title p-lg-1" >
+      {{ module.id }}
+    </div>
+    <div class="card-body">
+      {{ module.nom }}
+    </div>
+    <div class="card-footer text-center">
+      {{ module.desc }} <br>
+      <a class="btn btn-primary" routerLink="/cours">
+        Savoir plus
+      </a>
+    </div>
+  </div>
+</div>

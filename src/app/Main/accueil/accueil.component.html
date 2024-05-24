@@ -1,5 +1,5 @@
 
-<div class="main">
+<!-- <div class="main">
   <div class="Principale container-fluid h-100">
     <nav class="navbar navbar-expand-lg  bg-body-secondary" >
 
@@ -84,9 +84,9 @@
         </div>
 
         <div class="col-md  sticky-md-top  h-auto" style="overflow: auto; ">
-          <!-- <div class="option">
+          <div class="option">
               <app-option></app-option>
-          </div> -->
+          </div>
           <div class="row d-flex py-2 flex-column option">
               <ul class="nav navbar">
                   <li *ngFor="let cont of elementsName" class="m-2">
@@ -109,4 +109,154 @@
 
       </div>
   </div>
-</div>
+</div> -->
+
+
+
+<link rel="stylesheet" href="../../sources/css/app.css">
+
+<main>
+  <style>
+    .show{
+      visibility: visible;
+    }
+    .hide{
+      visibility: hidden;
+    }
+  </style>
+    
+	<div class="wrapper">
+
+    <nav id="sidebar" class="sidebar js-sidebar show">
+			<div class="sidebar-content js-simplebar">
+				<a class="sidebar-brand" routerLink="" *ngFor="let universite of universites">
+          <span class="align-middle">A l'UNIVERSITE</span><br>
+          <span class="align-middle text-dark-emphasis">{{universite.nom}}</span>
+        </a>
+
+				<ul class="sidebar-nav">
+					<li class="sidebar-header">
+						Pages
+					</li>
+
+					<li class="sidebar-item ">
+						<a class="sidebar-link" [routerLink]="['']" routerLinkActive="router-link-active" >
+              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Tableau de Bord</span>
+            </a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="">
+              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
+            </a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" [routerLink]="['login']" >
+              <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
+            </a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" (click)="handleLogout()">
+              <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">deconnexion</span>
+            </a>
+					</li>
+
+					<li class="sidebar-header ">
+						La Gestion
+					</li>
+          <li *ngFor="let action of navElements" >
+              <a   [routerLink]="action.route" (click)="changer(action.name)" [class]="action==currentAction ? 'sidebar-link  ' : 'sidebar-link active ' ">
+                <i class="align-middle bi bi-{{action.icon}}" data-feather="sliders" ></i> <span class="align-middle">{{action.title}}</span>
+              </a>
+          </li>
+				</ul>
+			</div>
+		</nav>
+    
+
+  <div class="main">
+    <nav class="navbar navbar-expand navbar-light navbar-bg">
+      <a id="icone" class="sidebar-toggle  ">
+        <i class="hamburger align-self-center"></i>
+      </a>
+
+      <div class="navbar-collapse collapse">
+        <ul class="navbar-nav navbar-align">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-inline-block d-sm-block" href="#" data-bs-toggle="dropdown"  *ngIf="users">
+              <img src="../image/DIEZ2.jpg" class="avatar img-fluid rounded me-1" alt="{{users.name}}"  /> <span class="text-dark">{{users.name}}</span>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+              <i class="align-middle" data-feather="settings"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end">
+              <!-- <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+              <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
+              <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Log out</a> -->
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="content">
+      <div class="container">
+        <router-outlet>
+
+        </router-outlet>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container-fluid">
+        <div class="row text-muted">
+          <div class="col-6 text-start">
+            <p class="mb-0">
+              <a class="text-muted" href=""><strong>A l'Université</strong></a> &copy;
+            </p>
+          </div>
+          <div class="col-6 text-end">
+            <ul class="list-inline">
+              <li class="list-inline-item">
+                <a class="text-muted" href="">Support</a>
+              </li>
+              <li class="list-inline-item">
+                <a class="text-muted" href="">Aide</a>
+              </li>
+              <li class="list-inline-item">
+                <a class="text-muted" href="">Privacy</a>
+              </li>
+              <li class="list-inline-item">
+                <a class="text-muted" href="">Terms</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+	</div>
+</main>
+
+<script >
+  var navbar =  document.getElementById('sidebar');
+  var icone = document.getElementById('icone');
+  icone.addEventListener('click',() =>{
+    if (navbar.classList.contains("show")) {
+      navbar.classList.remove("show");
+    }else{
+      navbar.classList.add("show");
+    }
+  } );
+</script>

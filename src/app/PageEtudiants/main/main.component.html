@@ -1,0 +1,45 @@
+<main>
+  <div class="container">
+    <div class="navbar">
+      <nav>
+        <ul>
+          <li><a routerLink="etudiant">Accueil</a></li>
+          <li><a routerLink="cours">Cours</a></li>
+          <li><a routerLink="module">Modules</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="container">
+    <router-outlet>
+
+    </router-outlet>
+  </div>
+  <div class="footer container">
+    <div class="container-fluid">
+      <div class="row text-muted">
+        <div class="col-6 text-start">
+          <p class="mb-0">
+            <a class="text-muted" href=""><strong>A l'Université</strong></a> &copy;
+          </p>
+        </div>
+        <div class="col-6 text-end">
+          <ul class="list-inline">
+            <li class="list-inline-item">
+              <a class="text-muted" href="">Support</a>
+            </li>
+            <li class="list-inline-item">
+              <a class="text-muted" href="">Aide</a>
+            </li>
+            <li class="list-inline-item">
+              <a class="text-muted" href="">Privacy</a>
+            </li>
+            <li class="list-inline-item">
+              <a class="text-muted" href="">Terms</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

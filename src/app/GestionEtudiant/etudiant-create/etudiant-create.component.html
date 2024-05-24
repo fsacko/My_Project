@@ -1,31 +1,52 @@
 <form (ngSubmit)="insertEtudiant()"  class=" container row my-4">
   <div class="mb-2 col-lg-6">
     <label for="nom" class="form-label">Nom</label>
-    <input class="form-control" type="text" name="nom" id="nom" placeholder="Nom de l'Etudiant" [(ngModel)]="etudiant.Nom">
+    <input required class="form-control" type="text" name="nom" id="nom" placeholder="Nom de l'Etudiant" [(ngModel)]="etudiant.nom">
   </div>
   <div class="mb-2 col-lg-6">
     <label for="Prenom" class="form-label">Prenom</label>
-    <input class="form-control" type="text" name="Prenom" id="Prenom" placeholder="Prenom de l'Etudiant" [(ngModel)]="etudiant.Prenom">
+    <input required class="form-control" type="text" name="Prenom" id="Prenom" placeholder="Prenom de l'Etudiant" [(ngModel)]="etudiant.prenom">
   </div>
   <div class="mb-2 col-lg-6">
     <label for="Email" class="form-label">Email</label>
-    <input class="form-control" type="email" name="Email" id="Email" placeholder="Exemple@xyz.abc" [(ngModel)]="etudiant.Email">
+    <input required class="form-control" type="email" name="Email" id="Email" placeholder="Exemple@xyz.abc" [(ngModel)]="etudiant.email">
   </div>
   <div class="mb-2 col-lg-6">
     <label for="Adresse" class="form-label">Adresse</label>
-    <input class="form-control" type="text" name="Adresse" id="Adresse" placeholder="Bamako/rue:xxx/porte:abc" [(ngModel)]="etudiant.Adresse">
+    <input required class="form-control" type="text" name="Adresse" id="Adresse" placeholder="Bamako/rue:xxx/porte:abc" [(ngModel)]="etudiant.adresse">
   </div>
   <div class="mb-2 col-lg-6">
     <label for="Tel" class="form-label">Tel</label>
-    <input class="form-control" type="text" name="Tel" id="Tel" placeholder="00223 12 34 56 78" [(ngModel)]="etudiant.Tel">
+    <input required class="form-control" type="text" name="Tel" id="Tel" placeholder="00223 12 34 56 78" [(ngModel)]="etudiant.telephone">
   </div>
   <div class="mb-2 col-lg-6">
     <label for="Date_de_naissance" class="form-label">Date de naissance</label>
-    <input class="form-control" type="date" name="Date_de_naissance" id="Date_de_naissance" placeholder="Date de Naissance de l'etudiant" [(ngModel)]="etudiant.date_de_naissance">
+    <input required class="form-control" type="date" name="Date_de_naissance" id="Date_de_naissance" placeholder="Date de Naissance de l'etudiant" [(ngModel)]="etudiant.date_de_naissance">
   </div>
   <div class="mb-2 col-lg-6">
     <label for="Mot_de_passe" class="form-label">Mot de passe</label>
-    <input class="form-control" type="text" name="Mot_de_passe" id="Mot_de_passe" [(ngModel)]="etudiant.mot_de_passe">
+    <input required class="form-control" type="text" name="Mot_de_passe" id="Mot_de_passe" [(ngModel)]="etudiant.password">
+  </div>
+  <div class="mb-2 col-lg-6">
+    <label for="login" class="form-label">Login</label>
+    <input required class="form-control" type="text" name="login" id="login" [(ngModel)]="etudiant.login">
+  </div>
+  <div class="mb-2 col-lg-6" *ngFor="let universite of universites">
+    <input required class="form-control visually-hidden"  type="text" name="universite_id" id="universite_id"  [(ngModel)]="etudiant.universite_id"> {{universite.nom}}
+  </div>
+  <div class="mb-2 col-lg-6"  *ngFor="let classes of listeFiliere" >
+    <label for="Classe" class="form-label">Classe</label>
+    <select id="Classe"  class="form-select" name="filiere" [(ngModel)]="etudiant.filiere_id">
+      <!-- <option value="">Veuillez Choisir La Classe</option> -->
+      <option  *ngFor="let classe of classes" [value]="classe.id"><strong>{{classe.nom}}</strong> ({{classe.niveau}})</option>
+    </select>
+  </div>
+  <div class="mb-2 col-lg-6"  *ngFor="let classes of annee" >
+    <label for="Classe" class="form-label">Annee Scolaire</label>
+    <select id="annee"  class="form-select" name="annee_scolaire" [(ngModel)]="etudiant.annee_scolaire">
+      <!-- <option value="">Veuillez Choisir La annee</option> -->
+      <option  *ngFor="let annee of classes" [value]="annee.id"><strong>{{annee.annee}}</strong></option>
+    </select>
   </div>
   <div class="text-center col-12">
     <button class="btn btn-primary" >Ajouter</button>

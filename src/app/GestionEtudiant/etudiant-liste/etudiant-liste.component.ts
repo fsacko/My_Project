@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../service/data.service';
+import { Etudiants } from '../../CLASS/etudiant/etudiants';
 
 @Component({
   selector: 'app-etudiant-liste',
@@ -7,18 +8,22 @@ import { DataService } from '../../service/data.service';
   styleUrl: './etudiant-liste.component.css'
 })
 export class EtudiantListeComponent implements OnInit {
- 
-  etudiants: any;
 
+  //etudiants = new Etudiants();
+   etudiants :any | Array<any>;
   constructor (private data:DataService){  }
 
   ngOnInit(): void {
-    this.getEtudiantListe();
+    this.data.getEtudiantData().subscribe(res=>{
+      console.log(res);
+      this.etudiants = res;
+    });
   }
 
   getEtudiantListe(){
     this.data.getEtudiantData().subscribe(res=>{
+      console.log(res);
       this.etudiants = res;
     });
-  }
+  };
 }

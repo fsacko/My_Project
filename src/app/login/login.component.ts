@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { EmailValidator, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../service/auth/auth.service';
+import { HttpHeaders } from '@angular/common/http';
+import { DataService } from '../service/data.service';
 
 @Component({
   selector: 'app-login',
@@ -8,14 +12,64 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  loginFormGroup! : FormGroup;
+  loginFormGroup!: FormGroup;
+  errorMessage: any;
+  AuthentificationService: any;
+  universites: any;
 
-  constructor (private fB:FormBuilder){ }
 
+  constructor(private formB:FormBuilder, private router:Router,private auth:AuthService,private data:DataService ){}
   ngOnInit(): void {
-    this.loginFormGroup = this.fB.group(controlsConfig: {
-      username: this.fB.(),
+    this.loginFormGroup =this.formB.group({
+      email: this.formB.control('',Validators.compose([Validators.required,Validators.email])),
+      password: this.formB.control('',Validators.compose([Validators.required,Validators.minLength(4)]))
     });
   }
 
+
+
+  // Pour API laravel :
+
+  login(): void
+  {
+
+    let email = this.loginFormGroup.value.email;
+    let password = this.loginFormGroup.value.password;
+    // let email = "mk79@gmail.com";
+    // let password = "xHDCNkSNv:4kh3g";
+    const options = {
+      headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
+    };
+    this.auth.login(email, password).subscribe(res => {
+
+      const user = res.user ;
+
+      if (user) {
+        console.log(user);
+
+        const redirect = res.redirect ;
+        this.data.getUser(res.user);  //Pour inserer l'utilisateur connecté dans la methode getUser du service data
+        this.data.getAnnee().subscribe(annee => {this.data.annee_scolaire = annee});
+        this.auth.valideUser(res).subscribe();
+        this.data.universite_id = user.universite_id ;
+        this.data.getClasseData().subscribe(res => {this.data.filiereListe = res});
+        this.router.navigate([redirect]);
+
+      }
+
+      else{
+        const msg = res.error;
+        this.errorMessage = msg ;
+        console.log(this.errorMessage);
+      }
+
+    });
+
+  }
+
+
+
 }
+
+// subscribe(next:(res: any) => {
+//   localStorage.setItem('access_token', res.access_token);this.loading = false;this.router.navigate(['/']);}, error: (err: any) => {this.loading = false;this.errors=true;});

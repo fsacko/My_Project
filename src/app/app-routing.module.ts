@@ -4,15 +4,9 @@ import { EtudiantComponent } from './GestionEtudiant/etudiant/etudiant.component
 import { DepartementComponent } from './GestionAdministration/departement/departement.component';
 import { EtudiantListeComponent } from './GestionEtudiant/etudiant-liste/etudiant-liste.component';
 import { EtudiantCreateComponent } from './GestionEtudiant/etudiant-create/etudiant-create.component';
-import { EtudiantDetailComponent } from './GestionEtudiant/etudiant-detail/etudiant-detail.component';
-import { EtudiantEditComponent } from './GestionEtudiant/etudiant-edit/etudiant-edit.component';
 import { DirectionComponent } from './GestionAdministration/direction/direction.component';
 import { ClasseComponent } from './GestionFiliere/classe/classe.component';
 import { StatistiqueComponent } from './Gestion/statistique/statistique.component';
-import { AccueilGestionComponent } from './Gestion/accueil-gestion/accueil-gestion.component';
-import { AideComponent } from './Main/aide/aide.component';
-import { ContactComponent } from './Main/contact/contact.component';
-import { AproposComponent } from './Main/apropos/apropos.component';
 import { ProfesseurComponent } from './GestionAdministration/professeur/professeur.component';
 import { ClasseCoursComponent } from './GestionFiliere/classe-cours/classe-cours.component';
 import { ClasseListeComponent } from './GestionFiliere/classe-liste/classe-liste.component';
@@ -20,25 +14,55 @@ import { ClasseCreateComponent } from './GestionFiliere/classe-create/classe-cre
 import { LoginComponent } from './login/login.component';
 import { EtudiantFiliereComponent } from './GestionEtudiant/etudiant-filiere/etudiant-filiere.component';
 import { AccueilComponent } from './Main/accueil/accueil.component';
+import { DashbordComponent } from './Main/dashbord/dashbord.component';
+import { ListeCoursComponent } from './GestionFiliere/cours/liste-cours/liste-cours.component';
+import { EditeCoursComponent } from './GestionFiliere/cours/edite-cours/edite-cours.component';
+import { CreateCoursComponent } from './GestionFiliere/cours/create-cours/create-cours.component';
+import { ClasseAccueilComponent } from './GestionFiliere/classe-accueil/classe-accueil.component';
+import { authentificationGuard } from './guards/auth/authentification.guard';
+import { ModuleComponent } from './GestionModule/module/module.component';
+import { ModuleListeComponent } from './GestionModule/module-liste/module-liste.component';
+import { ClasseDetailsComponent } from './GestionFiliere/classe-details/classe-details.component';
+import { DetailComponent } from './GestionFiliere/detail/detail.component';
+import { ModuleCreateComponent } from './GestionModule/module-create/module-create.component';
+import { AccueilEtudiantComponent } from './PageEtudiants/accueil-etudiant/accueil-etudiant.component';
+import { CourEtudiantComponent } from './PageEtudiants/cour-etudiant/cour-etudiant.component';
+import { ModuleEtudiantComponent } from './PageEtudiants/module-etudiant/module-etudiant.component';
+import { MainComponent } from './PageEtudiants/main/main.component';
 
 const routes: Routes = [
     // {path : '', component : LoginComponent},
-    {path : 'login', component : LoginComponent},
-    {path: '', component:AccueilComponent, children: [
+    {path : 'login',component : LoginComponent},
+
+
+    // Pour la partie Administrateur
+
+    {path: '', component:AccueilComponent,canActivate:[authentificationGuard], children: [
+      {path: '',component:DashbordComponent},
       {path : 'direction', component : DirectionComponent},
+      {path : 'gestion', component : ClasseComponent},
 
-      {path : 'filiere', component : ClasseComponent},
-      {path : 'filiere/modules', component : ClasseCoursComponent},
-      {path : 'filiere/liste', component :ClasseListeComponent },
-      {path : 'filiere/new', component :ClasseCreateComponent },
-
-
-      {path: 'departement', component:DepartementComponent},
-      {path: 'professeur', component : ProfesseurComponent},
-
+      {path : 'gestion/Filieres', component : ClasseDetailsComponent , children:[
+        {path : '', component :ClasseAccueilComponent },
+        {path : 'new', component :ClasseCreateComponent },
+        {path : 'voir_plus', component :DetailComponent },
+        {path : 'newModule', component :ModuleCreateComponent },
+        {path : 'liste',component :ClasseListeComponent}
+      ]},
+      {path : 'gestion/Cours', component : ClasseCoursComponent, children:[
+        {path: '', component: ListeCoursComponent},
+        {path: 'liste', component: ListeCoursComponent},
+        {path: 'etat', component: EditeCoursComponent },
+        {path: 'new', component: CreateCoursComponent }
+      ]},
+      {path : 'gestion/Modules', component : ModuleComponent, children:[
+        {path: '', component: ModuleListeComponent},
+        {path: 'liste', component: ModuleListeComponent},
+        {path: 'new', component: ModuleCreateComponent }
+      ]},
       // Pour les routes qui ne concernent que les Etudiants :
-      {path:  'etudiant', component:EtudiantComponent,children:[
-        {path : '', component : EtudiantListeComponent},
+      {path:  'gestion/Etudiants', component:EtudiantComponent,children:[
+        {path : '', component : EtudiantFiliereComponent},
         {path : 'liste', component : EtudiantListeComponent},
         {path : 'filiere', component : EtudiantFiliereComponent},
         {path : 'new', component : EtudiantCreateComponent}
@@ -46,15 +70,24 @@ const routes: Routes = [
         // {path : 'edit/:id', component : EtudiantEditComponent}
 
       ]},
+
+
+
+      {path: 'departement', component:DepartementComponent},
+      {path: 'professeur', component : ProfesseurComponent},
+
       // Fin Pour les routes des etudiants.
 
       {path : 'statistique', component : StatistiqueComponent},
+    ]},
 
-      {path : 'gestion', component : AccueilGestionComponent},
-      {path : 'aide', component :AideComponent},
-      {path : 'contact', component : ContactComponent},
-      {path : 'apropos', component : AproposComponent},
-    ]}
+
+    // Pour la partie des Etudiants :
+    {path: 'etudiant',component:MainComponent,children:[
+      {path :'',component:AccueilEtudiantComponent},
+      {path :'cours',component:CourEtudiantComponent},
+      {path:'module',component:ModuleEtudiantComponent}
+    ] }
 
 ];
 

@@ -1,0 +1,35 @@
+<form (ngSubmit)="insertModule()"  class=" container row my-4">
+  <div class="mb-2 col-lg-6">
+    <label for="Abre" class="form-label">Nom du Module</label>
+    <input class="form-control" type="text" name="Abre" id="Abre" placeholder="Nom du Module" [(ngModel)]="module.nom">
+    <input class="form-control disabled visually-hidden" type="text" name="univID" [(ngModel)]="module.universite_id">
+  </div>
+  <div class="mb-2 col-lg-6">
+    <label for="nom" class="form-label">Code d'Apprentisage du Module</label>
+    <input class="form-control" type="text" name="Nom" id="nom" placeholder="Code (UE ou UA majeur ou mineur)" [(ngModel)]="module.code">
+  </div>
+  <div class="mb-2 col-12">
+    <label for="Classe" class="form-label">Module pour la Classe</label>
+    <select name="Classe" id="Classe" class="form-select" *ngFor="let classes of classeData" [(ngModel)]="module.filiere_id" >
+      <option value="">Veuillez Choisir La Classe</option>
+      <option value="{{classe.id}}"  *ngFor="let classe of classes"  ><strong>{{classe.nom}}</strong> ({{classe.niveau}})</option>
+    </select>
+  </div>
+  <div class="mb-2 col-lg-12" id="editor">
+
+    <label for="Explication" class="form-label">Description du Module</label>
+    <textarea type="text" name="explication" id="Explication" class="form-control mb-2" placeholder="Explication du Module"  [(ngModel)]="module.description"> </textarea>
+
+  </div>
+  <div class="text-center col-12 my-4">
+    <button class="btn btn-primary" >Ajouter</button>
+  </div>
+</form>
+<script>
+   
+	ClassicEditor
+		.create( document.querySelector( '#editor' ) )
+		.catch( error => {
+			console.error( error );
+		} );
+</script>

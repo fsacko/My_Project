@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Classe } from '../../CLASS/classe/classe';
 import { DataService } from '../../service/data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-classe-create',
@@ -10,13 +11,20 @@ import { DataService } from '../../service/data.service';
 export class ClasseCreateComponent implements OnInit  {
 
   filiere = new Classe;
-
-  constructor(private data:DataService){};
+  universite : any;
+  constructor(private data:DataService,private route:Router){};
   ngOnInit(): void {
-
+    this.data.getUniversite().subscribe(res => {
+      this.universite = res
+    });
+    this.filiere.universite_id = this.data.users.universite_id;
   }
   addFiliere() {
-    this.data.insertClasse(this.filiere).subscribe();
+    // console.log(this.filiere);
+    this.data.insertClasse(this.filiere).subscribe(res => {
+      const redirect = res.redirect;
+      this.route.navigate([redirect]); 
+    });
   }
 
 }

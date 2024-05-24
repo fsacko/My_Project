@@ -1,31 +1,58 @@
-<div class="container w-50 my-5">
-  <div class="card">
-    <div class="card-header">Login</div>
-    <div class="card-body">
-      <form class="container">
-        <img class="mb-4 text-center" src="#" alt="" width="72" height="57">
-        <h1 class="h3 mb-3 fw-normal text-center">CONNEXION</h1>
+<main class="d-flex w-100 login"  style="background-color: rgba(2, 2, 22, 0.546);">
+  <div class="container d-flex flex-column">
+    <div class="row vh-100">
+      <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+        <div class="d-table-cell align-middle">
+          <!-- <div class=" card-header text-center mt-4">
+            <h2 class="h2">BIENVENUE SUR LA PLATEFORME UNIVERSITE</h2>
+            <p class="lead">
+              Identifiez-vous Pour pouvoir continuer
+            </p>
+          </div> -->
+          <div class="card">
+            <div class="card-body shadow-lg shadow-sm"  style="background-color: rgba(251, 251, 251, 0.864);">
+              <div class="m-sm-4">
+                <div class="text-center">
+                  <img src="#" alt="Profils" class="img-fluid rounded-circle" width="132" height="132" />
+                </div>
+                <div class="text-danger" *ngIf="errorMessage">{{errorMessage}}</div>
 
-        <div class=" mb-3">
-          <label class="form-label">Email</label>
-          <input type="email" class="form-control"  placeholder="name@example.com">
-        </div>
-        <div class=" mb-3">
-          <label class="form-label">Password</label>
-          <input type="password" class="form-control" placeholder="Password">
+                <form [formGroup]="loginFormGroup" (ngSubmit)="login()">
+                  <!-- {{loginFormGroup.value| json}} -->
+                  <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input class="form-control form-control-lg" [required]="true" type="email" name="email" value="mk79@gmail.com" placeholder="Entrer votre Email "  formControlName="email"/>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input class="form-control form-control-lg" [required]="true" type="password" name="password" value="massirekamara" placeholder="Entrer Mot de passe" formControlName="password" >
+                    <small>
+                      <a href="#">Mot de passe oublié?</a>
+                    </small>
+                  </div>
+                  <div>
+                    <label class="form-check">
+                      <input class="form-check-input" type="checkbox" value="remember-me" name="remember-me" checked>
+                      <span class="form-check-label">
+                        Se souvenir de moi!
+                      </span>
+                    </label>
+                  </div>
+                  <div class="text-center mt-3">
+                    <!-- <a href="index.html" class="btn btn-lg btn-primary">Sign in</a> -->
+                    <button type="submit" class="btn btn-lg btn-primary">Connexion</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
 
         </div>
-
-        <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
-      </form>
-    </div>
-    <div class="card-footer">
-      <button class="w-100 btn btn-lg btn-primary  mb-3" type="submit">CONNEXION</button>
-      <p class="mt-5 mb-3 text-muted">&copy; 2023–2024</p>
+      </div>
     </div>
   </div>
-</div>
+</main>
+
+
+
+

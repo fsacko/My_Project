@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'FrontEnd';
+
+  // public Editor = ClassicEditor;
   actions : Array<any> = [
     {name :'accueils',title :"Accueil", "route":"accueil", "icon":"home"},
     {name :'administrations',title :"Departement", "route":"departement", "icon":"school"},

@@ -1,10 +1,14 @@
 export class Etudiants {
   id: any;
-  Nom: any;
-  Prenom: any;
-  Tel: any;
-  Email: any;
-  Adresse: any;
+  nom: any;
+  prenom: any;
+  telephone: any;
+  email: any;
+  adresse: any;
   date_de_naissance: any;
-  mot_de_passe: any;
+  login: any;
+  password: any;
+  universite_id: number|undefined;
+  annee_scolaire: any;
+  filiere_id: any;
 }

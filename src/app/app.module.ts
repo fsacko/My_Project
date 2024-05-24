@@ -15,22 +15,32 @@ import { DepartementComponent } from './GestionAdministration/departement/depart
 import { ProfesseurComponent } from './GestionAdministration/professeur/professeur.component';
 import { DirectionComponent } from './GestionAdministration/direction/direction.component';
 import { StatistiqueComponent } from './Gestion/statistique/statistique.component';
-import { OptionComponent } from './Main/option/option.component';
-import { ContenuFooterComponent } from './Main/contenu-footer/contenu-footer.component';
-import { ContenuHeaderComponent } from './Main/contenu-header/contenu-header.component';
 import { AccueilComponent } from './Main/accueil/accueil.component';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { EtudiantEditComponent } from './GestionEtudiant/etudiant-edit/etudiant-edit.component';
 import { AccueilGestionComponent } from './Gestion/accueil-gestion/accueil-gestion.component';
-import { ContactComponent } from './Main/contact/contact.component';
-import { AproposComponent } from './Main/apropos/apropos.component';
-import { AideComponent } from './Main/aide/aide.component';
 import { ClasseListeComponent } from './GestionFiliere/classe-liste/classe-liste.component';
 import { ClasseCreateComponent } from './GestionFiliere/classe-create/classe-create.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EtudiantFiliereComponent } from './GestionEtudiant/etudiant-filiere/etudiant-filiere.component';
+import { DashbordComponent } from './Main/dashbord/dashbord.component';
+import { ProfilComponent } from './Profil/profil/profil.component';
+import { CreateCoursComponent } from './GestionFiliere/cours/create-cours/create-cours.component';
+import { EditeCoursComponent } from './GestionFiliere/cours/edite-cours/edite-cours.component';
+import { ListeCoursComponent } from './GestionFiliere/cours/liste-cours/liste-cours.component';
+import { ClasseAccueilComponent } from './GestionFiliere/classe-accueil/classe-accueil.component';
+import { ModuleComponent } from './GestionModule/module/module.component';
+import { ModuleCreateComponent } from './GestionModule/module-create/module-create.component';
+import { ModuleListeComponent } from './GestionModule/module-liste/module-liste.component';
+import { ClasseDetailsComponent } from './GestionFiliere/classe-details/classe-details.component';
+import { DetailComponent } from './GestionFiliere/detail/detail.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { AccueilEtudiantComponent } from './PageEtudiants/accueil-etudiant/accueil-etudiant.component';
+import { CourEtudiantComponent } from './PageEtudiants/cour-etudiant/cour-etudiant.component';
+import { ModuleEtudiantComponent } from './PageEtudiants/module-etudiant/module-etudiant.component';
+import { MainComponent } from './PageEtudiants/main/main.component';
 
 @NgModule({
     declarations: [
@@ -47,19 +57,28 @@ import { EtudiantFiliereComponent } from './GestionEtudiant/etudiant-filiere/etu
         ProfesseurComponent,
         DirectionComponent,
         StatistiqueComponent,
-        OptionComponent,
-        ContenuFooterComponent,
-        ContenuHeaderComponent,
         AccueilComponent,
         EtudiantEditComponent,
         AccueilGestionComponent,
-        ContactComponent,
-        AproposComponent,
-        AideComponent,
         ClasseListeComponent,
         ClasseCreateComponent,
         LoginComponent,
-        EtudiantFiliereComponent
+        EtudiantFiliereComponent,
+        DashbordComponent,
+        ProfilComponent,
+        CreateCoursComponent,
+        EditeCoursComponent,
+        ListeCoursComponent,
+        ClasseAccueilComponent,
+        ModuleComponent,
+        ModuleCreateComponent,
+        ModuleListeComponent,
+        ClasseDetailsComponent,
+        DetailComponent,
+        AccueilEtudiantComponent,
+        CourEtudiantComponent,
+        ModuleEtudiantComponent,
+        MainComponent
     ],
     providers: [
         provideClientHydration(),
@@ -69,9 +88,11 @@ import { EtudiantFiliereComponent } from './GestionEtudiant/etudiant-filiere/etu
     imports: [
         BrowserModule,
         FormsModule,
+        FormsModule,
         ReactiveFormsModule,
         AppRoutingModule,
-        RouterOutlet
+        RouterOutlet,
+        CKEditorModule
     ]
 })
 export class AppModule {

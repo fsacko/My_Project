@@ -1,11 +1,12 @@
 <form (ngSubmit)="addFiliere()"  class=" container row my-4">
   <div class="mb-2 col-lg-6">
     <label for="Abre" class="form-label">Nom(Abreviation)</label>
-    <input class="form-control" type="text" name="Abre" id="Abre" placeholder="Abreviation de filiere(IG,FC,GEA...)" [(ngModel)]="filiere.Abre">
+    <input class="form-control" type="text" name="Abre" id="Abre" placeholder="Sigle (Abreviation de la filiere)" [(ngModel)]="filiere.Sigle">
+    <input class="form-control disabled visually-hidden" type="text" name="univID" [(ngModel)]="filiere.universite_id">
   </div>
   <div class="mb-2 col-lg-6">
     <label for="nom" class="form-label">Nom Complet de Filiere</label>
-    <input class="form-control" type="text" name="Nom" id="nom" placeholder="Abreviation de filiere(IG,FC,GEA...)" [(ngModel)]="filiere.Nom">
+    <input class="form-control" type="text" name="Nom" id="nom" placeholder="Ce que signifie le Sigle" [(ngModel)]="filiere.Nom">
   </div>
   <div class="mb-2 col-lg-12">
     <label for="Prenom" class="form-label">Description de Filiere</label>
@@ -26,7 +27,7 @@
     <label for="Email" class="form-label">Lieu</label>
     <input class="form-control" type="text" name="Lieu" id="Email" placeholder="Bamako" [(ngModel)]="filiere.Lieu">
   </div>
-  <div class="text-center col-12">
+  <div class="text-center col-12 my-4">
     <button class="btn btn-primary" >Ajouter</button>
   </div>
 </form>

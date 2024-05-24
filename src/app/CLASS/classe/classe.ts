@@ -1,8 +1,9 @@
 export class Classe {
   id:any;
   Nom:any;
-  Abre : any;
+  Sigle : any;
   Description:any;
   Niveau:any;
   Lieu:any;
+  universite_id: any;
 }

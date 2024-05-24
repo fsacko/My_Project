@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Classe } from '../../CLASS/classe/classe';
 import { DataService } from '../../service/data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-classe-liste',
@@ -9,15 +10,22 @@ import { DataService } from '../../service/data.service';
 })
 export class ClasseListeComponent implements OnInit {
 
-  filieres : any;
-  constructor(private data:DataService){};
+  filieres : any | Array <any>;
+  constructor(private data:DataService, private route:Router){};
 
   ngOnInit(): void {
-    this.listeFilieres() ;
-  }
-  listeFilieres(){
     this.data.getClasseData().subscribe(res =>{
       this.filieres = res;
     })
+  }
+
+  filiereDetails(id: any) {
+    this.data.getClasseById(id).subscribe(res =>
+      {
+        this.data.detailFiliere = res;
+        this.route.navigate(['gestion/Filieres/voir_plus']);
+        console.log(res);
+        
+      });
   }
 }

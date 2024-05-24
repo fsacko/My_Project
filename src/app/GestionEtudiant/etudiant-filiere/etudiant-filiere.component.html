@@ -1,24 +1,23 @@
-<table id="table1" class="table table-striped table-md my-3">
+
+<div class="input-group my-2">
+  <input type="text" class="form-control" placeholder="Tapez la Filiere" aria-label="" aria-describedby="button-addon2">
+  <button class="btn btn-outline-secondary" type="button" id="button-addon2">Affiche</button>
+</div>
+<table  class="table w-100 table-striped table-md">
   <thead>
-    <tr>
-      <div class="input-group ">
-        <input type="text" class="form-control" placeholder="Tapez la Filiere" aria-label="" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Affiche</button>
-      </div>
-    </tr>
     <tr >
-      <th scope="col">Id</th><th scope="col">Nom</th><th scope="col">Prenom</th><th scope="col">Email</th><th scope="col">Telephone</th><th scope="col" colspan="2">Editer</th>
+      <th scope="col">Nom</th><th scope="col">Prenom</th><th scope="col">Email</th><th scope="col">Telephone</th><th scope="col">Filiere</th><th scope="col" colspan="2">Editer</th>
     </tr>
   </thead>
-  <tbody>
-    <tr *ngFor="let etudiant of Etudiants" class="" style="font-size: small;">
-      <td><strong>{{etudiant.id}}</strong></td>
-      <td>{{etudiant.Nom}}</td>
-      <td>{{etudiant.Prenom}}</td>
-      <td>{{etudiant.Email}}</td>
-      <td>{{etudiant.Tel}}</td>
-      <td><button type="submit" class="btn btn-warning m-lg-auto " style="font-size: x-small;"  data-bs-toggle="modal" data-bs-target="#modifier" (click)="getEtudiantId(etudiant.id)">Modifier</button></td>
-      <td><button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#supprimer" style="font-size: x-small;" (click)="getEtudiantId(etudiant.id)">supprimer</button></td>
+  <tbody *ngFor="let etudiant of Etudiants">
+    <tr  *ngFor="let et of etudiant" style="font-size: small;">
+      <td>{{et.nom}}</td>
+      <td>{{et.prenom}}</td> 
+      <td>{{et.email}}</td>
+      <td>{{et.telephone}}</td>
+      <td *ngFor="let classe of et.filieres" ><strong>{{classe.sigle}}</strong></td>
+      <td><button type="submit" class="btn btn-warning m-lg-auto " style="font-size: x-small;"  data-bs-toggle="modal" data-bs-target="#modifier" (click)="getEtudiantId(et.id)">Modifier</button></td>
+      <td><button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#supprimer" style="font-size: x-small;" (click)="getEtudiantId(et.id)">supprimer</button></td>
     </tr>
   </tbody>
   <tfoot class="bg-body-tertiary">
@@ -52,37 +51,37 @@
 
                 <div class="mb-2 col-6">
                   <label for="nom" class="form-label">Nom</label>
-                  <input class="form-control" type="text" name="Nom" id="nom" placeholder="Nom de l'Etudiant"  [(ngModel)]="etudiantForm.Nom">
+                  <input class="form-control" type="text" name="Nom" id="nom" placeholder="Nom de l'Etudiant"  [(ngModel)]="etudiantForm.nom">
                 </div>
                 <div class="mb-2 col-6">
                   <label for="Prenom" class="form-label">Prenom</label>
-                  <input class="form-control" type="text" name="Prenom" id="Prenom" placeholder="Prenom de l'Etudiant" [(ngModel)]="etudiantForm.Prenom">
+                  <input class="form-control" type="text" name="Prenom" id="Prenom" placeholder="Prenom de l'Etudiant" [(ngModel)]="etudiantForm.prenom">
                 </div>
                 <div class="mb-2 col-8">
                   <label for="Email" class="form-label">Email</label>
-                  <input class="form-control" type="email" name="Email" id="Email" placeholder="Exemple@xyz.abc" [(ngModel)]="etudiantForm.Email">
+                  <input class="form-control" type="email" name="Email" id="Email" placeholder="Exemple@xyz.abc" [(ngModel)]="etudiantForm.email">
                 </div>
                 <div class="mb-2 col-12">
                   <label for="Adresse" class="form-label">Adresse</label>
-                  <input class="form-control" type="text" name="Adresse" id="Adresse" placeholder="Bamako/rue:xxx/porte:abc" [(ngModel)]="etudiantForm.Adresse">
+                  <input class="form-control" type="text" name="Adresse" id="Adresse" placeholder="Bamako/rue:xxx/porte:abc" [(ngModel)]="etudiantForm.adresse">
                 </div>
                 <div class="mb-2 col-6">
                   <label for="Tel" class="form-label">Tel</label>
-                  <input class="form-control" type="text" name="Tel" id="Tel" placeholder="00223 12 34 56 78" [(ngModel)]="etudiantForm.Tel">
+                  <input class="form-control" type="text" name="Tel" id="Tel" placeholder="00223 12 34 56 78" [(ngModel)]="etudiantForm.telephone">
                 </div>
                 <div class="mb-2 col-6">
                   <label for="Date_de_naissance" class="form-label">Date de naissance</label>
-                  <input class="form-control" type="date" name="date_de_naissance" id="Date_de_naissance" placeholder="Date de Naissance de l'etudiant" [(ngModel)]="etudiantForm.date_de_naissance">
+                  <input class="form-control" type="date" name="date_de_naissance" id="Date_de_naissance" placeholder="Date de Naissance de l'etudiant"  [value]="etudiantForm.date_de_naissance" [(ngModel)]="etudiantForm.date_de_naissance">
                 </div>
                 <div class="mb-2 col-12">
                   <label for="Mot_de_passe" class="form-label">Mot de passe</label>
-                  <input class="form-control" type="text" name="mot_de_passe" id="Mot_de_passe" disabled [(ngModel)]="etudiantForm.mot_de_passe">
+                  <input class="form-control" type="text" name="mot_de_passe" id="Mot_de_passe" disabled [(ngModel)]="etudiantForm.password">
                 </div>
 
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-              <button type="submit"  class="btn btn-outline-warning">Modifier</button>
+              <button type="submit"  class="btn btn-outline-warning" data-bs-dismiss="modal" >Modifier</button>
             </div>
         </div>
       </div>
@@ -104,12 +103,12 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          Etudiant : <strong>{{etudiantForm.Nom}} {{etudiantForm.Prenom}}</strong><br>
+          Etudiant : <strong>{{etudiantForm.nom}} {{etudiantForm.prenom}}</strong><br>
           Voulez-vous vraiment supprimer cet etudiant ?
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-          <button type="submit" (click)="delete(etudiantForm.id)" class="btn btn-danger">Supprimer</button>
+          <button type="submit" (click)="delete(etudiantForm.id)" class="btn btn-danger" data-bs-dismiss="modal">Supprimer</button>
         </div>
       </div>
     </div>

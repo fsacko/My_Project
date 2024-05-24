@@ -1,3 +1,20 @@
-<div class="container text-center">
-  <h3>Bienvenue sur la page des Cours</h3>
+<div>
+  <span class="badge-info ">{{dataClasse.sigle}} <sup>{{dataClasse.niveau}}</sup></span>
+  <h5 *ngFor="let module of dataModule">Cours du Module : <strong>{{module.nom}}</strong>  </h5>
 </div>
+<div class="sticky-top bg-body-secondary row justify-content-between">
+  <div class="nav-scroller col bg-body-secondary shadow-sm">
+    <nav class="nav" aria-label="Secondary navigation">
+      <a class="nav-link active" aria-current="page" routerLink="/gestion">Accueil</a>
+      <a class="nav-link active" aria-current="page" routerLink="liste">Liste des Cours</a>
+      <a class="nav-link" routerLink="new">Nouveau Cours</a>
+      <a class="nav-link" href="">Nouveau Chapitre</a>
+      <a class="nav-link" routerLink="etat">Etat des Cours </a>
+      <a class="nav-link" routerLink="edit">Edition des Cours</a>
+    </nav>
+  </div>
+</div>
+
+<main>
+  <router-outlet></router-outlet>
+</main>

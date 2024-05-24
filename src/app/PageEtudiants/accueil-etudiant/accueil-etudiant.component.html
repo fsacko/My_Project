@@ -1,0 +1,22 @@
+<div class="">
+  <h5>
+    Bienvenue sur votre Espace de telechargement et de Visionnage des cours
+  </h5>
+</div>
+<div class=" container-fluid justify-content-center row">
+
+  <div class="card col-sm-12 col-lg-auto m-3 shadow-lg" *ngFor="let classe of classes">
+    <div class="card-title p-lg-1" >
+      {{ classe.id }}
+    </div>
+    <div class="card-body">
+      {{ classe.nom }}
+    </div>
+    <div class="card-footer text-center">
+      {{ classe.desc }} <br>
+      <a class="btn btn-primary" routerLink="/module">
+        Voir Modules
+      </a>
+    </div>
+  </div>
+</div>
