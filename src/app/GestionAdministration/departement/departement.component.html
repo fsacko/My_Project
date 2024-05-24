@@ -1,0 +1,21 @@
+<div class="text-center">
+  <h2>
+    Voici les departements predefinis ...
+  </h2>
+</div>
+<div class=" container-fluid style-grid">
+  <div class="card shadow-lg" *ngFor="let ecole of ecoles">
+    <div class="card-title p-lg-1" >
+      {{ ecole.id }}
+    </div>
+    <div class="card-body">
+      {{ ecole.nom }}
+    </div>
+    <div class="card-footer text-center">
+      {{ ecole.lieu }} <br>
+      <a class="btn btn-primary" routerLink="details">
+        Savoir plus
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,257 @@
+<form (ngSubmit)="insertEtudiant()"  class=" container row my-4">
+  <div class="mb-2 col-lg-6">
+    <label for="nom" class="form-label">Nom</label>
+    <input class="form-control" type="text" name="nom" id="nom" placeholder="Nom de l'Etudiant" [(ngModel)]="etudiant.Nom">
+  </div>
+  <div class="mb-2 col-lg-6">
+    <label for="Prenom" class="form-label">Prenom</label>
+    <input class="form-control" type="text" name="Prenom" id="Prenom" placeholder="Prenom de l'Etudiant" [(ngModel)]="etudiant.Prenom">
+  </div>
+  <div class="mb-2 col-lg-6">
+    <label for="Email" class="form-label">Email</label>
+    <input class="form-control" type="email" name="Email" id="Email" placeholder="Exemple@xyz.abc" [(ngModel)]="etudiant.Email">
+  </div>
+  <div class="mb-2 col-lg-6">
+    <label for="Adresse" class="form-label">Adresse</label>
+    <input class="form-control" type="text" name="Adresse" id="Adresse" placeholder="Bamako/rue:xxx/porte:abc" [(ngModel)]="etudiant.Adresse">
+  </div>
+  <div class="mb-2 col-lg-6">
+    <label for="Tel" class="form-label">Tel</label>
+    <input class="form-control" type="text" name="Tel" id="Tel" placeholder="00223 12 34 56 78" [(ngModel)]="etudiant.Tel">
+  </div>
+  <div class="mb-2 col-lg-6">
+    <label for="Date_de_naissance" class="form-label">Date de naissance</label>
+    <input class="form-control" type="date" name="Date_de_naissance" id="Date_de_naissance" placeholder="Date de Naissance de l'etudiant" [(ngModel)]="etudiant.date_de_naissance">
+  </div>
+  <div class="mb-2 col-lg-6">
+    <label for="Mot_de_passe" class="form-label">Mot de passe</label>
+    <input class="form-control" type="text" name="Mot_de_passe" id="Mot_de_passe" [(ngModel)]="etudiant.mot_de_passe">
+  </div>
+  <div class="text-center col-12">
+    <button class="btn btn-primary" >Ajouter</button>
+  </div>
+</form>
+
+
+<!-- <div class="container">
+  <main>
+    <div class="py-5 text-center">
+      <img class="d-block mx-auto mb-4" src="/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+      <h2>Bienvenue</h2>
+      <p class="lead">Insertion de Nouveau/elle Etudiant(e)</p>
+    </div>
+
+    <div class="row g-5">
+      <div class="col-md-5 col-lg-4 order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-primary">Statut</span>
+          <span class="badge bg-primary rounded-pill">3</span>
+        </h4>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">Filiere Nom</h6>
+              <small class="text-muted">Brief description</small>
+            </div>
+            <span class="text-muted">20</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">Filiere 2</h6>
+              <small class="text-muted">Brief description</small>
+            </div>
+            <span class="text-muted">30</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">Filiere 3</h6>
+              <small class="text-muted">Brief description</small>
+            </div>
+            <span class="text-muted">40</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between bg-light">
+            <div class="text-success">
+              <h6 class="my-0">Matricule</h6>
+              <small>EXAMPle MATRICULE</small>
+            </div>
+            <span class="text-success">90</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Autre</span>
+            <strong>09</strong>
+          </li>
+        </ul>
+
+        <form class="card p-2">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Promo code">
+            <button type="submit" class="btn btn-secondary">Verifier</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3">Adresse</h4>
+        <form class="needs-validation" novalidate>
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label for="firstName" class="form-label">Prenom</label>
+              <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+              <div class="invalid-feedback">
+                Votre Prenom Obligatoire
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="lastName" class="form-label">Nom</label>
+              <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+              <div class="invalid-feedback">
+                Votre Nom est Obligatoire
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="username" class="form-label">Pseudo</label>
+              <div class="input-group has-validation">
+                <span class="input-group-text"></span>
+                <input type="text" class="form-control" id="username" placeholder="Username" required>
+                <div class="invalid-feedback">
+                  Votre Pseudo Obligatoire
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
+              <input type="email" class="form-control" id="email" placeholder="votreEmail@example.com">
+              <div class="invalid-feedback">
+                Veuillez entrer un Email Correct.
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="address" class="form-label">Adresse</label>
+              <input type="text" class="form-control" id="adresse" placeholder="1234 Main St" required>
+              <div class="invalid-feedback">
+                Votre adresse est Obligatoire
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="adresse2" class="form-label">Adresse 2 <span class="text-muted">(Optional)</span></label>
+              <input type="text" class="form-control" id="adresse2" placeholder="Apartment or suite">
+            </div>
+
+            <div class="col-md-5">
+              <label for="country" class="form-label">Pays</label>
+              <select class="form-select" id="country" required>
+                <option value="">Choisi le Pays.</option>
+                <option>Mali</option>
+              </select>
+              <div class="invalid-feedback">
+               Veuillez choisir un pays Valide
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label for="state" class="form-label">Region</label>
+              <select class="form-select" id="state" required>
+                <option value="">Choisir la region</option>
+                <option>Bamako</option>
+              </select>
+              <div class="invalid-feedback">
+                Veuillez choisir une Region Valide
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <label for="zip" class="form-label">Code</label>
+              <input type="text" class="form-control" id="zip" placeholder="" required>
+              <div class="invalid-feedback">
+                Zip code est obligatoire.
+              </div>
+            </div>
+          </div>
+
+          <hr class="my-4">
+
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="same-address">
+            <label class="form-check-label" for="same-address">Adresse supplementaire</label>
+          </div>
+
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="save-info">
+            <label class="form-check-label" for="save-info">Enregistre pour Tout jours</label>
+          </div>
+
+          <hr class="my-4">
+
+          <h4 class="mb-3">Niveau d'Etude</h4>
+
+          <div class="my-3">
+            <div class="form-check">
+              <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
+              <label class="form-check-label" for="credit">DUT</label>
+            </div>
+            <div class="form-check">
+              <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
+              <label class="form-check-label" for="debit">Licence</label>
+            </div>
+            <div class="form-check">
+              <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
+              <label class="form-check-label" for="paypal">Master</label>
+            </div>
+          </div>
+
+          <div class="row gy-3">
+            <div class="col-md-6">
+              <label for="cc-name" class="form-label">Nom Titeur</label>
+              <input type="text" class="form-control" id="cc-name" placeholder="" required>
+              <small class="text-muted">Nom Complete du titeur</small>
+              <div class="invalid-feedback">
+                Nom de titeur est obligatoire.
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="cc-number" class="form-label">Numero de Telephone </label>
+              <input type="text" class="form-control" id="cc-number" placeholder="" required>
+              <div class="invalid-feedback">
+                Numero de Telephone est obligatoire.
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <label for="cc-expiration" class="form-label">Domicile</label>
+              <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+              <div class="invalid-feedback">
+                Domicile est obligatoire.
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <label for="cc-cvv" class="form-label">ID Etudiant</label>
+              <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+              <div class="invalid-feedback">
+                ID Etudiant est obligatoire.
+              </div>
+            </div>
+          </div>
+
+          <hr class="my-4">
+
+          <button class="w-100 btn btn-primary btn-lg" type="submit">Continue de Valider</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">&copy; Nom de l'université</p>
+    <ul class="list-inline">
+      <li class="list-inline-item"><a href="#">Apropos</a></li>
+      <li class="list-inline-item"><a href="#">Terms</a></li>
+      <li class="list-inline-item"><a href="#">Support</a></li>
+    </ul>
+  </footer>
+</div> -->

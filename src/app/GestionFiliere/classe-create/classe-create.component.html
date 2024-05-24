@@ -1,0 +1,32 @@
+<form (ngSubmit)="addFiliere()"  class=" container row my-4">
+  <div class="mb-2 col-lg-6">
+    <label for="Abre" class="form-label">Nom(Abreviation)</label>
+    <input class="form-control" type="text" name="Abre" id="Abre" placeholder="Abreviation de filiere(IG,FC,GEA...)" [(ngModel)]="filiere.Abre">
+  </div>
+  <div class="mb-2 col-lg-6">
+    <label for="nom" class="form-label">Nom Complet de Filiere</label>
+    <input class="form-control" type="text" name="Nom" id="nom" placeholder="Abreviation de filiere(IG,FC,GEA...)" [(ngModel)]="filiere.Nom">
+  </div>
+  <div class="mb-2 col-lg-12">
+    <label for="Prenom" class="form-label">Description de Filiere</label>
+    <textarea class="form-control" type="text" name="Description" id="Prenom" placeholder="Description de filiere" [(ngModel)]="filiere.Description"></textarea>
+  </div>
+  <div class="mb-2 col-lg-6">
+    <label for="niveau" class="form-label">Niveau</label>
+    <select name="Niveau" id="niveau" class="form-select" [(ngModel)]="filiere.Niveau" >
+      <option value="">Veuillez Choisir Le Niveau</option>
+      <option value="L1">L1</option>
+      <option value="DUT">DUT</option>
+      <option value="LICENCE">LICENCE</option>
+      <option value="MASTER">MASTER</option>
+      <option value="DOCTORAT">DOCTORAT</option>
+    </select>
+  </div>
+  <div class="mb-2 col-lg-6">
+    <label for="Email" class="form-label">Lieu</label>
+    <input class="form-control" type="text" name="Lieu" id="Email" placeholder="Bamako" [(ngModel)]="filiere.Lieu">
+  </div>
+  <div class="text-center col-12">
+    <button class="btn btn-primary" >Ajouter</button>
+  </div>
+</form>

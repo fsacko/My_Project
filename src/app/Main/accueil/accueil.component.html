@@ -1,0 +1,112 @@
+
+<div class="main">
+  <div class="Principale container-fluid h-100">
+    <nav class="navbar navbar-expand-lg  bg-body-secondary" >
+
+      <div class="container-fluid w-100">
+        <a class="navbar-brand" >A L'UNIVERSITE</a>
+        <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Petit Menu</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Notifications</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Switch account</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Settings</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+      <div class="row d-flex flex-md-row bg-body-secondary  " style="height: 82vh; ">
+        <div class="col-md  sticky-md-top h-auto my-2" style="overflow: auto; ">
+          <nav class="p-2 menu">
+          <ul class="nav nav-pills">
+              <li *ngFor="let action of actions">
+                  <a   [routerLink]="action.route" (click)="setcurrentAction(action,action.name)"  [class]="action==currentAction ? 'btn btn-success nav-link active ' : 'btn btn-outline-success mb-1 my-1' "  style="font-size: x-small;" >
+                  <i class="fa fa-{{action.icon}} text-success"></i>
+                  {{action.title}}
+                  </a>
+              </li>
+          </ul>
+          </nav>
+
+          <hr>
+          <div class="dropdown sticky-bottom">
+            <a href="#" class="d-flex w-100 align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="#" alt="" width="32" height="32" class="rounded-circle me-2">
+              <strong>MyProfils</strong>
+            </a>
+            <ul class="dropdown-menu text-small shadow w-100" aria-labelledby="dropdownUser2">
+              <li><a class="dropdown-item" href="#">Voir plus</a></li>
+              <li><a class="dropdown-item" href="#">Parametres</a></li>
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Deconnecter</a></li>
+            </ul>
+          </div>
+        </div>
+
+
+        <div class="col-md-8 flex-grow-1 border-5 border-dark-subtle h-100" style="overflow: auto; ">
+
+          <div class="bodyContenu">
+            <router-outlet>
+
+            </router-outlet>
+          </div>
+
+          <div class="footerContenu sticky-bottom bg-body-secondary">
+            <app-contenu-footer></app-contenu-footer>
+          </div>
+        </div>
+
+        <div class="col-md  sticky-md-top  h-auto" style="overflow: auto; ">
+          <!-- <div class="option">
+              <app-option></app-option>
+          </div> -->
+          <div class="row d-flex py-2 flex-column option">
+              <ul class="nav navbar">
+                  <li *ngFor="let cont of elementsName" class="m-2">
+                      <a routerLink="{{cont.route}}" class="btn btn-light m-lg-auto " style="font-size: x-small;">
+                      <i class="fa fa-{{cont.icon}} text-success"></i>
+
+                      {{cont.title}}
+                      </a>
+                  </li>
+              </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row align-content-end sticky-md-bottom bg-dark-subtle">
+        <div class="footer">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit fugit debitis aperiam aliquam corporis sint, consectetur repudiandae cupiditate? Delectus labore, autem sunt quae pariatur modi provident accusantium eum fugit veniam!
+        </div>
+
+      </div>
+  </div>
+</div>

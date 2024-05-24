@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+/* @import "/bootstrap-icons/font/bootstrap-icons.css"; */
+.style-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 10px;
+  background-color: rgba(236, 236, 236, 0.395);
+  width: 100%;
+}
+.style-grid .card{
+  min-height: 40vh;
+}
