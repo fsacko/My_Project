@@ -13,17 +13,18 @@ export class EtudiantListeComponent implements OnInit {
    etudiants :any | Array<any>;
   constructor (private data:DataService){  }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.data.getEtudiantData().subscribe(res=>{
-      console.log(res);
       this.etudiants = res;
+      console.log(res);
+
     });
   }
 
-  getEtudiantListe(){
-    this.data.getEtudiantData().subscribe(res=>{
-      console.log(res);
-      this.etudiants = res;
-    });
-  };
+  // getEtudiantListe(){
+  //   this.data.getEtudiantData().subscribe(res=>{
+  //     console.log(res);
+  //     this.etudiants = res;
+  //   });
+  // };
 }

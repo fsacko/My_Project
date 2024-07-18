@@ -1,3 +1,7 @@
+
+<div *ngIf="errors">
+  <span class="alert-danger">{{errors}}</span>
+</div>
 <form (ngSubmit)="insertEtudiant()"  class=" container row my-4">
   <div class="mb-2 col-lg-6">
     <label for="nom" class="form-label">Nom</label>
@@ -51,7 +55,7 @@
   <div class="text-center col-12">
     <button class="btn btn-primary" >Ajouter</button>
   </div>
-</form>
+</form> 
 
 
 <!-- <div class="container">

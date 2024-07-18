@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthentificationService } from '../../service/authentification.service';
 import { Router } from '@angular/router';
 import { DataService } from '../../service/data.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-accueil',
@@ -16,9 +17,9 @@ export class AccueilComponent implements OnInit {
   elementsName : any;
   users : any;
 
-  constructor(public authService: AuthentificationService, private route : Router, private data:DataService){}
+  constructor(public authService: AuthentificationService, private route : Router, private data:DataService,public xss:DomSanitizer){}
 
-  ngOnInit(): void {
+  ngOnInit() {
 
     this.data.getUniversite().subscribe(res =>{
       this.universites = res;

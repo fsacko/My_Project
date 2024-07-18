@@ -12,15 +12,11 @@
     <label for="Prenom" class="form-label">Description de Filiere</label>
     <textarea class="form-control" type="text" name="Description" id="Prenom" placeholder="Description de filiere" [(ngModel)]="filiere.Description"></textarea>
   </div>
-  <div class="mb-2 col-lg-6">
+  <div class="mb-2 col-lg-6" >
     <label for="niveau" class="form-label">Niveau</label>
     <select name="Niveau" id="niveau" class="form-select" [(ngModel)]="filiere.Niveau" >
-      <option value="">Veuillez Choisir Le Niveau</option>
-      <option value="L1">L1</option>
-      <option value="DUT">DUT</option>
-      <option value="LICENCE">LICENCE</option>
-      <option value="MASTER">MASTER</option>
-      <option value="DOCTORAT">DOCTORAT</option>
+      <option>Veuillez Choisir Le Niveau</option>
+      <option *ngFor="let niv of niveau" value="{{niv.value}}">{{niv.name}}</option>
     </select>
   </div>
   <div class="mb-2 col-lg-6">

@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
 export class ClasseCreateComponent implements OnInit  {
 
   filiere = new Classe;
+  niveau = [
+    {name:'L1',value:'Licence I'},{name:'L2',value:'Licence II'},{name:'DUT',value:'DUT'},{name:'LCENCE',value:'Licence'},{name:'M-1',value:'Master I'},{name:'M-2',value:'Master II'},{name:'MBA',value:'MBA'},{name:'PhD',value:'Post-Doctorat'},{name:'DOCTORAT',value:'Doctorat'}
+  ];
   universite : any;
   constructor(private data:DataService,private route:Router){};
   ngOnInit(): void {
@@ -23,7 +26,7 @@ export class ClasseCreateComponent implements OnInit  {
     // console.log(this.filiere);
     this.data.insertClasse(this.filiere).subscribe(res => {
       const redirect = res.redirect;
-      this.route.navigate([redirect]); 
+      this.route.navigate([redirect]);
     });
   }
 

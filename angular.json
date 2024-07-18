@@ -46,8 +46,7 @@
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/datatables.net/js/dataTables.min.js",
               "node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js",
-              
-              "src/app/sources/js/app.js"
+              "src/assets/js/app.js"
             ],
             "server": "src/main.server.ts",
             "prerender": true,

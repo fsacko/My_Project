@@ -19,6 +19,7 @@ export class EtudiantFiliereComponent implements OnInit {
   ngOnInit(): void {
     this.data.getEtudiantData().subscribe(res=>{
       this.Etudiants = res;
+      console.log(res);
     });
   }
 // Afficher la liste des etudiants :
@@ -48,7 +49,7 @@ export class EtudiantFiliereComponent implements OnInit {
     });
   }
 
-  // Pour la supression d'un Etudiant : 
+  // Pour la supression d'un Etudiant :
   delete(id: any) {
     // console.log(id);
     this.data.deleteEtudiant(id).subscribe(res => {

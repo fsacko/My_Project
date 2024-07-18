@@ -14,12 +14,16 @@ export class EtudiantCreateComponent implements OnInit  {
   etudiant = new Etudiants;
   listeFiliere:any | Array<any>;
   universites: any;
+  errors:any|Array<any>; 
   annee:any | Array<any>;
 
   constructor(private data:DataService, private route:Router){}
 
   ngOnInit(): void {
-    this.listeFiliere = this.data.filiereListe;
+    // this.listeFiliere = this.data.filiereListe;
+    this.data.getClasseData().subscribe(data =>{
+      this.listeFiliere = data;
+    });
     this.etudiant.universite_id = this.data.users.universite_id;
     this.annee = this.data.annee_scolaire;
   }
@@ -27,7 +31,13 @@ export class EtudiantCreateComponent implements OnInit  {
     console.log(this.etudiant);
     this.data.insertEtudiantData(this.etudiant).subscribe(res=>{
       const redirect = res.redirect;
-      this.route.navigate([redirect]);
+      if(res.success){
+        this.data.session_success = res.success;
+        this.route.navigate([redirect]);
+      }
+      else{
+        this.errors = res.error;
+      }
     });
 
     // console.log(this.etudiant);

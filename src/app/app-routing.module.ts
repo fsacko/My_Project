@@ -19,7 +19,7 @@ import { ListeCoursComponent } from './GestionFiliere/cours/liste-cours/liste-co
 import { EditeCoursComponent } from './GestionFiliere/cours/edite-cours/edite-cours.component';
 import { CreateCoursComponent } from './GestionFiliere/cours/create-cours/create-cours.component';
 import { ClasseAccueilComponent } from './GestionFiliere/classe-accueil/classe-accueil.component';
-import { authentificationGuard } from './guards/auth/authentification.guard';
+import { adminGuard, authentificationGuard, etudiantGuard } from './guards/auth/authentification.guard';
 import { ModuleComponent } from './GestionModule/module/module.component';
 import { ModuleListeComponent } from './GestionModule/module-liste/module-liste.component';
 import { ClasseDetailsComponent } from './GestionFiliere/classe-details/classe-details.component';
@@ -37,7 +37,7 @@ const routes: Routes = [
 
     // Pour la partie Administrateur
 
-    {path: '', component:AccueilComponent,canActivate:[authentificationGuard], children: [
+    {path: '', component:AccueilComponent,canActivate:[adminGuard], children: [
       {path: '',component:DashbordComponent},
       {path : 'direction', component : DirectionComponent},
       {path : 'gestion', component : ClasseComponent},
@@ -83,7 +83,7 @@ const routes: Routes = [
 
 
     // Pour la partie des Etudiants :
-    {path: 'etudiant',component:MainComponent,children:[
+    {path: 'etudiant',component:MainComponent,canActivate:[etudiantGuard],children:[
       {path :'',component:AccueilEtudiantComponent},
       {path :'cours',component:CourEtudiantComponent},
       {path:'module',component:ModuleEtudiantComponent}

@@ -1,6 +1,14 @@
 <div>
   <span class="badge-info ">{{dataClasse.sigle}} <sup>{{dataClasse.niveau}}</sup></span>
-  <h5 *ngFor="let module of dataModule">Cours du Module : <strong>{{module.nom}}</strong>  </h5>
+  <h5 *ngFor="let module of dataModule">
+    Cours du Module : <strong class="badge bg-success">{{module.nom}}</strong><span>  </span>
+    <form [formGroup]="moduleForm">
+      <select name="" id="" (ngModelChange)="moduleChange()" formControlName="module_id">
+        <option>Autres Modules</option>
+        <option *ngFor="let mod of modules" [value]="mod.id" >{{mod.nom}}</option>
+      </select>
+    </form>
+  </h5>
 </div>
 <div class="sticky-top bg-body-secondary row justify-content-between">
   <div class="nav-scroller col bg-body-secondary shadow-sm">

@@ -13,3 +13,25 @@ export const authentificationGuard: CanActivateFn = (route, state) => {
   console.log(state.root);
   return true;
 };
+export const adminGuard: CanActivateFn = (route, state) => {
+  const auth = inject(AuthService);
+  const router = inject(Router);
+  if (auth.type!='adminUniversite') {
+    router.navigate(['/login']);
+    return false;
+  }
+  // router.navigate([route.url]);
+  console.log(state.root);
+  return true;
+};
+export const etudiantGuard: CanActivateFn = (route, state) => {
+  const auth = inject(AuthService);
+  const router = inject(Router);
+  if (auth.type!='etudiant') {
+    router.navigate(['/login']);
+    return false;
+  }
+  // router.navigate([route.url]);
+  console.log(state.root);
+  return true;
+};

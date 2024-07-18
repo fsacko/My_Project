@@ -13,13 +13,14 @@ export class AuthService {
   apiUrl = 'http://localhost:8000/api';
 
   userValide: Login | undefined;
+  type!:string;
   // options : any;
 
   constructor(private http:HttpClient)
   {
 
 
-  } 
+  }
 
   login(email:string, password:string)
   {
@@ -34,13 +35,15 @@ export class AuthService {
 
   }
 
-  public valideUser (login:Login):Observable<boolean>
+  public valideUser (login:Login,type:string):Observable<boolean>
   {
+    this.type = type;
     this.userValide = login;
     return of(true);
   }
 
   public isValide(){
+
     return this.userValide!=undefined;
   }
 

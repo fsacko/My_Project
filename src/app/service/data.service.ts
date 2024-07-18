@@ -1,8 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Etudiants } from '../CLASS/etudiant/etudiants';
 import { Classe } from '../CLASS/classe/classe';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Module } from '../CLASS/module';
 import { Cours } from '../model/Cours.model';
 
@@ -10,6 +10,8 @@ import { Cours } from '../model/Cours.model';
   providedIn: 'root'
 })
 export class DataService {
+  universites: any;
+  session_success:string|undefined;
 
   constructor(private httpClient:HttpClient) {
   }
@@ -20,6 +22,7 @@ export class DataService {
   universite_nom:string | undefined;
   users: any | undefined;
   annee_scolaire: any;
+  etudiantEmail!:string;
 
   getUser(value:any){
     return this.users = value; //Pour les informations de l'utilisateur connecter
@@ -29,14 +32,14 @@ export class DataService {
       const options = {
         headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
       };
-    return this.httpClient.get('http://127.0.0.1:8000/api/universite/'+this.universite_id,options);
+    return this.httpClient.get<any>('http://127.0.0.1:8000/api/universite/'+this.universite_id,options);
   }
 
   getAnnee(){
       const options = {
         headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
       };
-    return this.httpClient.get('http://127.0.0.1:8000/api/anneeScolaire/',options);
+    return this.httpClient.get<any>('http://127.0.0.1:8000/api/anneeScolaire/',options);
   }
 
 // *******************************POUR LES ETUDIANTS*********************************
@@ -105,7 +108,7 @@ export class DataService {
 
     getClasseById(id:any)
     {
-      
+
       const options = {
         headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
       };
@@ -129,6 +132,14 @@ export class DataService {
     return this.httpClient.post<any>('http://127.0.0.1:8000/api/module',module,options);
 
   }
+// Pour recuperer Modules par filieres
+  getModule(filiere_id:any)
+  {
+    const options = {
+      headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
+    };
+    return this.httpClient.get<any>('http://127.0.0.1:8000/api/moduleByfiliere/'+this.universite_id+'/'+filiere_id,options);
+  }
 
 
 // ***********************************POUR LES COURS******************************
@@ -136,20 +147,44 @@ export class DataService {
   filiere_id:any;
   moduleData:any;
   classeData: any;
-  
+
   getCourData(filiere_id:any,module_id:any)
   {
     const options = {
       headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
     };
-    return this.httpClient.get<any>('http://127.0.0.1:8000/api/listeCours/'+this.universite_id+'/'+filiere_id+'/'+module_id,options);
+    return this.httpClient.get<any>('http://127.0.0.1:8000/api/listeCours/'+filiere_id+'/'+module_id,options);
   }
+  // Pour l'insertion des cours
+  insertcour(fichier: File,titre:string,sous_titre:string,contenu:string, filiere_id:any,module_id:any) {
 
-  insertcour(cour: Cours) {
-    const options = {
-      headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
-    };
-    return this.httpClient.post<any>('http://127.0.0.1:8000/api/cours',cour,options);
+    const formData: FormData = new FormData();
+    formData.append('fichier', fichier);
+    formData.append('titre', titre);
+    formData.append('sous_titre', sous_titre);
+    formData.append('contenu', contenu);
+    formData.append('filiere_id', filiere_id);
+    formData.append('module_id', module_id);
+
+    return this.httpClient.post<any>('http://127.0.0.1:8000/api/cours',formData, {
+      reportProgress: true,
+      observe: 'events',
+      headers: new HttpHeaders({
+        'Accept': 'application/json'
+      })
+    }).pipe(
+      map(event => {
+        switch (event.type) {
+          case HttpEventType.UploadProgress:
+            const progress = Math.round(100 * event.loaded / event.total!);
+            return { status: 'progress', message: progress };
+          case HttpEventType.Response:
+            return event.body;
+          default:
+            return `Unhandled event: ${event.type}`;
+        }
+      })
+    );
 
   }
 

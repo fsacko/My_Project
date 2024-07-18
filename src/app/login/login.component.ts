@@ -50,10 +50,18 @@ export class LoginComponent implements OnInit {
         const redirect = res.redirect ;
         this.data.getUser(res.user);  //Pour inserer l'utilisateur connecté dans la methode getUser du service data
         this.data.getAnnee().subscribe(annee => {this.data.annee_scolaire = annee});
-        this.auth.valideUser(res).subscribe();
+        this.auth.valideUser(res,user.type).subscribe();
+
         this.data.universite_id = user.universite_id ;
-        this.data.getClasseData().subscribe(res => {this.data.filiereListe = res});
-        this.router.navigate([redirect]);
+        this.data.etudiantEmail = user.email;
+
+        console.log(user.universite_id);
+
+        this.data.getUniversite().subscribe(res =>{this.data.universites = res;console.log(this.data.universites);})
+
+
+
+        this.router.navigateByUrl(redirect);
 
       }
 

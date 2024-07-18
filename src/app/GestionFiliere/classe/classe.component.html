@@ -63,7 +63,7 @@
               <div class="mb-2 col-12">
                 <label for="Classe" class="form-label">Classe</label>
                 <select id="Classe" class="form-select" (ngModelChange)="OnClasseChange()" *ngFor="let classes of classeData"  formControlName="filiere_id"  >
-                  <!-- <option value="">Veuillez Choisir La Classe</option> -->
+                  <option class="ck-link_selected">Veuillez Choisir La Classe</option>
                   <option  *ngFor="let classe of classes" [value]="classe.id" ><strong>{{classe.nom}}</strong> ({{classe.niveau}})</option>
                 </select>
               </div>
@@ -71,7 +71,7 @@
               <div class="mb-2 col-12">
                 <label for="Module" class="form-label">Module</label>
                 <select id="Module"  class="form-select" *ngFor="let modules of classeModule"  formControlName="module_id"  >
-                  <!-- <option value="">Veuillez Choisir Le Module pour la classe {{modules.sigle}}</option> -->
+                  <option [value]="0">Veuillez Choisir Le Module pour la classe {{modules.sigle}}</option>
                   <option   *ngFor="let module of modules.modules" [value]="module.id" ><strong>{{module.nom}}</strong> ({{module.code}})</option>
                 </select>
               </div>

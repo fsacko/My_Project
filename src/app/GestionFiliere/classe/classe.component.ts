@@ -38,7 +38,7 @@ export class ClasseComponent implements OnInit {
   }
 
   renseigner() {
-    this.route.navigate(['/gestion/Cours']); //Pour la redirection
+    this.route.navigate(['/gestion']); //Pour la redirection
   }
 
   validation(){
@@ -55,9 +55,9 @@ export class ClasseComponent implements OnInit {
       this.route.navigate(['gestion/Cours'])
     }
     else{
-      console.log(this.classeForm.errors);
+      // console.log(this.classeForm.errors);
       this.erreur = {'err':"Erreur!!! Veillez Bien renseigner le formulaire"};
-      console.log(this.erreur)
+      // console.log(this.erreur)
       this.route.navigate(['/gestion'])
     }
     
@@ -73,7 +73,7 @@ export class ClasseComponent implements OnInit {
         if (data2.id == selectedClass) {
 
           this.classeModule = [data2];
-          console.log(this.classeModule);
+          // console.log(this.classeModule);
 
         }
       }

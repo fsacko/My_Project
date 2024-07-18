@@ -1,4 +1,4 @@
-  <table class="table w-100 table-striped table-md" *ngIf="etudiants" >
+  <table class="table table-hover my-0" *ngIf="etudiants" >
     <thead>
       <tr >
         <th scope="col">Nom</th>
@@ -14,7 +14,7 @@
           <td>{{et.prenom}}</td>
           <td>{{et.email}}</td>
           <td>{{et.telephone}}</td>
-          <td *ngFor="let classe of et.filieres" ><strong>{{classe.sigle}}</strong></td>
+          <td ><strong>{{et.sigle}}</strong></td>
         </tr>
     </tbody>
     <tfoot class="bg-body-tertiary">

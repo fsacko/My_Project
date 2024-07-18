@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="../../../sources/css/app.css">
 
 <script type="Java" src="script.js" async></script>
-<form action="" >
+<!-- <form action="" >
 
   <div class="row ">
 
@@ -19,36 +19,65 @@
 
 </form>
 
-<form action="" class="my-2 row  p-2" style="font-size: large;" id="formText">
+<form  (ngSubmit)="saveCours()" class="my-2 row  p-2" enctype="multipart/form-data" style="font-size: large;" id="formText">
 
   <div class="mb-2 col-lg-6">
 
     <label for="SousTitre" class="form-label">Sous-Titre</label>
-    <input type="text" name="sous_titre" id="SousTitre" class="form-control" placeholder="Sous-Titre du cours">
+    <input type="text" name="sous_titre" [(ngModel)]="cours.sous_titre" id="SousTitre" class="form-control" placeholder="Sous-Titre du cours">
 
   </div>
   <div class="mb-2 col-lg-6">
 
     <label for="Explication" class="form-label">Explication</label>
-    <textarea type="text" name="explication" id="Explication" class="form-control mb-2" placeholder="Explication du cours"> </textarea>
+    <textarea type="text" name="explication" [(ngModel)]="cours.explication" id="Explication" class="form-control mb-2" placeholder="Explication du cours"> </textarea>
 
   </div>
   <div class="mb-2 col-lg-6">
 
     <label for="Contenu" class="form-label">Contenu</label>
-
+    <textarea name="contenu" id="Contenu" [(ngModel)]="cours.contenu"></textarea>
   </div>
   <div class="mb-2 col-lg-6">
 
     <label for="Fichier" class="form-label">Fichier</label>
-    <input type="file" name="fichier" id="Fichier" class="form-control" placeholder="Fichier du cours">
+    <input type="file" (change)="onFileSelected($event)" name="fichier" id="Fichier" class="form-control" placeholder="Fichier du cours">
 
   </div>
   <div class="text-center col-12 my-2">
-    <button class="btn btn-primary" >Enregistrer</button>
+    <button class="btn btn-primary" (click)="saveCours()" >Enregistrer</button>
   </div>
-</form>
+</form> -->
 
 
 <!-- Pour le script de fichier ou contenu -->
 
+<!-- src/app/components/file-upload/file-upload.component.html -->
+
+<div class="container">
+  <h2>Upload File</h2>
+  <form (submit)="saveCours()"  class="my-2 row  p-2" >
+    <div class="mb-2 col-lg-6">
+      <label class="form-label" for="title">Title:</label>
+      <input class="form-control" type="text" id="title" [(ngModel)]="titre" name="title">
+    </div>
+    <div class="mb-2 col-lg-6">
+      <label class="form-label" for="subtitle">Subtitle:</label>
+      <input class="form-control" type="text" id="subtitle" [(ngModel)]="sous_titre" name="subtitle">
+    </div>
+    <div class="mb-2 col-lg-6">
+      <label class="form-label" for="content">Content:</label>
+      <textarea id="content" [(ngModel)]="contenu" name="content"></textarea>
+    </div>
+    <div class="mb-2 col-lg-6">
+      <label class="form-label" for="file">Fichiers:</label>
+      <input class="form-control" type="file" (change)="onFileSelected($event)">
+    </div>
+    <div class="text-center col-12 my-2">
+      <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </div>
+  </form>
+  <div class="mb-2 col-lg-6" *ngIf="uploadProgress !== null">
+    Progress: {{ uploadProgress }}%
+  </div>
+</div>

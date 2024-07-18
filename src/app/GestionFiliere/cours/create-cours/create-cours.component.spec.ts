@@ -11,7 +11,7 @@ describe('CreateCoursComponent', () => {
       declarations: [CreateCoursComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(CreateCoursComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
