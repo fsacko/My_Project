@@ -1,6 +1,6 @@
 <div class="">
   <h2>
-    La liste des Cours Pour le Module : ....
+    La liste des Cours Pour le Module : <strong>{{modules.sigle}}</strong>
   </h2>
 </div>
 <table  class="table table-striped-columns border-1">
@@ -10,26 +10,12 @@
     </tr>
   </thead>
   <tbody >
-    <tr style="font-size: small;">
-      <td>Chapitre I</td>
-      <td>Introduction a la programmation d'Application Mobile</td>
-      <td>IONIC</td>
-      <td>Voir Texte</td>
-      <td>Voir Fichier</td>
-    </tr>
-    <tr style="font-size: small;">
-      <td>Chapitre II</td>
-      <td>Mise en place de l'environnement de travail</td>
-      <td>IONIC</td>
-      <td>Voir Texte</td>
-      <td>Voir Fichier</td>
-    </tr>
-    <tr style="font-size: small;">
-      <td>Chapitre III</td>
-      <td>Installation des dependences Extra-Framework</td>
-      <td>IONIC</td>
-      <td>Voir Texte</td>
-      <td>Voir Fichier</td>
+    <tr style="font-size: small;" *ngFor="let cour of cours">
+      <td>{{cour.titre}}</td>
+      <td>{{cour.sous_titre}}</td>
+      <td><strong>{{modules.sigle}}</strong></td>
+      <td>Voir contenu</td>
+      <td>Telecharger Fichier</td>
     </tr>
   </tbody>
   <tfoot class="bg-body-tertiary">

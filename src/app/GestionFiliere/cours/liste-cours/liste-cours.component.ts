@@ -17,10 +17,7 @@ export class ListeCoursComponent implements OnInit {
     ngOnInit(): void {
       this.data.getCourData(this.data.filiere_id,this.data.module_id).subscribe(res =>{
         this.cours = res;
-        console.log(res);
       });
-      console.log(this.data.filiere_id);
-      console.log(this.data.module_id);
 
     }
 

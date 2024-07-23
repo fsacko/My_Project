@@ -1,33 +1,30 @@
-<div class="text-center">
-  <h2>
-    ici on va afficher les etudiants en fonction de leurs nom ou quelques chose de ce genre
-  </h2>
+<div *ngIf="errors">
+  <span class="badge bg-danger">{{errors}}</span>
 </div>
-<!-- Le resultats apres les recherches de leurs Noms sera affiché comme suite -->
-<!-- <div class=" container-fluid style-grid">
-  <div class="card  shadow-lg" *ngFor="let etudiants of etudiant">
-    <div class="card-title p-lg-1" >
-      <div>
-        <img class="img img-thumbnail" src="#" alt="83vh">
-      </div>
-      <div>
+<div  class=" container my-1 py-4 bg-light bg-opacity-75">
 
-        <strong>Etudiant N<sup>o</sup> : {{ etudiant.id }} <br></strong>
-        <strong>Prenom :</strong>{{ etudiant.Prenom }} <br>
-        <strong>Nom :</strong>{{ etudiant.Nom }}
+  <form (ngSubmit)="insertEtudiant()" class="row">
+    <div class="mb-2 col-12">
+      <label for="nom" class="form-label py-3"><strong>Matricule/Numero/Email</strong></label>
+      <input required class="form-control" type="text" name="nom" id="nom" placeholder="MATRICULE OU NUMERO OU EMAIL DE L'ETUDIANT " [(ngModel)]="etudiants.identifiant">
+    </div>
+    <div class="mb-2 col-lg-6"  *ngFor="let classes of listeFiliere" >
+      <label for="Classe" class="form-label py-3"><strong>Classe</strong></label>
+      <select id="Classe"  class="form-select" name="filiere" [(ngModel)]="etudiants.filiere_id">
+        <!-- <option value="">Veuillez Choisir La Classe</option> -->
+        <option  *ngFor="let classe of classes" [value]="classe.id"><strong>{{classe.nom}}</strong> ({{classe.niveau}})</option>
+      </select>
+    </div>
+    <div class="mb-2 col-lg-6"  *ngFor="let classes of annee" >
+      <label for="Classe" class="form-label py-3"><strong>Annee Scolaire</strong></label>
+      <select id="annee"  class="form-select" name="annee_scolaire" [(ngModel)]="etudiants.annee_scolaire">
+        <!-- <option value="">Veuillez Choisir La annee</option> -->
+        <option  *ngFor="let annee of classes" [value]="annee.id"><strong>{{annee.annee}}</strong></option>
+      </select>
+    </div>
+    <div class="text-center col-12 py-4">
+      <button class="btn btn-primary" style="font-size: large;font-weight: bold;">Ajouter</button>
+    </div>
+  </form>
 
-      </div>
-    </div>
-    <div class="card-body">
-      <strong>Classe : </strong>
-      {{ etudiant.Adresse }}
-    </div>
-    <div class="card-footer">
-      {{ etudiant.Email}} <br>
-      <a class="btn btn-primary" routerLink="details">
-        Savoir plus
-      </a>
-    </div>
-  </div>
-</div> -->
-
+</div>

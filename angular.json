@@ -38,14 +38,16 @@
             "styles": [
               "src/styles.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css"
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/datatables.net-dt/css/dataTables.dataTables.css",
+              "src/assets/css/app.css"
             ],
             "scripts": [
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/datatables.net/js/dataTables.js",
               "node_modules/ckeditor5/build/ckeditor5-dll.js",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.js",
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/datatables.net/js/dataTables.min.js",
-              "node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "src/assets/js/app.js"
             ],
             "server": "src/main.server.ts",

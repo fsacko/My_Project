@@ -1,18 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { EtudiantDataService } from '../../service/etudiant/etudiant-data.service';
 
 @Component({
   selector: 'app-module-etudiant',
   templateUrl: './module-etudiant.component.html',
   styleUrl: './module-etudiant.component.css'
 })
-export class ModuleEtudiantComponent {
+export class ModuleEtudiantComponent implements OnInit {
 
-  modules =[
-    {'nom': 'IONIC', 'id': 1, 'desc': 'C\'est le module dedié a la programmation Mobile Hybride'},
-    {'nom': 'LARAVEL', 'id': 2, 'desc': 'C\'est le module dedié a la programmation Web coté Serveur'},
-    {'nom': 'JAVASCRIPT', 'id': 3, 'desc': 'C\'est le module dedié a la programmation Web coté Client'},
-    {'nom': 'ANDROID', 'id': 4, 'desc': 'C\'est le module dedié a la programmation Android Mobile'},
-    {'nom': 'GENIE LOGICIEL', 'id': 5, 'desc': 'C\'est le module qui vous enseigne a la programmation'},
-  ];
+  constructor(private data:EtudiantDataService){}
+  modules!:Array<any>;
+
+  ngOnInit()
+  {
+    this.modules = this.data.dataModules;
+  }
+
+
+  listeCour(id: any) {
+    for (let i = 0; i < this.data.dataModules.length; i++) {
+      const element = this.modules[i];
+      if (element.id == id) {
+        this.data.dataModules = element;
+        this.data.dataCours = element.descriptions.cours;//Pour la liste des Cours en fonction avec ses contenus
+      }
+
+    }
+  }
 
 }

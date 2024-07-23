@@ -1,6 +1,6 @@
 <!--  -->
 
-<table class="table table-hover my-0">
+<table class="table table-hover my-0  bg-light bg-opacity-75">
   <thead>
     <tr>
       <th scope="col">Titre</th>
@@ -20,7 +20,7 @@
           <video *ngSwitchCase="'video'" [src]="course.fichier" controls  width="200" height="100"></video>
           <audio *ngSwitchCase="'audio'" [src]="course.fichier" controls></audio>
           <object *ngSwitchCase="'pdf'" [data]="xss.bypassSecurityTrustResourceUrl(course.fichier)" type="application/pdf" height="100" width="200">
-             <a class="btn btn-primary small" [href]="xss.bypassSecurityTrustUrl(course.fichier)" target="_blank">Telecharger PDF</a> 
+             <a class="btn btn-primary small" [href]="xss.bypassSecurityTrustUrl(course.fichier)" target="_blank">Telecharger PDF</a>
           </object>
           <div *ngSwitchDefault>
             <a class="btn btn-primary small" [href]="xss.bypassSecurityTrustUrl(course.fichier)" target="_blank">Telecharger Fichier</a>

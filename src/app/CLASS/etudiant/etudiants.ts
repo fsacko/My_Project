@@ -11,4 +11,5 @@ export class Etudiants {
   universite_id: number|undefined;
   annee_scolaire: any;
   filiere_id: any;
+identifiant: any;
 }

@@ -12,9 +12,11 @@ import { Cours } from '../model/Cours.model';
 export class DataService {
   universites: any;
   session_success:string|undefined;
+  dataEtudiants: any;
 
   constructor(private httpClient:HttpClient) {
   }
+
 
 
 // *******************************POUR L'UNIVERSITE *********************************
@@ -27,6 +29,14 @@ export class DataService {
   getUser(value:any){
     return this.users = value; //Pour les informations de l'utilisateur connecter
   }
+
+  getData(res:any){
+    const options = {
+      headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
+    };
+  return this.httpClient.get<any>(`http://127.0.0.1:8000/api/${res}/`+this.universite_id);
+  }
+
 
   getUniversite(){
       const options = {
@@ -44,12 +54,12 @@ export class DataService {
 
 // *******************************POUR LES ETUDIANTS*********************************
     // La liste des etudiants
-    getEtudiantData()
+    getEtudiantData():Observable<any>
     {
       const options = {
         headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
       };
-      return this.httpClient.get<any>('http://127.0.0.1:8000/api/listeEtudiants/'+this.universite_id,options);
+      return this.httpClient.get('http://127.0.0.1:8000/api/listeEtudiants/'+this.universite_id,options);
     }
     // L'insertion d'un nouveau Etudiant
     insertEtudiantData(etudiant:Etudiants)

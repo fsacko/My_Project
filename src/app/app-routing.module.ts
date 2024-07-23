@@ -29,6 +29,7 @@ import { AccueilEtudiantComponent } from './PageEtudiants/accueil-etudiant/accue
 import { CourEtudiantComponent } from './PageEtudiants/cour-etudiant/cour-etudiant.component';
 import { ModuleEtudiantComponent } from './PageEtudiants/module-etudiant/module-etudiant.component';
 import { MainComponent } from './PageEtudiants/main/main.component';
+import { EtudiantEditComponent } from './GestionEtudiant/etudiant-edit/etudiant-edit.component';
 
 const routes: Routes = [
     // {path : '', component : LoginComponent},
@@ -52,7 +53,7 @@ const routes: Routes = [
       {path : 'gestion/Cours', component : ClasseCoursComponent, children:[
         {path: '', component: ListeCoursComponent},
         {path: 'liste', component: ListeCoursComponent},
-        {path: 'etat', component: EditeCoursComponent },
+        {path: 'edit', component: EditeCoursComponent },
         {path: 'new', component: CreateCoursComponent }
       ]},
       {path : 'gestion/Modules', component : ModuleComponent, children:[
@@ -65,7 +66,8 @@ const routes: Routes = [
         {path : '', component : EtudiantFiliereComponent},
         {path : 'liste', component : EtudiantListeComponent},
         {path : 'filiere', component : EtudiantFiliereComponent},
-        {path : 'new', component : EtudiantCreateComponent}
+        {path : 'new', component : EtudiantCreateComponent},
+        {path : 'new/matricule', component : EtudiantEditComponent}
         // {path : 'details/:id', component : EtudiantDetailComponent},
         // {path : 'edit/:id', component : EtudiantEditComponent}
 
@@ -85,7 +87,7 @@ const routes: Routes = [
     // Pour la partie des Etudiants :
     {path: 'etudiant',component:MainComponent,canActivate:[etudiantGuard],children:[
       {path :'',component:AccueilEtudiantComponent},
-      {path :'cours',component:CourEtudiantComponent},
+      {path :'module/cours',component:CourEtudiantComponent},
       {path:'module',component:ModuleEtudiantComponent}
     ] }
 

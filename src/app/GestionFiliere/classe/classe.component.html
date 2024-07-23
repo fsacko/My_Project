@@ -1,54 +1,61 @@
-<div class="container text-center">
-  <h3>Bienvenue sur la page de la gestion des Classes</h3>
-</div>
+
 <div *ngIf="erreur" >
   <span class="text-danger accent-danger text-center colored">
     {{erreur.err}}
   </span>
 </div>
-<div class="container style-grid ">
-  <a  class="card shadow-lg"   data-bs-toggle="modal" data-bs-target="#modifier" style="cursor: pointer;" >
-    <div class="card-title text-center">
-      <h6>COURS</h6>
-    </div>
-    <div class="card-body">
-      <img src="..." class="img-thumbnail" alt="...">
-    </div>
-    <div class="card-footer"></div>
-  </a>
-  <a routerLink="Filieres" class="card  shadow-lg ">
-    <div class="card-title text-center">
-      <h6>FILIERES</h6>
-    </div>
-    <div class="card-body">
-      <img src="..." class="img-thumbnail" alt="...">
-    </div>
-    <div class="card-footer"></div>
-  </a>
-  <a routerLink="Etudiants" class="card  shadow-lg ">
-    <div class="card-title text-center">
-      <h6>ETUDIANTS</h6>
-    </div>
-    <div class="card-body">
-      <img src="..." class="img-thumbnail" alt="...">
-    </div>
-    <div class="card-footer"></div>
-  </a>
-  <a class="card  shadow-lg">
-    <div class="card-title text-center">
-      <h6>GESTION</h6>
-    </div>
-    <div class="card-body">
-      <img src="..." class="img-thumbnail" alt="...">
-    </div>
-    <div class="card-footer"></div>
-  </a>
+<div class="bg-light row justify-content-between bg-opacity-75">
+
+  <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand h3 mb-3" routerLink="/gestion">
+        <img src="assets/image/DIEZ2.jpg" alt="Logo" height="24" class="d-inline-block align-text-top">
+        Gestion Des Classes
+      </a>
+  </nav>
+  <div class="container style-grid bg-body-secondary bg-opacity-75 ">
+    <a  class="card shadow-lg p-3 mb-5 bg-body rounded border border-primary"   data-bs-toggle="modal" data-bs-target="#modifier" style="cursor: pointer;" >
+      <div class="card-title text-center">
+        <h6>COURS</h6>
+      </div>
+      <div class="card-body">
+        <img src="..." class="img-thumbnail" alt="...">
+      </div>
+      <div class="card-footer"></div>
+    </a>
+    <a routerLink="Filieres" class="card  shadow-lg p-3 mb-5 bg-body rounded border border-primary ">
+      <div class="card-title text-center">
+        <h6>FILIERES</h6>
+      </div>
+      <div class="card-body">
+        <img src="..." class="img-thumbnail" alt="...">
+      </div>
+      <div class="card-footer"></div>
+    </a>
+    <a routerLink="Etudiants" class="card  shadow-lg p-3 mb-5 bg-body rounded border border-primary">
+      <div class="card-title text-center">
+        <h6>ETUDIANTS</h6>
+      </div>
+      <div class="card-body">
+        <img src="..." class="img-thumbnail" alt="...">
+      </div>
+      <div class="card-footer"></div>
+    </a>
+    <a class="card  shadow-lg p-3 mb-5 bg-body rounded border border-primary">
+      <div class="card-title text-center">
+        <h6>GESTION</h6>
+      </div>
+      <div class="card-body">
+        <img src="..." class="img-thumbnail" alt="...">
+      </div>
+      <div class="card-footer"></div>
+    </a>
+  </div>
 </div>
 
 
 
 <!-- La Partie Modal -->
-<form [formGroup]="classeForm" (ngSubmit)="validation()"  class=" my-4" >
+<form [formGroup]="classeForm" (ngSubmit)="validation()"  class=" my-4 " >
 
   <div class="modal fade" id="modifier" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">

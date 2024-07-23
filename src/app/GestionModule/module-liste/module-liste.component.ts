@@ -13,7 +13,7 @@ export class ModuleListeComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.data.getModuleData().subscribe(data => {
+    this.data.getData('listeModule').subscribe(data => {
       this.modules = data;
       console.log(this.modules);
     });

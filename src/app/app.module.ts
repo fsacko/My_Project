@@ -36,11 +36,14 @@ import { ModuleCreateComponent } from './GestionModule/module-create/module-crea
 import { ModuleListeComponent } from './GestionModule/module-liste/module-liste.component';
 import { ClasseDetailsComponent } from './GestionFiliere/classe-details/classe-details.component';
 import { DetailComponent } from './GestionFiliere/detail/detail.component';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { AccueilEtudiantComponent } from './PageEtudiants/accueil-etudiant/accueil-etudiant.component';
 import { CourEtudiantComponent } from './PageEtudiants/cour-etudiant/cour-etudiant.component';
 import { ModuleEtudiantComponent } from './PageEtudiants/module-etudiant/module-etudiant.component';
 import { MainComponent } from './PageEtudiants/main/main.component';
+import { DataTablesModule } from 'angular-datatables';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { SimplebarAngularModule } from 'simplebar-angular';
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     declarations: [
@@ -92,7 +95,9 @@ import { MainComponent } from './PageEtudiants/main/main.component';
         ReactiveFormsModule,
         AppRoutingModule,
         RouterOutlet,
-        CKEditorModule
+        CKEditorModule,
+        DataTablesModule,
+        SimplebarAngularModule
     ]
 })
 export class AppModule {

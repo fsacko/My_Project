@@ -1,24 +1,22 @@
-<div>
-  <span class="badge-info ">{{dataClasse.sigle}} <sup>{{dataClasse.niveau}}</sup></span>
-  <h5 *ngFor="let module of dataModule">
-    Cours du Module : <strong class="badge bg-success">{{module.nom}}</strong><span>  </span>
-    <form [formGroup]="moduleForm">
-      <select name="" id="" (ngModelChange)="moduleChange()" formControlName="module_id">
-        <option>Autres Modules</option>
-        <option *ngFor="let mod of modules" [value]="mod.id" >{{mod.nom}}</option>
-      </select>
-    </form>
-  </h5>
-</div>
-<div class="sticky-top bg-body-secondary row justify-content-between">
+
+<div class="bg-body-secondary row justify-content-between">
+  <span class="h3 mb-3">Filiere :<sup class="badge bg-dark text-white ms-2 h5">{{dataClasse.sigle}} </sup></span>
+  <nav class="navbar navbar-light  bg-light bg-opacity-75">
+        <!-- <img src="assets/image/DIEZ2.jpg" alt="Logo" height="24" class="d-inline-block align-text-top"> -->
+        <label for="mod" class="form-label h3">Cours du Module : </label>
+        <form [formGroup]="moduleForm" >
+          <select class="form-control" name="" id="mod" (click)="moduleChange()" formControlName="module_id">
+            <!-- <option>Autres Modules</option> -->
+            <option *ngFor="let mod of modules" [value]="mod.id" >{{mod.nom}}</option>
+          </select>
+        </form>
+  </nav>
   <div class="nav-scroller col bg-body-secondary shadow-sm">
-    <nav class="nav" aria-label="Secondary navigation">
+    <nav class="nav  nav-pills nav-fill" aria-label="Secondary navigation">
       <a class="nav-link active" aria-current="page" routerLink="/gestion">Accueil</a>
-      <a class="nav-link active" aria-current="page" routerLink="liste">Liste des Cours</a>
-      <a class="nav-link" routerLink="new">Nouveau Cours</a>
-      <a class="nav-link" href="">Nouveau Chapitre</a>
-      <a class="nav-link" routerLink="etat">Etat des Cours </a>
-      <a class="nav-link" routerLink="edit">Edition des Cours</a>
+      <a class="nav-link " routerLink="liste">Liste</a>
+      <a class="nav-link" routerLink="new">New Cours</a>
+      <a class="nav-link" routerLink="edit">Edit Cours</a>
     </nav>
   </div>
 </div>

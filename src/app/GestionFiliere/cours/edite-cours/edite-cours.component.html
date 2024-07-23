@@ -1,1 +1,31 @@
-<p>edite-cours works!</p>
+
+<div  class="table-responsive p-0  bg-light bg-opacity-75" >
+  <table  class="table align-items-center mb-0">
+    <thead>
+      <tr>
+        <th scope="col">Titre</th>
+        <th scope="col" class="d-none d-xl-table-cell">Sous Titre</th>
+        <!-- <th scope="col" class="d-none d-xl-table-cell">Aperçu</th> -->
+        <th scope="col">Etat</th>
+        <th scope="col" colspan="2">Options</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr   *ngFor="let course of cours" >
+        <td>{{ course.titre }}</td>
+        <td class="d-none d-xl-table-cell">{{ course.sous_titre }}</td>
+
+        <td>
+          <select name="" id="">
+            <option value=""><span  class="badge bg-success">Actif</span></option>
+            <option value=""><span  class="badge bg-danger">Inactif</span></option>
+          </select>
+        </td>
+        <td><button type="submit" class="btn btn-warning m-lg-auto " style="font-size: x-small;"  data-bs-toggle="modal" data-bs-target="#modifier" (click)="update(course.id)">Modifier</button></td>
+        <td><button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#supprimer" style="font-size: x-small;" (click)="delete(course.id)">supprimer</button></td>
+
+      </tr>
+
+    </tbody>
+  </table>
+</div>

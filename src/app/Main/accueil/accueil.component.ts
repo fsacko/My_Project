@@ -3,6 +3,7 @@ import { AuthentificationService } from '../../service/authentification.service'
 import { Router } from '@angular/router';
 import { DataService } from '../../service/data.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import SimpleBar from 'simplebar';
 
 @Component({
   selector: 'app-accueil',
@@ -30,16 +31,68 @@ export class AccueilComponent implements OnInit {
     this.users = this.data.users;
     console.log( this.users);
 
+    this.initialize();
 
 
+
+    // Wait until page is loaded
+    // document.addEventListener("DOMContentLoaded", () => initialize());
+
+
+  }
+  initialize()
+  {
+    this.initializeSimplebar();
+    this.initializeSidebarCollapse();
+  }
+
+  initializeSimplebar()
+  {
+    const simplebarElement:HTMLCollectionOf<Element> = document.getElementsByClassName("js-simplebar");
+
+    if(simplebarElement){
+      const simpleNav = simplebarElement[0] as HTMLElement
+      const simplebarInstance = new SimpleBar(simpleNav);
+
+      /* Recalculate simplebar on sidebar dropdown toggle */
+      const sidebarDropdowns = document.querySelectorAll(".js-sidebar [data-bs-parent]");
+
+      sidebarDropdowns.forEach(link => {
+        link.addEventListener("shown.bs.collapse", () => {
+          simplebarInstance.recalculate();
+        });
+        link.addEventListener("hidden.bs.collapse", () => {
+          simplebarInstance.recalculate();
+        });
+      });
+    }
+  }
+
+  initializeSidebarCollapse()
+  {
+    const sidebarElement:HTMLCollectionOf<Element> = document.getElementsByClassName("js-sidebar");
+    const sidebarToggleElement:HTMLCollectionOf<Element>  = document.getElementsByClassName("js-sidebar-toggle");
+
+    if(sidebarElement && sidebarToggleElement) {
+      const sideBto = sidebarToggleElement[0] as HTMLElement;
+      const sideEl = sidebarElement[0] as HTMLElement;
+      sideBto.addEventListener("click", () => {
+        sideEl.classList.toggle("collapsed");
+
+        sideEl.addEventListener("transitionend", () => {
+          window.dispatchEvent(new Event("resize"));
+        });
+      });
+    }
   }
 
   // title = 'front-endMemoire';
   navElements  = [
-    {name :'administrations',title :"Departement", route:"departement", icon:"school"},
-    {name :'enseignants',title:"Enseignants", route:"professeur", icon:"peop"},
-    {name :'',title :"Gestions", route:"gestion", icon:"class"},
-    {name :'administrations',title:"Direction", route:"direction", icon:"admin_panel_settings"}
+    {name :'tb',title :"Tableau de Board", route:"", icon:"home"},
+    {name :'et',title :"Etudiants", route:"gestion/Etudiants", icon:"school"},
+    {name :'en',title:"Filieres", route:"gestion/Filieres", icon:"peop"},
+    {name :'mo',title :"Modules", route:"gestion/Modules", icon:"class"},
+    {name :'gc',title:"Gestion des Cours", route:"gestion", icon:"admin_panel_settings"}
 
   ];
 
@@ -53,6 +106,18 @@ export class AccueilComponent implements OnInit {
     }
   }
 
+  side(){
+    const navbar: HTMLCollectionOf<Element> = document.getElementsByClassName('nav');
+    if (navbar.length > 0) {
+      const navElement = navbar[0] as HTMLElement;
+      if (navElement.classList.contains('show')) {
+        navElement.classList.remove('show');
+      } else {
+        navElement.classList.add('show');
+      }
+    }
+
+  }
 
 
   // Pour le logOut :

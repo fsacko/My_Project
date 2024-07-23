@@ -1,61 +1,64 @@
 
 <div *ngIf="errors">
-  <span class="alert-danger">{{errors}}</span>
+  <span class="badge bg-info">{{errors}}</span>
 </div>
-<form (ngSubmit)="insertEtudiant()"  class=" container row my-4">
-  <div class="mb-2 col-lg-6">
-    <label for="nom" class="form-label">Nom</label>
-    <input required class="form-control" type="text" name="nom" id="nom" placeholder="Nom de l'Etudiant" [(ngModel)]="etudiant.nom">
-  </div>
-  <div class="mb-2 col-lg-6">
-    <label for="Prenom" class="form-label">Prenom</label>
-    <input required class="form-control" type="text" name="Prenom" id="Prenom" placeholder="Prenom de l'Etudiant" [(ngModel)]="etudiant.prenom">
-  </div>
-  <div class="mb-2 col-lg-6">
-    <label for="Email" class="form-label">Email</label>
-    <input required class="form-control" type="email" name="Email" id="Email" placeholder="Exemple@xyz.abc" [(ngModel)]="etudiant.email">
-  </div>
-  <div class="mb-2 col-lg-6">
-    <label for="Adresse" class="form-label">Adresse</label>
-    <input required class="form-control" type="text" name="Adresse" id="Adresse" placeholder="Bamako/rue:xxx/porte:abc" [(ngModel)]="etudiant.adresse">
-  </div>
-  <div class="mb-2 col-lg-6">
-    <label for="Tel" class="form-label">Tel</label>
-    <input required class="form-control" type="text" name="Tel" id="Tel" placeholder="00223 12 34 56 78" [(ngModel)]="etudiant.telephone">
-  </div>
-  <div class="mb-2 col-lg-6">
-    <label for="Date_de_naissance" class="form-label">Date de naissance</label>
-    <input required class="form-control" type="date" name="Date_de_naissance" id="Date_de_naissance" placeholder="Date de Naissance de l'etudiant" [(ngModel)]="etudiant.date_de_naissance">
-  </div>
-  <div class="mb-2 col-lg-6">
-    <label for="Mot_de_passe" class="form-label">Mot de passe</label>
-    <input required class="form-control" type="text" name="Mot_de_passe" id="Mot_de_passe" [(ngModel)]="etudiant.password">
-  </div>
-  <div class="mb-2 col-lg-6">
-    <label for="login" class="form-label">Login</label>
-    <input required class="form-control" type="text" name="login" id="login" [(ngModel)]="etudiant.login">
-  </div>
-  <div class="mb-2 col-lg-6" *ngFor="let universite of universites">
-    <input required class="form-control visually-hidden"  type="text" name="universite_id" id="universite_id"  [(ngModel)]="etudiant.universite_id"> {{universite.nom}}
-  </div>
-  <div class="mb-2 col-lg-6"  *ngFor="let classes of listeFiliere" >
-    <label for="Classe" class="form-label">Classe</label>
-    <select id="Classe"  class="form-select" name="filiere" [(ngModel)]="etudiant.filiere_id">
-      <!-- <option value="">Veuillez Choisir La Classe</option> -->
-      <option  *ngFor="let classe of classes" [value]="classe.id"><strong>{{classe.nom}}</strong> ({{classe.niveau}})</option>
-    </select>
-  </div>
-  <div class="mb-2 col-lg-6"  *ngFor="let classes of annee" >
-    <label for="Classe" class="form-label">Annee Scolaire</label>
-    <select id="annee"  class="form-select" name="annee_scolaire" [(ngModel)]="etudiant.annee_scolaire">
-      <!-- <option value="">Veuillez Choisir La annee</option> -->
-      <option  *ngFor="let annee of classes" [value]="annee.id"><strong>{{annee.annee}}</strong></option>
-    </select>
-  </div>
-  <div class="text-center col-12">
-    <button class="btn btn-primary" >Ajouter</button>
-  </div>
-</form> 
+<div class=" container   py-4 bg-light bg-opacity-75">
+
+  <form (ngSubmit)="insertEtudiant()"  class="row">
+    <div class="mb-2 col-lg-6">
+      <label for="nom" class="form-label py-3"><strong>Nom</strong></label>
+      <input required class="form-control" type="text" name="nom" id="nom" placeholder="Nom de l'Etudiant" [(ngModel)]="etudiant.nom">
+    </div>
+    <div class="mb-2 col-lg-6">
+      <label for="Prenom" class="form-label py-3"><strong>Prenom</strong></label>
+      <input required class="form-control" type="text" name="Prenom" id="Prenom" placeholder="Prenom de l'Etudiant" [(ngModel)]="etudiant.prenom">
+    </div>
+    <div class="mb-2 col-lg-6">
+      <label for="Email" class="form-label py-3"><strong>Email</strong></label>
+      <input required class="form-control" type="email" name="Email" id="Email" placeholder="Exemple@xyz.abc" [(ngModel)]="etudiant.email">
+    </div>
+    <div class="mb-2 col-lg-6">
+      <label for="Adresse" class="form-label py-3"><strong>Adresse</strong></label>
+      <input required class="form-control" type="text" name="Adresse" id="Adresse" placeholder="Bamako/rue:xxx/porte:abc" [(ngModel)]="etudiant.adresse">
+    </div>
+    <div class="mb-2 col-lg-6">
+      <label for="Tel" class="form-label py-3"><strong>Tel</strong></label>
+      <input required class="form-control" type="text" name="Tel" id="Tel" placeholder="00223 12 34 56 78" [(ngModel)]="etudiant.telephone">
+    </div>
+    <div class="mb-2 col-lg-6">
+      <label for="Date_de_naissance" class="form-label py-3"><strong>Date de naissance</strong></label>
+      <input required class="form-control" type="date" name="Date_de_naissance" id="Date_de_naissance" placeholder="Date de Naissance de l'etudiant" [(ngModel)]="etudiant.date_de_naissance">
+    </div>
+    <div class="mb-2 col-lg-6">
+      <label for="Mot_de_passe" class="form-label py-3"><strong>Mot de passe</strong></label>
+      <input required class="form-control" type="text" name="Mot_de_passe" id="Mot_de_passe" [(ngModel)]="etudiant.password">
+    </div>
+    <div class="mb-2 col-lg-6">
+      <label for="login" class="form-label py-3"><strong>Login</strong></label>
+      <input required class="form-control" type="text" name="login" id="login" [(ngModel)]="etudiant.login">
+    </div>
+    <div class="mb-2 col-lg-6" *ngFor="let universite of universites">
+      <input required class="form-control visually-hidden"  type="text" name="universite_id" id="universite_id"  [(ngModel)]="etudiant.universite_id"> {{universite.nom}}
+    </div>
+    <div class="mb-2 col-lg-6"  *ngFor="let classes of listeFiliere" >
+      <label for="Classe" class="form-label py-3"><strong>Classe</strong></label>
+      <select id="Classe"  class="form-select" name="filiere" [(ngModel)]="etudiant.filiere_id">
+        <!-- <option value="">Veuillez Choisir La Classe</option> -->
+        <option  *ngFor="let classe of classes" [value]="classe.id"><strong>{{classe.nom}}</strong> ({{classe.niveau}})</option>
+      </select>
+    </div>
+    <div class="mb-2 col-lg-6"  *ngFor="let classes of annee" >
+      <label for="Classe" class="form-label py-3"><strong>Annee Scolaire</strong></label>
+      <select id="annee"  class="form-select" name="annee_scolaire" [(ngModel)]="etudiant.annee_scolaire">
+        <!-- <option value="">Veuillez Choisir La annee</option> -->
+        <option  *ngFor="let annee of classes" [value]="annee.id"><strong>{{annee.annee}}</strong></option>
+      </select>
+    </div>
+    <div class="text-center col-12 py-4">
+      <button class="btn btn-primary" style="font-size: large;" ><strong>Ajouter</strong></button>
+    </div>
+  </form>
+</div>
 
 
 <!-- <div class="container">

@@ -3,18 +3,17 @@
     Bienvenue sur votre Espace de telechargement et de Visionnage des cours
   </h5>
 </div>
-<div class=" container-fluid justify-content-center row">
+<div class=" container-fluid justify-content-center row"  *ngFor="let classes of dataGlobal" >
 
-  <div class="card col-sm-12 col-lg-auto m-3 shadow-lg" *ngFor="let classe of classes">
+  <div class="card col-sm-12 col-lg-auto m-3 shadow-lg" *ngFor="let classe of classes.filieres">
     <div class="card-title p-lg-1" >
-      {{ classe.id }}
+      {{ classe.sigle }}
     </div>
     <div class="card-body">
       {{ classe.nom }}
-    </div> 
+    </div>
     <div class="card-footer text-center">
-      {{ classe.desc }} <br>
-      <a class="btn btn-primary" routerLink="/module">
+      <a class="btn btn-primary" (click)="listeModule(classe.id )" routerLink="module">
         Voir Modules
       </a>
     </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
@@ -6,8 +6,12 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'FrontEnd';
+
+  ngOnInit(): void {
+    // Initialisation des composants JavaScript AdminKit
+  }
 
   // public Editor = ClassicEditor;
   actions : Array<any> = [

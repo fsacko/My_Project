@@ -2,13 +2,22 @@
 <div *ngIf="succes">
   <span class="alert-success">{{succes}}</span>
 </div>
-<h5>Bienvenue sur la page des Etudiants </h5>
-<div class="sticky-top bg-body-secondary row justify-content-between">
+
+
+
+<div class="bg-body-secondary row justify-content-between">
+  <nav class="navbar navbar-light  bg-light bg-opacity-75">
+      <a class="navbar-brand h3 mb-3" routerLink="filiere">
+        <img src="assets/image/DIEZ2.jpg" alt="Logo" height="24" class="d-inline-block align-text-top">
+        Page Des Etudiants
+      </a>
+  </nav>
   <div class="nav-scroller col bg-body-secondary shadow-sm">
-    <nav class="nav" aria-label="Secondary navigation">
+    <nav  class="nav nav-pills nav-fill" aria-label="Secondary navigation">
       <a class="nav-link active" aria-current="page" routerLink="/gestion">Accueil</a>
-      <a class="nav-link" routerLink="new">Nouveau</a>
       <a class="nav-link" routerLink="filiere">Liste</a>
+      <a class="nav-link" routerLink="new">Nouveau</a>
+      <a class="nav-link" routerLink="new/matricule">Nouveau Avec Matricule</a>
     </nav>
   </div>
 </div>
