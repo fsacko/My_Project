@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +12,6 @@ export class AppComponent implements OnInit{
     // Initialisation des composants JavaScript AdminKit
   }
 
-  // public Editor = ClassicEditor;
   actions : Array<any> = [
     {name :'accueils',title :"Accueil", "route":"accueil", "icon":"home"},
     {name :'administrations',title :"Departement", "route":"departement", "icon":"school"},

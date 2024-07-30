@@ -66,11 +66,11 @@
     </div>
     <div class="mb-2 col-lg-6">
       <label class="form-label py-3" for="content">Content:</label>
-      <!-- <textarea  class="form-text"  id="content" [(ngModel)]="contenu" name="content"></textarea> -->
-      <ckeditor [(ngModel)]="contenu" ></ckeditor>
+      <textarea  class="form-text"  id="content" [(ngModel)]="contenu" name="content"></textarea>
+      <ckeditor [(ngModel)]="editorData"></ckeditor>
        <!-- app.component.html -->
 
-      <!-- <ckeditor [editor]="Editor" [config]="config" data="<p>Hello, world!</p>"></ckeditor> -->
+      <!-- <ng-component  editor="Editor"  data="<p>Hello, world!</p>"></ng-component> -->
 
     </div>
     <div class="mb-2 col-lg-6">

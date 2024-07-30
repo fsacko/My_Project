@@ -45,13 +45,12 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
               "node_modules/datatables.net/js/dataTables.js",
-              "node_modules/ckeditor5/build/ckeditor5-dll.js",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.js",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "src/assets/js/app.js"
             ],
             "server": "src/main.server.ts",
-            "prerender": true,
+            "prerender": false,
             "ssr": {
               "entry": "server.ts"
             }

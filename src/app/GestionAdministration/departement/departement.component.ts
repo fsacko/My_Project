@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-departement',
+  selector: 'app-departement-acceuil',
   templateUrl: './departement.component.html',
-  styleUrl: './departement.component.css'
+  styleUrl: './departement.component.css',
+  host: {'some-binding': 'departement-liste'}
 })
 export class DepartementComponent {
   ecoles =[

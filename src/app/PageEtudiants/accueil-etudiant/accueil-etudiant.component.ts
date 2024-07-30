@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EtudiantDataService } from '../../service/etudiant/etudiant-data.service';
+import { DataService } from '../../service/data.service';
+import SimpleBar from 'simplebar';
 
 @Component({
   selector: 'app-accueil-etudiant',
@@ -8,7 +10,13 @@ import { EtudiantDataService } from '../../service/etudiant/etudiant-data.servic
 })
 export class AccueilEtudiantComponent implements OnInit {
 
-  constructor(private data:EtudiantDataService){}
+  constructor(private data:EtudiantDataService,private dataS:DataService){}
+
+  universites:any ;
+  currentAction :any;
+  elementsName : any;
+  users : any;
+
   classe:any;
   modules:any;
   descriptionMosule!:string;
@@ -27,7 +35,7 @@ export class AccueilEtudiantComponent implements OnInit {
 
   }
 
-  
+
   listeModule(id: any) {
     for (let i = 0; i < this.data.dataEtudiant.length; i++) {
       const element = this.data.dataEtudiant[i];//Pour la liste des Filieres avec ses contenus

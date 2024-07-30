@@ -3,7 +3,7 @@
 <div  class="table-responsive bg-light bg-opacity-75" >
   <table datatable [dtOptions]="dtOptions" class="table  row-border hover" id="tableEtudiant"></table>
 </div>
-<!-- <table  class="table align-items-center mb-0" id="tableEtudiant">
+<!-- <table datatable [dtOptions]="dtOptions"  class="table align-items-center mb-0" id="tableEtudiant">
   <thead>
     <tr >
       <th scope="col">Nom</th>
@@ -14,27 +14,16 @@
     </tr>
   </thead>
   <tbody >
-    <tr  *ngFor="let et of Etudiants" style="font-size: small;">
-      <td>{{et.nom}}</td>
-      <td>{{et.prenom}}</td>
-      <td class="d-none d-xl-table-cell">{{et.email}}</td>
-      <td class="d-none d-xl-table-cell">{{et.telephone}}</td>
-      <td  ><strong>{{et.sigle}}</strong></td>
-      <td><button type="submit" class="btn btn-warning m-lg-auto " style="font-size: x-small;"  data-bs-toggle="modal" data-bs-target="#modifier" (click)="getEtudiantId(et.id)">Modifier</button></td>
-      <td><button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#supprimer" style="font-size: x-small;" (click)="getEtudiantId(et.id)">supprimer</button></td>
+    <tr style="font-size: small;">
+      <td></td>
+      <td></td>
+      <td class="d-none d-xl-table-cell"></td>
+      <td class="d-none d-xl-table-cell"></td>
+      <td  ><strong></strong></td>
+      <td><button type="submit" class="btn btn-warning m-lg-auto " style="font-size: x-small;"  data-bs-toggle="modal" data-bs-target="#modifier" (click)="getEtudiantId('#')">Modifier</button></td>
+      <td><button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#supprimer" style="font-size: x-small;" (click)="getEtudiantId('#')">supprimer</button></td>
     </tr>
   </tbody>
-  <tfoot class="bg-body-tertiary">
-    <tr>
-      <td>A</td>
-      <td>B</td>
-      <td class="d-none d-xl-table-cell">C</td>
-      <td class="d-none d-xl-table-cell">D</td>
-      <td>E</td>
-      <td>F</td>
-      <td>G</td>
-    </tr>
-  </tfoot>
 </table> -->
 
 <!-- <table datatable [dtOptions]="dtOptions" class="row-border hover">

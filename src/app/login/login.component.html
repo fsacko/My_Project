@@ -1,14 +1,14 @@
-<main class="d-flex w-100 login"  style="background-color: rgba(2, 2, 22, 0.546);">
+<!-- <main class="d-flex w-100 login"  style="background-color: rgba(2, 2, 22, 0.546);">
   <div class="container d-flex flex-column">
     <div class="row vh-100">
       <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
         <div class="d-table-cell align-middle">
-          <!-- <div class=" card-header text-center mt-4">
+          <div class=" card-header text-center mt-4">
             <h2 class="h2">BIENVENUE SUR LA PLATEFORME UNIVERSITE</h2>
             <p class="lead">
               Identifiez-vous Pour pouvoir continuer
             </p>
-          </div> -->
+          </div>
           <div class="card">
             <div class="card-body shadow-lg shadow-sm"  style="background-color: rgba(251, 251, 251, 0.864);">
               <div class="m-sm-4">
@@ -18,7 +18,7 @@
                 <div class="text-danger" *ngIf="errorMessage">{{errorMessage}}</div>
 
                 <form [formGroup]="loginFormGroup" (ngSubmit)="login()">
-                  <!-- {{loginFormGroup.value| json}} -->
+
                   <div class="mb-3">
                     <label class="form-label">Email</label>
                     <input class="form-control form-control-lg" [required]="true" type="email" name="email" value="mk79@gmail.com" placeholder="Entrer votre Email "  formControlName="email"/>
@@ -39,7 +39,6 @@
                     </label>
                   </div>
                   <div class="text-center mt-3">
-                    <!-- <a href="index.html" class="btn btn-lg btn-primary">Sign in</a> -->
                     <button type="submit" class="btn btn-lg btn-primary">Connexion</button>
                   </div>
                 </form>
@@ -51,8 +50,67 @@
       </div>
     </div>
   </div>
+</main> -->
+
+
+<main>
+
+  <div class="login-wrapper">
+    <form class="login"  [formGroup]="loginFormGroup" (ngSubmit)="login()">
+      <div class="login-header">
+        <div class="logo"></div>
+      </div>
+      <div class="login-body">
+        <section class="title">
+          <div class="welcome">Bienvenue sur</div>
+          A l'Université
+          <div class="hint">Product tagline</div>
+        </section>
+        <div class="login-group">
+          <clr-select-container>
+            <label>Role</label>
+            <select clrSelect name="type" >
+              <option value="local">Administration</option>
+              <option value="admin">Etudiant</option>
+            </select>
+          </clr-select-container>
+          <clr-input-container>
+            <label class="clr-sr-only">E-mail</label>
+            <input
+              type="text"
+              autocomplete="username"
+              name="username"
+              clrInput
+              placeholder="Entrer votre Email "
+              formControlName="email"
+            />
+          </clr-input-container>
+          <clr-password-container>
+            <label class="clr-sr-only">Password</label>
+            <input
+              type="password"
+              autocomplete="current-password"
+              name="password"
+              clrPassword
+              placeholder="Entrer votre Mot de passe "
+              formControlName="password"
+            />
+          </clr-password-container>
+          <clr-checkbox-wrapper>
+            <label>se souvenir de moi</label>
+            <input type="checkbox" name="rememberMe" clrCheckbox  />
+          </clr-checkbox-wrapper>
+          <div class="error active" *ngIf="errorMessage">{{errorMessage}}</div>
+          <button type="submit" class="btn btn-primary">Log in</button>
+        </div>
+      </div>
+      <div class="login-footer">
+        <span class="copyright">2024 A l'UNIVERSITE, Inc.</span>
+        <a href="javascript://">Terms</a>
+        <a href="javascript://">Privacy</a>
+      </div>
+    </form>
+  </div>
 </main>
-
-
 
 

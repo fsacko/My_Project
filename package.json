@@ -27,6 +27,7 @@
     "@ckeditor/ckeditor5-engine": "^41.4.2",
     "@ckeditor/ckeditor5-utils": "^41.4.2",
     "@ckeditor/ckeditor5-watchdog": "^41.4.2",
+    "@clr/angular": "^17.2.1",
     "@wiris/mathtype-ckeditor5": "^8.8.3",
     "adminkit": "^0.0.1",
     "angular-datatables": "^18.0.0",
@@ -43,7 +44,7 @@
     "simplebar": "^6.2.7",
     "simplebar-angular": "^3.2.6",
     "tslib": "^2.3.0",
-    "update": "^0.4.2",
+    "update": "^0.7.4",
     "yarn": "^1.22.22",
     "zone.js": "~0.14.3"
   },

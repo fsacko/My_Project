@@ -7,22 +7,23 @@ import { EtudiantDetailComponent } from '../etudiant-detail/etudiant-detail.comp
 import { ADTSettings } from 'angular-datatables/src/models/settings';
 import { Subject } from 'rxjs';
 import { Idrecuper } from '../etudiant-detail/IDrecuper';
-import { Config } from 'datatables.net';
-import { link } from 'fs';
 
 
 
 @Component({
   selector: 'app-etudiant-filiere',
   templateUrl: './etudiant-filiere.component.html',
-  styleUrl: './etudiant-filiere.component.css'
+  styleUrl: './etudiant-filiere.component.css',
+  host: {'some-binding': 'atudiant-liste'}
 })
 export class EtudiantFiliereComponent implements OnInit {
+  @ViewChild('editModal') editModal: TemplateRef<any> | undefined;
   Etudiants: any | Array <any>;
   IdEtudiant:any;
   etudiantForm = new Etudiants;
 
   dataEtudiant!:Array<any>;
+  currentRowId: number | undefined;
   // dtOptions: Config = {};
 
 
@@ -47,6 +48,10 @@ export class EtudiantFiliereComponent implements OnInit {
       const self =this;
 
       this.dtOptions = {
+        // pagingType: 'full_numbers',
+        // pageLength: 10,
+        serverSide: true,
+
         processing: true,
         ajax: (dataTablesParameters: any, callback) => {
           console.log('DataTables Parameters:', dataTablesParameters);
@@ -88,6 +93,7 @@ export class EtudiantFiliereComponent implements OnInit {
             defaultContent: '',
             orderable: false,
             render: (data, type, row) => {
+
               return `
                 <style>
                   .edit-btn {
@@ -118,8 +124,8 @@ export class EtudiantFiliereComponent implements OnInit {
                     border-radius: 4px;
                   }
                 </style>
-                <button class="edit-btn" data-id="${data.id}"  style="font-size: x-small;"  data-bs-toggle="modal" data-bs-target="#modifier">Edit</button>
-                <button class="delete-btn" data-id="${row.id}"   style="font-size: x-small;" data-bs-toggle="modal" data-bs-target="#supprimer">Delete</button>
+                <button type="submit" class="edit-btn"  style="font-size: x-small;"  data-bs-toggle="modal" data-bs-target="#modifier" (click)="console()">Edit</button>
+                <button type="submit" class="delete-btn" style="font-size: x-small;" data-bs-toggle="modal" data-bs-target="#supprimer" (click)="getEtudiantId('${data}')">Delete</button>
 
               `;
             }
@@ -131,29 +137,32 @@ export class EtudiantFiliereComponent implements OnInit {
     console.log(this.dataS.dataEtudiants);
 
   }
+  console(){
+    console.log('Coucou')
+  }
 
-    // Add event listeners for edit and delete buttons
-    addRowEventListeners() {
-      $('#tableEtudiant tbody').on('click', 'button.edit-btn', (event) => {
-        const id = $(event.currentTarget).data('id');
-        this.editRow(id);
-      });
+  // Add event listeners for edit and delete buttons
+  addRowEventListeners() {
+    $('#tableEtudiant tbody').on('click', 'button.edit-btn', (event) => {
+      const id = $(event.currentTarget).data('id');
+      this.editRow(id);
+    });
 
-      $('#tableEtudiant tbody').on('click', 'button.delete-btn', (event) => {
-        const id = $(event.currentTarget).data('id');
-        this.deleteRow(id);
-      });
-    }
+    $('#tableEtudiant tbody').on('click', 'button.delete-btn', (event) => {
+      const id = $(event.currentTarget).data('id');
+      this.deleteRow(id);
+    });
+  }
 
-    editRow(id: number): void {
-      console.log('Edit row with ID:', id);
-      // Implement edit functionality here
-    }
+  editRow(id: number): void {
+    console.log('Edit row with ID:', id);
+    // Implement edit functionality here
+  }
 
-    deleteRow(id: number): void {
-      console.log('Delete row with ID:', id);
-      // Implement delete functionality here
-    }
+  deleteRow(id: number): void {
+    console.log('Delete row with ID:', id);
+    // Implement delete functionality here
+  }
 
 
   ngAfterViewInit() {
@@ -173,6 +182,7 @@ export class EtudiantFiliereComponent implements OnInit {
   // Recuperer l'ID d'un Etudiant en particulier :
   getEtudiantId(id : any){
     if (id != undefined) {
+      console.log(id);
 
       this.Etudiants.forEach((element: any | Array <any>) => {
         for (let i = 0; i < element.length; i++) {
@@ -185,13 +195,17 @@ export class EtudiantFiliereComponent implements OnInit {
         }
       });
     }
+    else
+    {
+      console.log('ID etudiant Non prise en compte !!')
+    }
 
   }
 
   // Pour Modifier l'etudiant en question :
   updateEtudiant(){
     this.dataS.updateEtudiant(this.IdEtudiant,this.etudiantForm).subscribe(res => {
-      this.route.navigate(['/etudiant/filiere']);
+      this.route.navigate(['getsion/Etudiant/filiere']);
     });
   }
 

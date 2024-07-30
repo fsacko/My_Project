@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule,  Routes } from '@angular/router';
 import { EtudiantComponent } from './GestionEtudiant/etudiant/etudiant.component';
 import { DepartementComponent } from './GestionAdministration/departement/departement.component';
-import { EtudiantListeComponent } from './GestionEtudiant/etudiant-liste/etudiant-liste.component';
 import { EtudiantCreateComponent } from './GestionEtudiant/etudiant-create/etudiant-create.component';
 import { DirectionComponent } from './GestionAdministration/direction/direction.component';
 import { ClasseComponent } from './GestionFiliere/classe/classe.component';
@@ -64,7 +63,7 @@ const routes: Routes = [
       // Pour les routes qui ne concernent que les Etudiants :
       {path:  'gestion/Etudiants', component:EtudiantComponent,children:[
         {path : '', component : EtudiantFiliereComponent},
-        {path : 'liste', component : EtudiantListeComponent},
+        {path : 'liste', component : EtudiantFiliereComponent},
         {path : 'filiere', component : EtudiantFiliereComponent},
         {path : 'new', component : EtudiantCreateComponent},
         {path : 'new/matricule', component : EtudiantEditComponent}

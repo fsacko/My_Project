@@ -4,7 +4,8 @@ import { DataService } from '../../service/data.service';
 @Component({
   selector: 'app-etudiant',
   templateUrl: './etudiant.component.html',
-  styleUrl: './etudiant.component.css'
+  styleUrl: './etudiant.component.css',
+  host: {'some-binding': 'atudiant-acceuil'}
 })
 export class EtudiantComponent implements OnInit {
 succes: any;

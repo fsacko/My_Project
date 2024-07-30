@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../../service/data.service';
 import { Cours } from '../../../model/Cours.model';
 import { Router } from '@angular/router';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-create-cours',
@@ -11,6 +9,9 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
   styleUrl: './create-cours.component.css'
 })
 export class CreateCoursComponent implements OnInit {
+
+  // public Editor = ClassicEditor;
+  public editorData : string = '';
 
   // public Editor = ClassicEditor;
   public config = {
@@ -22,7 +23,7 @@ export class CreateCoursComponent implements OnInit {
   }
   selectedFile!: File ;
   uploadProgress: number | null = null;
-  contenu: string = "";
+  contenu:  string = "" ;
   sous_titre: string = "";
   titre: string = "";
   constructor(private data: DataService,private route:Router) {}
@@ -39,6 +40,7 @@ export class CreateCoursComponent implements OnInit {
     // this.coursFormGroup = this.formB.group({
     //   fichier:
     // });
+    this.editorData = '<p>Contenu initial de l\'éditeur.</p>';
     console.log(this.data.module_id);
     console.log(this.data.filiere_id);
   }

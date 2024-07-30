@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EtudiantComponent } from './GestionEtudiant/etudiant/etudiant.component';
 import { EtudiantCreateComponent } from './GestionEtudiant/etudiant-create/etudiant-create.component';
-import { EtudiantListeComponent } from './GestionEtudiant/etudiant-liste/etudiant-liste.component';
 import { EtudiantDetailComponent } from './GestionEtudiant/etudiant-detail/etudiant-detail.component';
 import { ClasseComponent } from './GestionFiliere/classe/classe.component';
 import { ClasseEtudiantComponent } from './GestionFiliere/classe-etudiant/classe-etudiant.component';
@@ -41,8 +40,10 @@ import { CourEtudiantComponent } from './PageEtudiants/cour-etudiant/cour-etudia
 import { ModuleEtudiantComponent } from './PageEtudiants/module-etudiant/module-etudiant.component';
 import { MainComponent } from './PageEtudiants/main/main.component';
 import { DataTablesModule } from 'angular-datatables';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+// import { CKEditorComponent, CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { SimplebarAngularModule } from 'simplebar-angular';
+import { ClrCheckboxModule, ClrCheckboxWrapper, ClrInputModule, ClrPassword, ClrPasswordContainer, ClrPasswordModule, ClrSelectModule } from '@clr/angular';
+import { CKEditorComponent, CKEditorModule } from '@ckeditor/ckeditor5-angular';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -50,7 +51,6 @@ import { SimplebarAngularModule } from 'simplebar-angular';
         AppComponent,
         EtudiantComponent,
         EtudiantCreateComponent,
-        EtudiantListeComponent,
         EtudiantDetailComponent,
         ClasseComponent,
         ClasseEtudiantComponent,
@@ -91,13 +91,15 @@ import { SimplebarAngularModule } from 'simplebar-angular';
     imports: [
         BrowserModule,
         FormsModule,
-        FormsModule,
         ReactiveFormsModule,
         AppRoutingModule,
         RouterOutlet,
-        CKEditorModule,
         DataTablesModule,
-        SimplebarAngularModule
+        SimplebarAngularModule,
+        ClrInputModule,
+        ClrCheckboxModule,
+        ClrPasswordModule,
+        ClrSelectModule
     ]
 })
 export class AppModule {

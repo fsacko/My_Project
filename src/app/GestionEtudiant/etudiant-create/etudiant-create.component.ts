@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../service/data.service';
 import { Etudiants } from '../../CLASS/etudiant/etudiants';
-import { Console } from 'console';
+// import { CKEditor4 } from 'ckeditor4-angular';
 import { Router } from '@angular/router';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @Component({
   selector: 'app-etudiant-create',
@@ -14,7 +15,7 @@ export class EtudiantCreateComponent implements OnInit  {
   etudiant = new Etudiants;
   listeFiliere:any | Array<any>;
   universites: any;
-  errors:any|Array<any>; 
+  errors:any|Array<any>;
   annee:any | Array<any>;
 
   constructor(private data:DataService, private route:Router){}

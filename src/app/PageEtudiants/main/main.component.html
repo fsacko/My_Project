@@ -1,46 +1,115 @@
-<main>
-  <div class="container">
-    <div class="navbar">
-      <nav>
-        <ul>
-          <li><a routerLink="">Accueil</a></li>
-          <li><a routerLink="cours">Cours</a></li>
-          <li><a routerLink="module">Modules</a></li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-  <div class="container" >
-    
-    <router-outlet>
 
-    </router-outlet>
-  </div>
-  <div class="footer container">
-    <div class="container-fluid">
-      <div class="row text-muted">
-        <div class="col-6 text-start">
-          <p class="mb-0">
-            <a class="text-muted" href=""><strong>A l'Université</strong></a> &copy;
-          </p>
-        </div>
-        <div class="col-6 text-end">
-          <ul class="list-inline">
-            <li class="list-inline-item">
-              <a class="text-muted" href="">Support</a>
-            </li>
-            <li class="list-inline-item">
-              <a class="text-muted" href="">Aide</a>
-            </li>
-            <li class="list-inline-item">
-              <a class="text-muted" href="">Privacy</a>
-            </li>
-            <li class="list-inline-item">
-              <a class="text-muted" href="">Terms</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</main>
+
+<body>
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar js-sidebar">
+			<div class="sidebar-content js-simplebar">
+        <a class="sidebar-brand" routerLink="" >
+          <span class="align-middle">A l'UNIVERSITE</span><br>
+          <span class="align-middle text-danger-emphasis"></span>
+        </a>
+
+				<ul class="sidebar-nav">
+					<li class="sidebar-header">
+						Pages
+					</li>
+          <li *ngFor="let action of navElements"  [class]="action==currentAction ? 'sidebar-item  active ' : 'sidebar-item' ">
+              <a class="sidebar-link"  [routerLink]="action.route" (click)="changer(action.name)">
+                <i class="align-middle bi bi-{{action.icon}}" data-feather="sliders" ></i> <span class="align-middle">{{action.title}}</span>
+              </a>
+          </li>
+
+				</ul>
+
+				<div class="sidebar-cta">
+					<div class="sidebar-cta-content">
+						<strong class="d-inline-block mb-2">En cas de Probleme</strong>
+						<div class="mb-3 text-sm">
+							Si Vous avez un quelconque probleme avec le systeme, Adresse de l'Admin
+						</div>
+						<div class="d-grid">
+							<a  routerLink="" class="btn btn-primary">Contacter Admin</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<a class="sidebar-toggle js-sidebar-toggle">
+          <i class="hamburger align-self-center"></i>
+        </a>
+
+				<div class="navbar-collapse collapse ">
+					<ul class="navbar-nav navbar-align">
+						<li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" routerLink="#" data-bs-toggle="dropdown">
+                <i class="align-middle" data-feather="settings"></i>
+              </a>
+
+              <a class="nav-link dropdown-toggle d-inline-block d-sm-block" href="#" data-bs-toggle="dropdown"  *ngIf="users">
+                <img src="assets/image/DIEZ2.jpg" class="avatar img-fluid rounded me-1" alt="{{users.name}}"  /> <span class="text-dark">{{users.name}}</span>
+              </a>
+							<div class="dropdown-menu dropdown-menu-end">
+								<a class="dropdown-item" ><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" routerLink="/login"> Deconnexion</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+			<main class="content">
+				<div class="container-fluid p-0">
+					<div class="row">
+						<div class="col-12">
+							<!-- <div class="card">
+								<div class="card-header">
+									<h5 class="card-title mb-0">Empty card</h5>
+								</div>
+								<div class="card-body">
+								</div>
+							</div> -->
+              <router-outlet></router-outlet>
+						</div>
+					</div>
+
+				</div>
+
+			</main>
+
+			<footer class="footer">
+				<div class="container-fluid">
+					<div class="row text-muted">
+						<div class="col-6 text-start">
+              <p class="mb-0">
+                <a class="text-muted" href=""><strong>A l'Université</strong></a> 2023 - 2024 &copy;
+              </p>
+						</div>
+						<div class="col-6 text-end">
+							<ul class="list-inline">
+								<li class="list-inline-item">
+									<a class="text-muted" href="#" target="_blank">Support</a>
+								</li>
+								<li class="list-inline-item">
+									<a class="text-muted" href="#" target="_blank">Help Center</a>
+								</li>
+								<li class="list-inline-item">
+									<a class="text-muted" href="#" target="_blank">Privacy</a>
+								</li>
+								<li class="list-inline-item">
+									<a class="text-muted" href="#" target="_blank">Terms</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+
+	<script src="../../../assets/js/app.js"></script>
+
+</body>
