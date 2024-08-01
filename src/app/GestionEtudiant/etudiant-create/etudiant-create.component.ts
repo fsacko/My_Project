@@ -3,7 +3,6 @@ import { DataService } from '../../service/data.service';
 import { Etudiants } from '../../CLASS/etudiant/etudiants';
 // import { CKEditor4 } from 'ckeditor4-angular';
 import { Router } from '@angular/router';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @Component({
   selector: 'app-etudiant-create',

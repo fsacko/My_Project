@@ -22,7 +22,7 @@ import { AccueilGestionComponent } from './Gestion/accueil-gestion/accueil-gesti
 import { ClasseListeComponent } from './GestionFiliere/classe-liste/classe-liste.component';
 import { ClasseCreateComponent } from './GestionFiliere/classe-create/classe-create.component';
 import { LoginComponent } from './login/login.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EtudiantFiliereComponent } from './GestionEtudiant/etudiant-filiere/etudiant-filiere.component';
 import { DashbordComponent } from './Main/dashbord/dashbord.component';
 import { ProfilComponent } from './Profil/profil/profil.component';
@@ -39,12 +39,10 @@ import { AccueilEtudiantComponent } from './PageEtudiants/accueil-etudiant/accue
 import { CourEtudiantComponent } from './PageEtudiants/cour-etudiant/cour-etudiant.component';
 import { ModuleEtudiantComponent } from './PageEtudiants/module-etudiant/module-etudiant.component';
 import { MainComponent } from './PageEtudiants/main/main.component';
-import { DataTablesModule } from 'angular-datatables';
-// import { CKEditorComponent, CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { CommonModule } from '@angular/common';
 import { SimplebarAngularModule } from 'simplebar-angular';
-import { ClrCheckboxModule, ClrCheckboxWrapper, ClrInputModule, ClrPassword, ClrPasswordContainer, ClrPasswordModule, ClrSelectModule } from '@clr/angular';
-import { CKEditorComponent, CKEditorModule } from '@ckeditor/ckeditor5-angular';
-// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { ClrCheckboxModule, ClrCheckboxWrapper, ClrInputModule, ClrPassword, ClrPasswordContainer, ClrPasswordModule, ClrSelectModule } from '@clr/angular';
+
 
 @NgModule({
     declarations: [
@@ -84,23 +82,10 @@ import { CKEditorComponent, CKEditorModule } from '@ckeditor/ckeditor5-angular';
         MainComponent
     ],
     providers: [
-        provideClientHydration(),
         provideHttpClient(withFetch())
     ],
     bootstrap: [AppComponent],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        ReactiveFormsModule,
-        AppRoutingModule,
-        RouterOutlet,
-        DataTablesModule,
-        SimplebarAngularModule,
-        ClrInputModule,
-        ClrCheckboxModule,
-        ClrPasswordModule,
-        ClrSelectModule
-    ]
+    imports: [RouterOutlet,FormsModule,ReactiveFormsModule,AppRoutingModule,BrowserModule]
 })
 export class AppModule {
 

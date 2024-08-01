@@ -21,16 +21,10 @@ export class AccueilEtudiantComponent implements OnInit {
   modules:any;
   descriptionMosule!:string;
   cours:any;
-  dataGlobal : Array <any> | any;
+  dataGlobal :any;
   ngOnInit()
   {
-    this.data.getEtudiantClasse().subscribe(res =>{
-      console.log(res);
-      this.dataGlobal = res;
-      this.data.dataEtudiant = res;
-
-      console.log(this.dataGlobal);
-    });
+    this.dataGlobal = this.data.dataEtudiant;
     console.log(this.dataGlobal);
 
   }

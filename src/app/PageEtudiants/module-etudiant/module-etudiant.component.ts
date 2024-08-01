@@ -8,12 +8,33 @@ import { EtudiantDataService } from '../../service/etudiant/etudiant-data.servic
 })
 export class ModuleEtudiantComponent implements OnInit {
 
-  constructor(private data:EtudiantDataService){}
+  constructor(private data:EtudiantDataService){
+  }
   modules!:Array<any>;
 
   ngOnInit()
   {
-    this.modules = this.data.dataModules;
+
+    if (this.data.dataModules != null) {
+      this.modules = this.data.dataModules;
+      // this.data.dataCours = this.data.dataModules.descriptions.cours;//Pour la liste des Cours en fonction avec ses contenus
+
+    }
+    else
+    {
+
+      for (let i = 0; i < this.data.dataEtudiant.length; i++) {
+        const element = this.data.dataEtudiant[i];//Pour la liste des Filieres avec ses contenus
+
+        for (let j = 0; j < element.filieres.length; j++) {
+          const elem = element.filieres[j];
+            this.modules = elem.modules;//Pour la liste des modules avec ses cours:
+        }
+
+      }
+    }
+
+
   }
 
 

@@ -5,6 +5,7 @@ import { AuthentificationService } from '../../service/authentification.service'
 import { DataService } from '../../service/data.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { EtudiantDataService } from '../../service/etudiant/etudiant-data.service';
 
 @Component({
   selector: 'app-main',
@@ -19,23 +20,23 @@ export class MainComponent {
   elementsName : any;
   users : any;
 
-  constructor(public authService: AuthentificationService, private route : Router, private data:DataService,public xss:DomSanitizer){}
+  constructor(public authService: AuthentificationService, private route : Router, private data:DataService,public xss:DomSanitizer,private dataS:EtudiantDataService){}
 
   ngOnInit() {
 
     this.data.getUniversite().subscribe(res =>{
       this.universites = res;
-      const universite_nom = res;
       this.data.universite_nom = this.universites.nom;
-      console.log(res);
     } );
     this.users = this.data.users;
-    console.log( this.users);
 
     this.initialize();
 
 
-
+    this.dataS.getEtudiantClasse().subscribe(res => {
+      this.dataS.dataEtudiant = res.global;
+      console.log(res.global);
+    });
     // Wait until page is loaded
     // document.addEventListener("DOMContentLoaded", () => initialize());
 
@@ -89,10 +90,10 @@ export class MainComponent {
 
   // title = 'front-endMemoire';
   navElements  = [
-    {name :'et',title :"Accueil", route:"", icon:"school"},
-    {name :'en',title:"Filieres", route:"", icon:"peop"},
-    {name :'mo',title :"Modules", route:"module", icon:"class"},
-    {name :'gc',title:"Cours", route:"module/cours", icon:"admin_panel_settings"}
+    {name :'et',title :"Accueil", route:"Accueil", icon:"school"},
+    {name :'en',title:"Filieres", route:"Classe", icon:"peop"},
+    {name :'mo',title :"Modules", route:"Classe/Module", icon:"class"},
+    {name :'gc',title:"Cours", route:"Classe/Module/Cours", icon:"admin_panel_settings"}
 
   ];
 

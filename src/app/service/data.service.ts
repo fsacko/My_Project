@@ -30,7 +30,8 @@ export class DataService {
     return this.users = value; //Pour les informations de l'utilisateur connecter
   }
 
-  getData(res:any){
+  getData(res:any):Observable<any>
+  {
     const options = {
       headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
     };
@@ -38,14 +39,16 @@ export class DataService {
   }
 
 
-  getUniversite(){
+  getUniversite():Observable<any>
+  {
       const options = {
         headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
       };
     return this.httpClient.get<any>('http://127.0.0.1:8000/api/universite/'+this.universite_id,options);
   }
 
-  getAnnee(){
+  getAnnee():Observable<any>
+  {
       const options = {
         headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
       };
@@ -61,6 +64,25 @@ export class DataService {
       };
       return this.httpClient.get('http://127.0.0.1:8000/api/listeEtudiants/'+this.universite_id,options);
     }
+
+    // Pour recuperer les informations d'un etudiant:
+    getEtudiantDataById(id:any,filiere_id:any):Observable<any>
+    {
+      const options = {
+        headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
+      };
+      return this.httpClient.get<any>('http://127.0.0.1:8000/api/etudiantById/'+filiere_id+'/'+id,options);
+    }
+
+    // Pour recuperer les informations des etudiants d'une filiere:
+    getEtudiantDataByFiliere(filiere_id:any):Observable<any>
+    {
+      const options = {
+        headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
+      };
+      return this.httpClient.get<any>('http://127.0.0.1:8000/api/etudiantByFiliere/'+filiere_id+'/'+this.universite_id,options);
+    }
+
     // L'insertion d'un nouveau Etudiant
     insertEtudiantData(etudiant:Etudiants)
     {
@@ -79,12 +101,12 @@ export class DataService {
       return this.httpClient.put<any>('http://127.0.0.1:8000/api/etudiants/'+id,data,options);
     }
     // Suppression d'un Etudiant
-    deleteEtudiant(id:any)
+    deleteEtudiant(id:any,filiere_id:any)
     {
       const options = {
         headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
       };
-      return this.httpClient.delete('http://127.0.0.1:8000/api/etudiants/'+id,options);
+      return this.httpClient.get<any>('http://127.0.0.1:8000/api/etudiants/'+id+'/'+filiere_id,options);
     }
 
 // ***********************************POUR LES FILIERES******************************

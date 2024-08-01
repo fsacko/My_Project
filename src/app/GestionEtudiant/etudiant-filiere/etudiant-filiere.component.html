@@ -1,30 +1,29 @@
 
 
 <div  class="table-responsive bg-light bg-opacity-75" >
-  <table datatable [dtOptions]="dtOptions" class="table  row-border hover" id="tableEtudiant"></table>
+  <table class=" table table-striped mb-0" id="tableEtudiant">
+    <thead>
+      <tr >
+        <th scope="col">Nom</th>
+        <th scope="col">Prenom</th>
+        <th scope="col" class="d-none d-xl-table-cell">Email</th>
+        <th scope="col" class="d-none d-xl-table-cell">Telephone</th>
+        <th scope="col">Filiere</th><th scope="col" colspan="2">Editer</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let etu of Filieres" >
+      <tr scope="row" *ngFor="let et of etu.etudiants" style="font-size: small;">
+        <td>{{et.nom}}</td>
+        <td>{{et.prenom}}</td>
+        <td class="d-none d-xl-table-cell" >{{et.email}}</td>
+        <td class="d-none d-xl-table-cell" >{{et.telephone}}</td>
+        <td  ><strong>{{etu.sigle}}</strong></td>
+        <td><button type="submit" class="btn btn-warning m-lg-auto " style="font-size: x-small;"  data-bs-toggle="modal" data-bs-target="#modifier" (click)="getEtudiantId(et.id)">Modifier</button></td>
+        <td><button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#supprimer" style="font-size: x-small;" (click)="getEtudiantId(et.id)">supprimer</button></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
-<!-- <table datatable [dtOptions]="dtOptions"  class="table align-items-center mb-0" id="tableEtudiant">
-  <thead>
-    <tr >
-      <th scope="col">Nom</th>
-      <th scope="col">Prenom</th>
-      <th scope="col" class="d-none d-xl-table-cell">Email</th>
-      <th scope="col" class="d-none d-xl-table-cell">Telephone</th>
-      <th scope="col">Filiere</th><th scope="col" colspan="2">Editer</th>
-    </tr>
-  </thead>
-  <tbody >
-    <tr style="font-size: small;">
-      <td></td>
-      <td></td>
-      <td class="d-none d-xl-table-cell"></td>
-      <td class="d-none d-xl-table-cell"></td>
-      <td  ><strong></strong></td>
-      <td><button type="submit" class="btn btn-warning m-lg-auto " style="font-size: x-small;"  data-bs-toggle="modal" data-bs-target="#modifier" (click)="getEtudiantId('#')">Modifier</button></td>
-      <td><button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#supprimer" style="font-size: x-small;" (click)="getEtudiantId('#')">supprimer</button></td>
-    </tr>
-  </tbody>
-</table> -->
 
 <!-- <table datatable [dtOptions]="dtOptions" class="row-border hover">
   <thead>
@@ -126,7 +125,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-          <button type="submit" (click)="delete(etudiantForm.id)" class="btn btn-danger" data-bs-dismiss="modal">Supprimer</button>
+          <button type="submit" (click)="delete(etudiantForm.id,etudiantForm.filiere_id)" class="btn btn-danger" data-bs-dismiss="modal">Supprimer</button>
         </div>
       </div>
     </div>

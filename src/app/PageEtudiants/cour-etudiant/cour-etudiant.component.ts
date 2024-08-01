@@ -10,7 +10,9 @@ export class CourEtudiantComponent implements OnInit{
   cours: any;
   modules: any;
 
-  constructor(private data:EtudiantDataService){}
+  constructor(private data:EtudiantDataService){
+    this.cours = this.data.dataCours;
+  }
 
   ngOnInit()
   {

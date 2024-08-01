@@ -86,8 +86,10 @@ const routes: Routes = [
     // Pour la partie des Etudiants :
     {path: 'etudiant',component:MainComponent,canActivate:[etudiantGuard],children:[
       {path :'',component:AccueilEtudiantComponent},
-      {path :'module/cours',component:CourEtudiantComponent},
-      {path:'module',component:ModuleEtudiantComponent}
+      {path :'Accueil',component:AccueilEtudiantComponent},
+      {path :'Classe',component:AccueilEtudiantComponent},
+      {path :'Classe/Module/Cours',component:CourEtudiantComponent},
+      {path:'Classe/Module',component:ModuleEtudiantComponent}
     ] }
 
 ];

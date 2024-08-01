@@ -22,6 +22,6 @@ export class EtudiantDataService {
     const options = {
       headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
     };
-    return this.http.get<any>(this.apiUrl+'etudiant/'+this.universite_id+'/'+this.user,options)
+    return this.http.get<any>(this.apiUrl+'etudiant/'+this.user,options)
   }
 }
