@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EtudiantDataService } from '../../service/etudiant/etudiant-data.service';
 import { DataService } from '../../service/data.service';
 import SimpleBar from 'simplebar';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-accueil-etudiant',
@@ -10,7 +11,7 @@ import SimpleBar from 'simplebar';
 })
 export class AccueilEtudiantComponent implements OnInit {
 
-  constructor(private data:EtudiantDataService,private dataS:DataService){}
+  constructor(private data:EtudiantDataService,private dataS:DataService,public spinner: NgxSpinnerService){}
 
   universites:any ;
   currentAction :any;
@@ -24,25 +25,23 @@ export class AccueilEtudiantComponent implements OnInit {
   dataGlobal :any;
   ngOnInit()
   {
-    this.dataGlobal = this.data.dataEtudiant;
-    console.log(this.dataGlobal);
+    this.spinner.show();
+
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 1000);
+    this.data.getEtudiantClasse().subscribe(res => {
+      this.data.dataEtudiant = res;
+      this.dataGlobal = res;
+
+      console.log(res);
+    });
 
   }
 
 
   listeModule(id: any) {
-    for (let i = 0; i < this.data.dataEtudiant.length; i++) {
-      const element = this.data.dataEtudiant[i];//Pour la liste des Filieres avec ses contenus
-
-      for (let j = 0; j < element.filieres.length; j++) {
-        const elem = element.filieres[j];
-        if (elem.id == id) {
-          this.data.dataModules = elem.modules;//Pour la liste des modules avec ses cours:
-        }
-
-      }
-
-    }
+    this.data.filiereID = id;
   }
 
 }

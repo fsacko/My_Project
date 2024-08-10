@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../../service/data.service';
 import { Cours } from '../../../model/Cours.model';
 import { Router } from '@angular/router';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { NgxSpinnerService } from "ngx-spinner";
+import { ClassicEditor, Bold, Essentials, Italic, Mention, Paragraph, Undo } from 'ckeditor5';
+
 
 @Component({
   selector: 'app-create-cours',
@@ -11,22 +15,26 @@ import { Router } from '@angular/router';
 export class CreateCoursComponent implements OnInit {
 
   // public Editor = ClassicEditor;
-  public editorData : string = '';
+  // public editorData : string = '';
 
-  // public Editor = ClassicEditor;
+  public Editor = ClassicEditor;
   public config = {
-      toolbar: [ 'undo', 'redo', '|', 'bold', 'italic' ],
+    toolbar: [ 'undo', 'redo', '|', 'bold', 'italic' ],
+      Plugins:[
+        Bold, Essentials, Italic, Mention, Paragraph, Undo
+      ],
       licenseKey: '',
-      mention: {
-          // Mention configuration
-      }
+      // mention: {
+      //   Editorconfig:true
+      //     // Mention configuration
+      // }
   }
   selectedFile!: File ;
   uploadProgress: number | null = null;
-  contenu:  string = "" ;
+  contenu:  any ;
   sous_titre: string = "";
   titre: string = "";
-  constructor(private data: DataService,private route:Router) {}
+  constructor(private data: DataService,private route:Router,public spinner: NgxSpinnerService) {}
 
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
@@ -36,11 +44,16 @@ export class CreateCoursComponent implements OnInit {
 
   ngOnInit():void
   {
+    this.spinner.show();
+
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 1000);
     // this.model;
     // this.coursFormGroup = this.formB.group({
     //   fichier:
     // });
-    this.editorData = '<p>Contenu initial de l\'éditeur.</p>';
+    // this.editorData = '<p>Contenu initial de l\'éditeur.</p>';
     console.log(this.data.module_id);
     console.log(this.data.filiere_id);
   }

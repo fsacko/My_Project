@@ -1,30 +1,52 @@
 <div class="">
-  <h2>
-    La liste des Cours Pour le Module : <strong>{{modules.sigle}}</strong>
+  <h2  *ngIf="nom != null">
+    La liste des Cours Pour le Module : <strong> {{nom}}</strong>
+  </h2>
+  <h2  *ngIf="nom == null || nom == undefined">
+    La liste des Cours Pour l'ensemble des modules
   </h2>
 </div>
-<table  class="table table-striped-columns border-1">
-  <thead>
-    <tr >
-      <th scope="col">Chapitre</th><th scope="col">Titre</th><th scope="col">Modules</th><th scope="col" colspan="2">Voir</th>
-    </tr>
-  </thead>
-  <tbody >
-    <tr style="font-size: small;" *ngFor="let cour of cours">
-      <td>{{cour.titre}}</td>
-      <td>{{cour.sous_titre}}</td>
-      <td><strong>{{modules.sigle}}</strong></td>
-      <td>Voir contenu</td>
-      <td>Telecharger Fichier</td>
-    </tr>
-  </tbody>
-  <tfoot class="bg-body-tertiary">
-    <tr>
-      <td>A</td>
-      <td>B</td>
-      <td>C</td>
-      <td>D</td>
-      <td>E</td>
-    </tr>
-  </tfoot>
-</table>
+<div  class="table-responsive bg-light bg-opacity-75" >
+  <table  class="table table-striped-columns border-1">
+    <thead>
+      <tr >
+        <th scope="col">Chapitre</th><th scope="col">Titre</th><th scope="col">Modules</th><th scope="col" colspan="2">Voir</th>
+      </tr>
+    </thead>
+    <tbody >
+      <tr style="font-size: small;" *ngFor="let cour of cours">
+        <td>{{cour.titre}}</td>
+        <td>{{cour.sous_titre}}</td>
+        <td><strong>{{cour.nom}}</strong><sup>{{cour.sigle}}</sup></td>
+        <td *ngIf="cour.fichier">
+          <div [ngSwitch]="getFileType(cour.fichier)">
+            <img *ngSwitchCase="'image'" [src]="cour.fichier" alt="{{ cour.title }}" width="60" height="90" >
+            <video *ngSwitchCase="'video'" [src]="cour.fichier" controls  width="200" height="100"></video>
+            <audio *ngSwitchCase="'audio'" [src]="cour.fichier" controls></audio>
+            <object *ngSwitchCase="'pdf'" [data]="xss.bypassSecurityTrustResourceUrl(cour.fichier)" type="application/pdf" height="100" width="200">
+               <a class="btn btn-primary small" [href]="xss.bypassSecurityTrustUrl(cour.fichier)" target="_blank">Telecharger PDF</a>
+            </object>
+            <div *ngSwitchDefault>
+              <a class="btn btn-primary small" [href]="xss.bypassSecurityTrustUrl(cour.fichier)" target="_blank">Telecharger Fichier</a>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div>
+              <a class="badge bg-success" [href]="xss.bypassSecurityTrustUrl(cour.fichier)" target="_blank">Telecharger Fichier</a>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot class="bg-body-tertiary">
+      <tr>
+        <td>A</td>
+        <td>B</td>
+        <td>C</td>
+        <td>D</td>
+        <td>E</td>
+      </tr>
+    </tfoot>
+  </table>
+
+</div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EtudiantDataService } from '../../service/etudiant/etudiant-data.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-module-etudiant',
@@ -8,45 +9,36 @@ import { EtudiantDataService } from '../../service/etudiant/etudiant-data.servic
 })
 export class ModuleEtudiantComponent implements OnInit {
 
-  constructor(private data:EtudiantDataService){
+  constructor(private data:EtudiantDataService,public spinner: NgxSpinnerService){
   }
   modules!:Array<any>;
 
   ngOnInit()
   {
+    this.spinner.show();
 
-    if (this.data.dataModules != null) {
-      this.modules = this.data.dataModules;
-      // this.data.dataCours = this.data.dataModules.descriptions.cours;//Pour la liste des Cours en fonction avec ses contenus
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 1000);
+    if (this.data.filiereID != 0) {
+      var id = this.data.filiereID;
 
+      this.data.getEtudiantModuleBy(id).subscribe(res =>{
+        this.modules = res;
+      });
+      this.data.filiereID = 0;
     }
-    else
-    {
-
-      for (let i = 0; i < this.data.dataEtudiant.length; i++) {
-        const element = this.data.dataEtudiant[i];//Pour la liste des Filieres avec ses contenus
-
-        for (let j = 0; j < element.filieres.length; j++) {
-          const elem = element.filieres[j];
-            this.modules = elem.modules;//Pour la liste des modules avec ses cours:
-        }
-
-      }
+    else{
+      this.data.getEtudiantModule().subscribe(res => {
+        this.modules = res;
+        console.log(res);
+      });
     }
-
-
   }
 
 
   listeCour(id: any) {
-    for (let i = 0; i < this.data.dataModules.length; i++) {
-      const element = this.modules[i];
-      if (element.id == id) {
-        this.data.dataModules = element;
-        this.data.dataCours = element.descriptions.cours;//Pour la liste des Cours en fonction avec ses contenus
-      }
-
-    }
+    this.data.moduleID = id;
   }
 
 }

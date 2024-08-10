@@ -6,6 +6,7 @@ import { DataService } from '../../service/data.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { EtudiantDataService } from '../../service/etudiant/etudiant-data.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-main',
@@ -20,9 +21,14 @@ export class MainComponent {
   elementsName : any;
   users : any;
 
-  constructor(public authService: AuthentificationService, private route : Router, private data:DataService,public xss:DomSanitizer,private dataS:EtudiantDataService){}
+  constructor(public authService: AuthentificationService, private route : Router, private data:DataService,public xss:DomSanitizer,private dataS:EtudiantDataService,public spinner: NgxSpinnerService){}
 
   ngOnInit() {
+    this.spinner.show();
+
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 3000);
 
     this.data.getUniversite().subscribe(res =>{
       this.universites = res;
@@ -33,10 +39,7 @@ export class MainComponent {
     this.initialize();
 
 
-    this.dataS.getEtudiantClasse().subscribe(res => {
-      this.dataS.dataEtudiant = res.global;
-      console.log(res.global);
-    });
+
     // Wait until page is loaded
     // document.addEventListener("DOMContentLoaded", () => initialize());
 

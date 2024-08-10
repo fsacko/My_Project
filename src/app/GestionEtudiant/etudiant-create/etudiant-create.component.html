@@ -31,11 +31,11 @@
     </div>
     <div class="mb-2 col-lg-6">
       <label for="Mot_de_passe" class="form-label py-3"><strong>Mot de passe</strong></label>
-      <input required class="form-control" type="text" name="Mot_de_passe" id="Mot_de_passe" [(ngModel)]="etudiant.password">
+      <input disabled class="form-control" type="text" name="Mot_de_passe" id="Mot_de_passe" placeholder="Par defeaut 12345678" value="12345678" [(ngModel)]="etudiant.password">
     </div>
     <div class="mb-2 col-lg-6">
       <label for="login" class="form-label py-3"><strong>Login</strong></label>
-      <input required class="form-control" type="text" name="login" id="login" [(ngModel)]="etudiant.login">
+      <input  class="form-control" type="text" name="login" id="login" [(ngModel)]="etudiant.login">
     </div>
     <div class="mb-2 col-lg-6" *ngFor="let universite of universites">
       <input required class="form-control visually-hidden"  type="text" name="universite_id" id="universite_id"  [(ngModel)]="etudiant.universite_id"> {{universite.nom}}
@@ -43,14 +43,14 @@
     <div class="mb-2 col-lg-6"  *ngFor="let classes of listeFiliere" >
       <label for="Classe" class="form-label py-3"><strong>Classe</strong></label>
       <select id="Classe"  class="form-select" name="filiere" [(ngModel)]="etudiant.filiere_id">
-        <!-- <option value="">Veuillez Choisir La Classe</option> -->
+        <option selected>Veuillez Choisir La Classe</option>
         <option  *ngFor="let classe of classes" [value]="classe.id"><strong>{{classe.nom}}</strong> ({{classe.niveau}})</option>
       </select>
     </div>
     <div class="mb-2 col-lg-6"  *ngFor="let classes of annee" >
       <label for="Classe" class="form-label py-3"><strong>Annee Scolaire</strong></label>
       <select id="annee"  class="form-select" name="annee_scolaire" [(ngModel)]="etudiant.annee_scolaire">
-        <!-- <option value="">Veuillez Choisir La annee</option> -->
+        <option selected>Veuillez Choisir La annee</option>
         <option  *ngFor="let annee of classes" [value]="annee.id"><strong>{{annee.annee}}</strong></option>
       </select>
     </div>

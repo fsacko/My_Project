@@ -64,11 +64,12 @@
       <label class="form-label py-3" for="subtitle">Sous Titre:</label>
       <input class="form-control" type="text" id="subtitle" [(ngModel)]="sous_titre" [ngModelOptions]="{standalone: true}">
     </div>
-    <div class="mb-2 col-lg-6">
+    <div class="mb-2 col-lg-12">
       <label class="form-label py-3" for="content">Content:</label>
-      <textarea  class="form-text"  id="content" [(ngModel)]="contenu" name="content"></textarea>
-      <ckeditor [(ngModel)]="editorData"></ckeditor>
+      <!-- <textarea  class="form-text"  id="content" [(ngModel)]="contenu" name="content"></textarea> -->
        <!-- app.component.html -->
+      <!-- <ckeditor [editor]="Editor" [config]="config"  data="<p>Hello, world!</p>" [(ngModel)]="contenu" ></ckeditor> -->
+      <ckeditor class="form-text" [editor]="Editor" [config]="config"  tagName="textarea" [(ngModel)]="contenu" ></ckeditor>
 
       <!-- <ng-component  editor="Editor"  data="<p>Hello, world!</p>"></ng-component> -->
 

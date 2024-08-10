@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../service/auth/auth.service';
 import { HttpHeaders } from '@angular/common/http';
 import { DataService } from '../service/data.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-login',
@@ -18,9 +19,10 @@ export class LoginComponent implements OnInit {
   universites: any;
 
 
-  constructor(private formB:FormBuilder, private router:Router,private auth:AuthService,private data:DataService ){}
+  constructor(private formB:FormBuilder, private router:Router,private auth:AuthService,private data:DataService,public spinner: NgxSpinnerService ){}
   ngOnInit(): void {
     this.loginFormGroup =this.formB.group({
+      role:this.formB.control(''),
       email: this.formB.control('',Validators.compose([Validators.required,Validators.email])),
       password: this.formB.control('',Validators.compose([Validators.required,Validators.minLength(4)]))
     });
@@ -35,45 +37,64 @@ export class LoginComponent implements OnInit {
 
     let email = this.loginFormGroup.value.email;
     let password = this.loginFormGroup.value.password;
+    let role = this.loginFormGroup.value.role;
     // let email = "mk79@gmail.com";
     // let password = "xHDCNkSNv:4kh3g";
     const options = {
       headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
     };
-    this.auth.login(email, password).subscribe(res => {
+    if (role == "") {
+      this.errorMessage = "Veuillez Indiquer votre Role!!";
+      this.router.navigateByUrl('/login');
+    }
+    else{
+      this.auth.login(email, password,role).subscribe(res => {
 
-      const user = res.user ;
+        const user = res.user ;
 
-      if (user) {
-        console.log(user);
+        if (user) {
+          console.log(user);
 
 
-        this.data.universite_id = user.universite_id ;
-        this.data.etudiantEmail = user.email;
-        console.log(this.data.etudiantEmail);
-        this.data.etudiantEmail = email;
-        console.log(this.data.etudiantEmail);
+          this.data.universite_id = user.universite_id ;
+          this.data.etudiantEmail = user.email;
+          console.log(this.data.etudiantEmail);
+          this.data.etudiantEmail = email;
+          console.log(this.data.etudiantEmail);
 
-        const redirect = res.redirect ;
-        this.data.getUser(res.user);  //Pour inserer l'utilisateur connecté dans la methode getUser du service data
-        this.data.getAnnee().subscribe(annee => {this.data.annee_scolaire = annee});
-        this.auth.valideUser(res,user.type).subscribe();
+          const redirect = res.redirect ;
+          this.data.getUser(res.user);  //Pour inserer l'utilisateur connecté dans la methode getUser du service data
+          this.data.getAnnee().subscribe(annee => {this.data.annee_scolaire = annee});
+          this.auth.valideUser(res,user.type).subscribe();
 
-        console.log(user.universite_id);
+          console.log(user.universite_id);
 
-        this.data.getUniversite().subscribe(res =>{this.data.universites = res;console.log(this.data.universites);});
+          this.data.getUniversite().subscribe(res =>{this.data.universites = res;console.log(this.data.universites);});
+          this.spinner.show(
 
-        this.router.navigate([redirect]);
+          );
 
-      }
+          setTimeout(() => {
+            /** spinner ends after 5 seconds */
+            this.spinner.hide();
+          }, 5000);
 
-      else{
-        const msg = res.error;
-        this.errorMessage = msg ;
-        console.log(this.errorMessage);
-      }
+          this.router.navigate([redirect]);
 
-    });
+        }
+
+        else{
+          const msg = res.error;
+
+          let time = setInterval(() => {
+            this.errorMessage = msg
+            },1000);
+          // setInterval(this.errorMessage,5000);
+          console.log(this.errorMessage);
+        }
+
+      });
+    }
 
   }
 

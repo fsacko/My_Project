@@ -3,6 +3,7 @@ import { DataService } from '../../service/data.service';
 import { Etudiants } from '../../CLASS/etudiant/etudiants';
 // import { CKEditor4 } from 'ckeditor4-angular';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-etudiant-create',
@@ -17,15 +18,24 @@ export class EtudiantCreateComponent implements OnInit  {
   errors:any|Array<any>;
   annee:any | Array<any>;
 
-  constructor(private data:DataService, private route:Router){}
+  constructor(private data:DataService, private route:Router,public spinner: NgxSpinnerService){}
 
   ngOnInit(): void {
     // this.listeFiliere = this.data.filiereListe;
+    this.spinner.show(
+
+    );
+
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 2000);
     this.data.getClasseData().subscribe(data =>{
       this.listeFiliere = data;
     });
     this.etudiant.universite_id = this.data.users.universite_id;
     this.annee = this.data.annee_scolaire;
+    /** spinner starts on init */
   }
   insertEtudiant(){
     console.log(this.etudiant);

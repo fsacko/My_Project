@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../service/data.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-detail',
@@ -8,10 +9,15 @@ import { DataService } from '../../service/data.service';
 })
 export class DetailComponent  implements OnInit {
   filieres: any|Array<any>;
-  constructor(private data:DataService){}
+  constructor(private data:DataService,public spinner: NgxSpinnerService){}
 
   ngOnInit()
   {
+    this.spinner.show();
+
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 1000);
     this.filieres = this.data.detailFiliere;
     console.log(this.filieres);
   }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { DataService } from '../../service/data.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import SimpleBar from 'simplebar';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-accueil',
@@ -18,7 +19,7 @@ export class AccueilComponent implements OnInit {
   elementsName : any;
   users : any;
 
-  constructor(public authService: AuthentificationService, private route : Router, private data:DataService,public xss:DomSanitizer){}
+  constructor(public authService: AuthentificationService, private route : Router, private data:DataService,public xss:DomSanitizer,public spinner: NgxSpinnerService){}
 
   ngOnInit() {
 
@@ -32,6 +33,15 @@ export class AccueilComponent implements OnInit {
     console.log( this.users);
 
     this.initialize();
+    /** spinner starts on init */
+    this.spinner.show(
+
+    );
+
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 10000);
 
 
 

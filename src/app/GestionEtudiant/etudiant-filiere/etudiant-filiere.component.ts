@@ -4,6 +4,7 @@ import { Etudiants } from '../../CLASS/etudiant/etudiants';
 import {  Router } from '@angular/router';
 
 import { Subject } from 'rxjs';
+import { NgxSpinnerService } from "ngx-spinner";
 
 
 
@@ -18,14 +19,17 @@ export class EtudiantFiliereComponent implements OnInit {
   Filieres: any | Array <any>;
   IdEtudiant:any;
   etudiantForm = new Etudiants;
+  listeFiliere:any | Array<any>;
 
   dataEtudiant!:Array<any>;
   currentRowId: number | undefined;
   etudiants: any;
+  annee: any;
+universites: any;
   // dtOptions: Config = {};
 
 
-  constructor (private dataS:DataService, private route : Router){  }
+  constructor (private dataS:DataService, private route : Router,public spinner: NgxSpinnerService){  }
 
 
 
@@ -38,13 +42,28 @@ export class EtudiantFiliereComponent implements OnInit {
   ngOnInit()
   {
 
+    /** spinner starts on init */
+    this.spinner.show(
+
+    );
+
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 1000);
     this.dataS.getEtudiantData().subscribe(res =>{
       this.dataS.dataEtudiants = res;
       this.data = this.dataS.dataEtudiants ;
-      this.Filieres = this.dataS.dataEtudiants;
+      this.Filieres = res;
+      console.log(res);
     });
-    console.log(this.dataS.dataEtudiants);
 
+    this.dataS.getClasseData().subscribe(data =>{
+      this.listeFiliere = data;
+    });
+
+    this.etudiantForm.universite_id = this.dataS.users.universite_id;
+    this.annee = this.dataS.annee_scolaire;
   }
 
 
@@ -56,15 +75,11 @@ export class EtudiantFiliereComponent implements OnInit {
         for (let i = 0; i < this.Filieres.length; i++) {
           const el = this.Filieres[i];
           console.log(el);
-          for (let j = 0; j < el.etudiants.length; j++) {
-            const element = el.etudiants[j];
-            console.log(element);
-            if (element.id === id) {
-              this.etudiantForm = element;
-              this.etudiantForm.filiere_id = el.id;
-              this.IdEtudiant = id;
-              console.log(element);
-            }
+          if (el.id === id) {
+            this.etudiantForm = el;
+            this.etudiantForm.filiere_id = el.filiere_id;
+            this.IdEtudiant = id;
+            console.log(el);
           }
         }
     }

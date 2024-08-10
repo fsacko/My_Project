@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../service/data.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-classe',
@@ -19,8 +20,13 @@ export class ClasseComponent implements OnInit {
   erreur: any;
 
 
-  constructor(private data:DataService,private route:Router,private formB:FormBuilder){}
+  constructor(private data:DataService,private route:Router,private formB:FormBuilder,public spinner: NgxSpinnerService){}
   ngOnInit(): void {
+    this.spinner.show();
+
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 1000);
     this.data.getClasseData().subscribe(data =>{
       this.classeData = data; //Pour la liste des classes qui sont dans l'Université en question.
     });
@@ -43,7 +49,7 @@ export class ClasseComponent implements OnInit {
 
   validation(){
     if (this.classeForm.value.filiere_id != 0 && this.classeForm.value.module_id != 0) {
-      
+
       console.log(this.classeForm.value);
       this.erreur = false;
       this.data.module_id = this.classeForm.value.module_id;
@@ -60,7 +66,7 @@ export class ClasseComponent implements OnInit {
       // console.log(this.erreur)
       this.route.navigate(['/gestion'])
     }
-    
+
   }
 
   OnClasseChange(){

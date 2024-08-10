@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../../service/data.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-liste-cours',
@@ -12,9 +13,14 @@ export class ListeCoursComponent implements OnInit {
   cours: any[] = [];
 
 
-  constructor(private data:DataService, public xss:DomSanitizer){};
+  constructor(private data:DataService, public xss:DomSanitizer,public spinner: NgxSpinnerService){};
 
     ngOnInit(): void {
+      this.spinner.show();
+
+      setTimeout(() => {
+        this.spinner.hide();
+      }, 1000);
       this.data.getCourData(this.data.filiere_id,this.data.module_id).subscribe(res =>{
         this.cours = res;
       });

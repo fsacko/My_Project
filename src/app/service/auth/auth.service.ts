@@ -22,14 +22,15 @@ export class AuthService {
 
   }
 
-  login(email:string, password:string)
+  login(email:string, password:string,role:string)
   {
     const options = {
       headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
     };
     return this.http.post<any>(this.authUrl,{
       email: email,
-      password: password
+      password: password,
+      role:role
     },options);
 
 

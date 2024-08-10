@@ -12,4 +12,5 @@ export class Etudiants {
   annee_scolaire: any;
   filiere_id: any;
 identifiant: any;
+pivot: any;
 }

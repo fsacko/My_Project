@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { DataService } from '../../service/data.service';
 import { Route, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-classe-cours',
@@ -18,10 +19,15 @@ export class ClasseCoursComponent implements OnInit,OnChanges {
 
 
 
-  constructor(private data:DataService,private router:Router,private formB:FormBuilder){};
+  constructor(private data:DataService,private router:Router,private formB:FormBuilder,public spinner: NgxSpinnerService){};
 
   ngOnInit()
   {
+    this.spinner.show();
+
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 1000);
 
 
     this.module_id = this.data.module_id;
