@@ -43,49 +43,49 @@
             </div>
             <div class="modal-body container">
 
-              <div class="mb-2 col-lg-6">
+              <div class="mb-2 col-12">
                 <label for="nom" class="form-label py-3"><strong>Nom</strong></label>
                 <input required class="form-control" type="text" name="nom" id="nom" placeholder="Nom de l'Etudiant" [(ngModel)]="etudiantForm.nom">
               </div>
-              <div class="mb-2 col-lg-6">
+              <div class="mb-2 col-12">
                 <label for="Prenom" class="form-label py-3"><strong>Prenom</strong></label>
                 <input required class="form-control" type="text" name="Prenom" id="Prenom" placeholder="Prenom de l'EtudiantForm" [(ngModel)]="etudiantForm.prenom">
               </div>
-              <div class="mb-2 col-lg-6">
+              <div class="mb-2 col-12">
                 <label for="Email" class="form-label py-3"><strong>Email</strong></label>
                 <input required class="form-control" type="email" name="Email" id="Email" placeholder="Exemple@xyz.abc" [(ngModel)]="etudiantForm.email">
               </div>
-              <div class="mb-2 col-lg-6">
+              <div class="mb-2 col-12">
                 <label for="Adresse" class="form-label py-3"><strong>Adresse</strong></label>
                 <input required class="form-control" type="text" name="Adresse" id="Adresse" placeholder="Bamako/rue:xxx/porte:abc" [(ngModel)]="etudiantForm.adresse">
               </div>
-              <div class="mb-2 col-lg-6">
+              <div class="mb-2 col-12">
                 <label for="Tel" class="form-label py-3"><strong>Tel</strong></label>
                 <input required class="form-control" type="text" name="Tel" id="Tel" placeholder="00223 12 34 56 78" [(ngModel)]="etudiantForm.telephone">
               </div>
-              <div class="mb-2 col-lg-6">
+              <div class="mb-2 col-12">
                 <label for="Date_de_naissance" class="form-label py-3"><strong>Date de naissance</strong></label>
                 <input required class="form-control" type="date" name="Date_de_naissance" id="Date_de_naissance" placeholder="Date de Naissance de l'etudiantForm" [(ngModel)]="etudiantForm.date_de_naissance">
               </div>
-              <div class="mb-2 col-lg-6">
+              <div class="mb-2 col-12">
                 <label for="Mot_de_passe" class="form-label py-3"><strong>Mot de passe</strong></label>
                 <input disabled class="form-control" type="text" name="Mot_de_passe" id="Mot_de_passe" placeholder="Par defeaut 12345678" value="12345678" [(ngModel)]="etudiantForm.password">
               </div>
-              <div class="mb-2 col-lg-6">
+              <div class="mb-2 col-12">
                 <label for="login" class="form-label py-3"><strong>Login</strong></label>
                 <input  class="form-control" type="text" name="login" id="login" [(ngModel)]="etudiantForm.login">
               </div>
-              <div class="mb-2 col-lg-6" *ngFor="let universite of universites">
+              <div class="mb-2 col-12" *ngFor="let universite of universites">
                 <input required class="form-control visually-hidden"  type="text" name="universite_id" id="universite_id"  [(ngModel)]="etudiantForm.universite_id"> {{universite.nom}}
               </div>
-              <div class="mb-2 col-lg-6"  *ngFor="let classes of listeFiliere" >
+              <div class="mb-2 col-12"  *ngFor="let classes of listeFiliere" >
                 <label for="Classe" class="form-label py-3"><strong>Classe</strong></label>
                 <select id="Classe"  class="form-select" name="filiere" [(ngModel)]="etudiantForm.filiere_id">
                   <option selected>Veuillez Choisir La Classe</option>
                   <option  *ngFor="let classe of classes" [value]="classe.id"><strong>{{classe.nom}}</strong> ({{classe.niveau}})</option>
                 </select>
               </div>
-              <div class="mb-2 col-lg-6"  *ngFor="let classes of annee" >
+              <div class="mb-2 col-12"  *ngFor="let classes of annee" >
                 <label for="Classe" class="form-label py-3"><strong>Annee Scolaire</strong></label>
                 <select id="annee"  class="form-select" name="annee_scolaire" [(ngModel)]="etudiantForm.annee_scolaire">
                   <option selected>Veuillez Choisir La annee</option>

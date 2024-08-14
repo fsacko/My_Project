@@ -146,6 +146,23 @@ export class DataService {
       };
       return this.httpClient.get<any>('http://127.0.0.1:8000/api/getModuleByFiliereId/'+this.universite_id+'/'+id,options);
     }
+    // Mise à jour de Classe
+    updateFiliere(id:any,data:Classe)
+    {
+      const options = {
+        headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
+      };
+      return this.httpClient.put<any>('http://127.0.0.1:8000/api/classe/'+id,data,options);
+    }
+    // Suppression d'une Classe
+    deleteFiliere(id:any)
+    {
+      const options = {
+        headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
+      };
+      return this.httpClient.get<any>('http://127.0.0.1:8000/api/classes/'+id,options);
+    }
+
 
 
 // ***********************************POUR LES Modules******************************
@@ -188,10 +205,10 @@ export class DataService {
     return this.httpClient.get<any>('http://127.0.0.1:8000/api/listeCours/'+filiere_id+'/'+module_id,options);
   }
   // Pour l'insertion des cours
-  insertcour(fichier: File,titre:string,sous_titre:string,contenu:string, filiere_id:any,module_id:any) {
+  insertcour(fichier: File,titre:string,sous_titre:string,contenu:any, filiere_id:any,module_id:any) {
 
     const formData: FormData = new FormData();
-    formData.append('fichier', fichier);
+    formData.append('fichier', fichier,fichier.name);
     formData.append('titre', titre);
     formData.append('sous_titre', sous_titre);
     formData.append('contenu', contenu);
@@ -218,6 +235,38 @@ export class DataService {
       })
     );
 
+  }
+  // insertcours(fichier: File,titre:string,sous_titre:string,contenu:string, filiere_id:any,module_id:any) {
+  //   const options = {
+  //     headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
+  //   };
+  //   const formData: FormData = new FormData();
+  //   formData.append('fichier', fichier);
+  //   formData.append('titre', titre);
+  //   formData.append('sous_titre', sous_titre);
+  //   formData.append('contenu', contenu);
+  //   formData.append('filiere_id', filiere_id);
+  //   formData.append('module_id', module_id);
+
+  //   return this.httpClient.post<any>('http://127.0.0.1:8000/api/cours',formData,options);
+  // }
+
+  // Active Cours :
+  activeCour(id:any)
+  {
+    const options = {
+      headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
+    };
+    return this.httpClient.get<any>('http://127.0.0.1:8000/api/activeCours/'+id,options);
+  }
+
+  // Desactive Cours :
+  desactiveCour(id:any)
+  {
+    const options = {
+      headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
+    };
+    return this.httpClient.get<any>('http://127.0.0.1:8000/api/desactiveCours/'+id,options);
   }
 
 }

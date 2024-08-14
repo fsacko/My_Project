@@ -8,6 +8,12 @@ import { NgxSpinnerService } from "ngx-spinner";
   styleUrl: './detail.component.css'
 })
 export class DetailComponent  implements OnInit {
+getModuleId(arg0: any) {
+throw new Error('Method not implemented.');
+}
+moduleDetails(arg0: any) {
+throw new Error('Method not implemented.');
+}
   filieres: any|Array<any>;
   constructor(private data:DataService,public spinner: NgxSpinnerService){}
 

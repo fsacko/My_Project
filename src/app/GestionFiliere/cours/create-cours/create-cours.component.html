@@ -66,12 +66,24 @@
     </div>
     <div class="mb-2 col-lg-12">
       <label class="form-label py-3" for="content">Content:</label>
-      <!-- <textarea  class="form-text"  id="content" [(ngModel)]="contenu" name="content"></textarea> -->
-       <!-- app.component.html -->
-      <!-- <ckeditor [editor]="Editor" [config]="config"  data="<p>Hello, world!</p>" [(ngModel)]="contenu" ></ckeditor> -->
-      <ckeditor class="form-text" [editor]="Editor" [config]="config"  tagName="textarea" [(ngModel)]="contenu" ></ckeditor>
+      <!-- <textarea  class="form-control"  id="content" [(ngModel)]="contenu" name="content"></textarea> -->
+      <div  class="main-container">
 
-      <!-- <ng-component  editor="Editor"  data="<p>Hello, world!</p>"></ng-component> -->
+        <div class="editor-container editor-container_document-editor editor-container_include-minimap" #editorContainerElement>
+          <div class="editor-container__menu-bar" #editorMenuBarElement></div>
+          <div class="editor-container__toolbar" #editorToolbarElement></div>
+          <div class="editor-container__minimap-wrapper">
+            <div class="editor-container__editor-wrapper">
+              <div class="editor-container__editor">
+                <div #editorElement>
+                  <ckeditor [editor]="Editor" [config]="config" [(ngModel)]="contenu" (change)="onChange($event)" [ngModelOptions]="{ standalone: true }" name="contenu" *ngIf="isLayoutReady" />
+                </div>
+              </div>
+            </div>
+            <div class="editor-container__sidebar editor-container__sidebar_minimap"><div #editorMinimapElement></div></div>
+          </div>
+        </div>
+      </div>
 
     </div>
     <div class="mb-2 col-lg-6">

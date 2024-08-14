@@ -44,6 +44,8 @@ import { SimplebarAngularModule } from 'simplebar-angular';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+// import { CKEditorModule } from 'ckeditor4-angular';
+
 // import { ClrCheckboxModule, ClrCheckboxWrapper, ClrInputModule, ClrPassword, ClrPasswordContainer, ClrPasswordModule, ClrSelectModule } from '@clr/angular';
 
 
@@ -82,13 +84,13 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
         AccueilEtudiantComponent,
         CourEtudiantComponent,
         ModuleEtudiantComponent,
-        MainComponent
+        MainComponent,
     ],
     providers: [
         provideHttpClient(withFetch())
     ],
     bootstrap: [AppComponent],
-    imports: [RouterOutlet,FormsModule,ReactiveFormsModule,AppRoutingModule,BrowserModule,SimplebarAngularModule,NgxSpinnerModule,BrowserAnimationsModule,CKEditorModule]
+    imports: [RouterOutlet,CKEditorModule,FormsModule,ReactiveFormsModule,AppRoutingModule,BrowserModule,SimplebarAngularModule,NgxSpinnerModule,BrowserAnimationsModule]
 })
 export class AppModule {
 

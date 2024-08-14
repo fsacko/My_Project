@@ -7,7 +7,11 @@
       <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
         <div class="d-flex justify-content-between">
           <strong class="text-gray-dark">{{mod.nom}}  <sup>{{mod.code}}</sup></strong>
-          <a href="">Voir Details</a>
+          <div>
+            <button  type="submit" class="btn btn-warning m-lg-auto " style="font-size: x-small;"  data-bs-toggle="modal" data-bs-target="#modifier" (click)="getModuleId(mod.id)">Modifier</button>
+            <button  type="submit" class="btn btn-danger m-lg-auto " style="font-size: x-small;"  data-bs-toggle="modal" data-bs-target="#supprimer" (click)="getModuleId(mod.id)">Supprimer</button>
+            <a href="">Voir Details</a>
+          </div>
         </div>
         <!-- <span class="d-block" *ngIf="mod.descriptions.description != null">{{mod.descriptions.description}}</span> -->
       </div>

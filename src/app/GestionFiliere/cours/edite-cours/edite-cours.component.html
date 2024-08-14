@@ -16,10 +16,14 @@
         <td class="d-none d-xl-table-cell">{{ course.sous_titre }}</td>
 
         <td>
-          <select name="" id="">
-            <option value=""><span  class="badge bg-success">Actif</span></option>
-            <option value=""><span  class="badge bg-danger">Inactif</span></option>
-          </select>
+          <!-- <select name="" id="">
+            <option *ngIf="course.etat == 1" ><span  class="badge bg-success">Actif</span></option>
+            <option *ngIf="course.etat == 0" ><span  class="badge bg-danger">Inactif</span></option>
+            <option  *ngIf="course.etat == 0"  value=""><button type="submit" (click)="active(course.id)"  class="badge bg-success">Actif</button></option>
+            <option  *ngIf="course.etat == 1"  value=""><button type="submit" (click)="desactive(course.id)"  class="badge bg-danger">Inactif</button></option>
+          </select> -->
+          <button  *ngIf="course.etat == 1" type="submit" class="btn btn-outline-primary m-lg-auto " style="font-size: x-small;"  data-bs-toggle="modal" data-bs-target="#modifier" (click)="desactive(course.id)">Actif</button>
+          <button  *ngIf="course.etat == 0" type="submit" class="btn btn-outline-danger m-lg-auto " style="font-size: x-small;"  data-bs-toggle="modal" data-bs-target="#modifier" (click)="active(course.id)">Inactif</button>
         </td>
         <td><button type="submit" class="btn btn-warning m-lg-auto " style="font-size: x-small;"  data-bs-toggle="modal" data-bs-target="#modifier" (click)="update(course.id)">Modifier</button></td>
         <td><button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#supprimer" style="font-size: x-small;" (click)="delete(course.id)">supprimer</button></td>

@@ -10,30 +10,33 @@
   <table  class="table table-striped-columns border-1">
     <thead>
       <tr >
-        <th scope="col">Chapitre</th><th scope="col">Titre</th><th scope="col">Modules</th><th scope="col" colspan="2">Voir</th>
+        <th scope="col">Aperçu</th><th scope="col">Chapitre</th><th scope="col">Titre</th><th scope="col">Modules</th><th scope="col">Telecharger</th>
       </tr>
     </thead>
     <tbody >
       <tr style="font-size: small;" *ngFor="let cour of cours">
-        <td>{{cour.titre}}</td>
-        <td>{{cour.sous_titre}}</td>
-        <td><strong>{{cour.nom}}</strong><sup>{{cour.sigle}}</sup></td>
         <td *ngIf="cour.fichier">
           <div [ngSwitch]="getFileType(cour.fichier)">
             <img *ngSwitchCase="'image'" [src]="cour.fichier" alt="{{ cour.title }}" width="60" height="90" >
-            <video *ngSwitchCase="'video'" [src]="cour.fichier" controls  width="200" height="100"></video>
+            <video *ngSwitchCase="'video'" [src]="xss.bypassSecurityTrustUrl(cour.fichier)" controls  width="320" height="240" autoplay type="video"></video>
             <audio *ngSwitchCase="'audio'" [src]="cour.fichier" controls></audio>
-            <object *ngSwitchCase="'pdf'" [data]="xss.bypassSecurityTrustResourceUrl(cour.fichier)" type="application/pdf" height="100" width="200">
-               <a class="btn btn-primary small" [href]="xss.bypassSecurityTrustUrl(cour.fichier)" target="_blank">Telecharger PDF</a>
+            <object *ngSwitchCase="'pdf'" [data]="xss.bypassSecurityTrustResourceUrl(cour.fichier)" type="application/pdf"  width="320" height="240">
+               <a class="btn btn-primary small" [href]="xss.bypassSecurityTrustUrl(cour.fichier)" [download]="cour.titre" >Telecharger PDF</a>
             </object>
+            <!-- <object *ngSwitchDefault [data]="xss.bypassSecurityTrustResourceUrl(cour.fichier)" type="application/pdf" height="280" width="320">
+               <a class="btn btn-primary small" [href]="xss.bypassSecurityTrustUrl(cour.fichier)" target="_blank">Telecharger Fichier</a>
+            </object> -->
             <div *ngSwitchDefault>
-              <a class="btn btn-primary small" [href]="xss.bypassSecurityTrustUrl(cour.fichier)" target="_blank">Telecharger Fichier</a>
+              <a class="btn btn-primary small" [href]="xss.bypassSecurityTrustUrl(cour.fichier)" [download]="cour.titre" target="_blank">Telecharger Fichier</a>
             </div>
           </div>
         </td>
+        <td>{{cour.titre}}</td>
+        <td>{{cour.sous_titre}}</td>
+        <td><strong>{{cour.nom}}</strong><sup>{{cour.sigle}}</sup></td>
         <td>
           <div>
-              <a class="badge bg-success" [href]="xss.bypassSecurityTrustUrl(cour.fichier)" target="_blank">Telecharger Fichier</a>
+              <a class="badge bg-success" [href]="xss.bypassSecurityTrustUrl(cour.fichier)" target="_blank" [download]="cour.titre" >Telecharger Fichier</a>
           </div>
         </td>
       </tr>
