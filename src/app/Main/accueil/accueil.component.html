@@ -52,7 +52,11 @@
 					</li>
           <li *ngFor="let action of navElements"  [class]="action==currentAction ? 'sidebar-item  active ' : 'sidebar-item' ">
               <a class="sidebar-link"  [routerLink]="action.route" (click)="changer(action.name)">
-                <i class="align-middle bi bi-{{action.icon}}" data-feather="sliders" ></i> <span class="align-middle">{{action.title}}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bank" viewBox="0 0 16 16">
+                  <path d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.5.5 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89zM3.777 3h8.447L8 1zM2 6v7h1V6zm2 0v7h2.5V6zm3.5 0v7h1V6zm2 0v7H12V6zM13 6v7h1V6zm2-1V4H1v1zm-.39 9H1.39l-.25 1h13.72z"/>
+                </svg>
+                <i class="align-middle bi bi-bank" data-feather="sliders" ></i> <span class="align-middle">{{action.title}}</span>
+                <!-- <i class="align-middle bi bi-bank" data-feather="sliders" ></i> <span class="align-middle">{{action.title}}</span> -->
               </a>
           </li>
 
@@ -61,25 +65,25 @@
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="ui-buttons.html">
+						<a class="sidebar-link">
               <i class="align-middle" data-feather="square"></i> <span class="align-middle">Professeurs</span>
             </a>
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="ui-forms.html">
+						<a class="sidebar-link">
               <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Administrateurs</span>
             </a>
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="ui-cards.html">
+						<a class="sidebar-link">
               <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Directions</span>
             </a>
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="ui-typography.html">
+						<a class="sidebar-link">
               <i class="align-middle" data-feather="align-left"></i> <span class="align-middle">Departements</span>
             </a>
 					</li>
@@ -105,7 +109,6 @@
 				<a class="sidebar-toggle js-sidebar-toggle">
           <i class="hamburger align-self-center"></i>
         </a>
-
 				<div class="navbar-collapse collapse ">
 					<ul class="navbar-nav navbar-align">
 						<li class="nav-item dropdown">
@@ -114,12 +117,12 @@
               </a>
 
               <a class="nav-link dropdown-toggle d-inline-block d-sm-block" href="#" data-bs-toggle="dropdown"  *ngIf="users">
-                <img src="assets/image/DIEZ2.jpg" class="avatar img-fluid rounded me-1" alt="{{users.name}}"  /> <span class="text-dark">{{users.name}}</span>
+                <img src="assets/image/DIEZ2.jpg" class="avatar img-fluid rounded me-1" alt="{{users}}"  /> <span class="text-dark">{{users}}</span>
               </a>
 							<div class="dropdown-menu dropdown-menu-end">
 								<a class="dropdown-item" ><i class="align-middle me-1" data-feather="user"></i> Profile</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" routerLink="/login"> Deconnexion</a>
+								<a class="dropdown-item" (click)="handleLogout()"> Deconnexion</a>
 							</div>
 						</li>
 					</ul>
@@ -127,55 +130,42 @@
 			</nav>
 
 			<main class="content">
-				<div class="container p-0">
-					<div class="row">
-						<div class="col-12">
-							<!-- <div class="card">
-								<div class="card-header">
-									<h5 class="card-title mb-0">Empty card</h5>
-								</div>
-								<div class="card-body">
-								</div>
-							</div> -->
-              <router-outlet></router-outlet>
-						</div>
-					</div>
-
+				<div class="container-fluid p-0">
+          <router-outlet></router-outlet>
 				</div>
-
 			</main>
 
-			<footer class="footer">
-				<div class="container-fluid">
-					<div class="row text-muted">
-						<div class="col-6 text-start">
+      <footer class="footer">
+        <div class="container-fluid">
+          <div class="row text-muted">
+            <div class="col-6 text-start">
               <p class="mb-0">
                 <a class="text-muted" href=""><strong>A l'Université</strong></a> 2023 - 2024 &copy;
               </p>
-						</div>
-						<div class="col-6 text-end">
-							<ul class="list-inline">
-								<li class="list-inline-item">
-									<a class="text-muted" href="#" target="_blank">Support</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="#" target="_blank">Help Center</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="#" target="_blank">Privacy</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="#" target="_blank">Terms</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</footer>
+            </div>
+            <div class="col-6 text-end">
+              <ul class="list-inline">
+                <li class="list-inline-item">
+                  <a class="text-muted" href="#" target="_blank">Support</a>
+                </li>
+                <li class="list-inline-item">
+                  <a class="text-muted" href="#" target="_blank">Help Center</a>
+                </li>
+                <li class="list-inline-item">
+                  <a class="text-muted" href="#" target="_blank">Privacy</a>
+                </li>
+                <li class="list-inline-item">
+                  <a class="text-muted" href="#" target="_blank">Terms</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
 		</div>
 	</div>
 
-	<script src="../../../assets/js/app.js"></script>
+	<!-- <script src="../../../assets/js/app.js"></script> -->
 
 </body>
 

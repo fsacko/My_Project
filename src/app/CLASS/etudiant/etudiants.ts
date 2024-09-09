@@ -8,9 +8,9 @@ export class Etudiants {
   date_de_naissance: any;
   login: any;
   password: any;
-  universite_id: number|undefined;
+  universite_id: any|undefined;
   annee_scolaire: any;
   filiere_id: any;
-identifiant: any;
-pivot: any;
+  identifiant: any;
+  pivot: any;
 }

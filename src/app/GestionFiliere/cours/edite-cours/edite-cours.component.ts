@@ -3,6 +3,7 @@ import { DataService } from '../../../service/data.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgxSpinnerService } from "ngx-spinner";
 import { Router } from '@angular/router';
+import { Cours } from '../../../model/Cours.model';
 
 @Component({
   selector: 'app-edite-cours',
@@ -10,8 +11,12 @@ import { Router } from '@angular/router';
   styleUrl: './edite-cours.component.css'
 })
 export class EditeCoursComponent implements OnInit {
+updateCour() {
+throw new Error('Method not implemented.');
+}
 // desactive: any;
   cours: any[] = [];
+  Cour = new Cours;
 
 
   constructor(private data:DataService, public xss:DomSanitizer,public spinner: NgxSpinnerService,private router:Router){};
@@ -42,6 +47,25 @@ export class EditeCoursComponent implements OnInit {
 
     }
 
+  getCoursId(id : any)
+  {
+    if (id != undefined) {
+      // console.log(id);
+        for (let i = 0; i < this.cours.length; i++) {
+          const el = this.cours[i];
+          console.log(el);
+          if (el.id === id) {
+            this.Cour = el;
+          }
+        }
+    }
+    else
+    {
+      console.log('ID etudiant Non prise en compte !!')
+    }
+
+  }
+
     desactive(id: any) {
       this.data.desactiveCour(id).subscribe(res=>{
         if (res.statut == 200) {
@@ -52,11 +76,13 @@ export class EditeCoursComponent implements OnInit {
         }
       })
     }
-    delete(arg0: any) {
-
+    delete(id: any) {
+      this.data.deleteCour(id).subscribe();
+      this.router.navigate(["gestion/Cours/liste"]);
     }
-    update(arg0: any) {
-
+    update(id: any) {
+      // console.log(this.cours.reduce(res => {res.id == id}));
+      this.router.navigate([`gestion/Cours/update/${id}`]);
     }
 
 }

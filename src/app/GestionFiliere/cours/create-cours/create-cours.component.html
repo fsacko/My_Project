@@ -1,58 +1,8 @@
 
-<!-- <link rel="stylesheet" href="../../../sources/css/app.css"> -->
 
 <script type="Java" src="script.js" async></script>
-<!-- <form action="" >
-
-  <div class="row ">
-
-    <div class="mt-3 col-lg-6 p-4" style="font-size: large;">
-      <label for="fichier" class="form-check-label">Ajouter le Fichier du Cours</label>
-      <input class="form-check-input mx-2" type="radio" name="choix" id="fichier">
-    </div>
-
-    <div class="mt-3 col-lg-6 p-4" style="font-size: large;">
-      <label for="texte" class="form-check-label">Rediger le cours en Format Texte</label>
-      <input class="form-check-input mx-2" type="radio" name="choix" id="texte">
-    </div>
-  </div>
-
-</form>
-
-<form  (ngSubmit)="saveCours()" class="my-2 row  p-2" enctype="multipart/form-data" style="font-size: large;" id="formText">
-
-  <div class="mb-2 col-lg-6">
-
-    <label for="SousTitre" class="form-label">Sous-Titre</label>
-    <input type="text" name="sous_titre" [(ngModel)]="cours.sous_titre" id="SousTitre" class="form-control" placeholder="Sous-Titre du cours">
-
-  </div>
-  <div class="mb-2 col-lg-6">
-
-    <label for="Explication" class="form-label">Explication</label>
-    <textarea type="text" name="explication" [(ngModel)]="cours.explication" id="Explication" class="form-control mb-2" placeholder="Explication du cours"> </textarea>
-
-  </div>
-  <div class="mb-2 col-lg-6">
-
-    <label for="Contenu" class="form-label">Contenu</label>
-    <textarea name="contenu" id="Contenu" [(ngModel)]="cours.contenu"></textarea>
-  </div>
-  <div class="mb-2 col-lg-6">
-
-    <label for="Fichier" class="form-label">Fichier</label>
-    <input type="file" (change)="onFileSelected($event)" name="fichier" id="Fichier" class="form-control" placeholder="Fichier du cours">
-
-  </div>
-  <div class="text-center col-12 my-2">
-    <button class="btn btn-primary" (click)="saveCours()" >Enregistrer</button>
-  </div>
-</form> -->
 
 
-<!-- Pour le script de fichier ou contenu -->
-
-<!-- src/app/components/file-upload/file-upload.component.html -->
 
 <div class="container bg-light bg-opacity-75 py-4 my-1">
   <form (submit)="saveCours()"  class="row" >
@@ -80,15 +30,14 @@
                 </div>
               </div>
             </div>
-            <div class="editor-container__sidebar editor-container__sidebar_minimap"><div #editorMinimapElement></div></div>
+            <!-- <div class="editor-container__sidebar editor-container__sidebar_minimap"><div #editorMinimapElement></div></div> -->
           </div>
         </div>
       </div>
-
     </div>
-    <div class="mb-2 col-lg-6">
+    <div class="mb-2 col-12">
       <label class="form-label py-3" for="file">Fichiers:</label>
-      <input class="form-control" type="file" (change)="onFileSelected($event)">
+      <input class="form-control" type="file" value="assets/defeaultImage/FONDCOUR.png" (change)="onFileSelected($event)">
     </div>
     <div class="text-center col-12 my-2">
       <button type="submit" class="btn btn-primary">Enregistrer</button>

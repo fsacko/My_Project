@@ -18,7 +18,7 @@ export class EtudiantDataService {
   constructor(private data:DataService,private http:HttpClient) { }
   // Pour la liste des classes de l'etudiant connecter :
   universite_id = this.data.universite_id;
-  user = this.data.etudiantEmail;
+  user:any = this.data.etudiantEmail;
 
   getEtudiantClasse()
   {

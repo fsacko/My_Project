@@ -59,7 +59,7 @@ export class EtudiantEditComponent implements OnInit {
     this.data.getClasseData().subscribe(data =>{
       this.listeFiliere = data;
     });
-    this.etudiants.universite_id = this.data.users.universite_id;
+    this.etudiants.universite_id =  localStorage.getItem('users');
     this.annee = this.data.annee_scolaire;
   }
 

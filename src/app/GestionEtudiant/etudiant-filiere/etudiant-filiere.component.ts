@@ -25,7 +25,7 @@ export class EtudiantFiliereComponent implements OnInit {
   currentRowId: number | undefined;
   etudiants: any;
   annee: any;
-universites: any;
+  universites: any;
   // dtOptions: Config = {};
 
 
@@ -62,7 +62,7 @@ universites: any;
       this.listeFiliere = data;
     });
 
-    this.etudiantForm.universite_id = this.dataS.users.universite_id;
+    this.etudiantForm.universite_id =  localStorage.getItem('users');
     this.annee = this.dataS.annee_scolaire;
   }
 

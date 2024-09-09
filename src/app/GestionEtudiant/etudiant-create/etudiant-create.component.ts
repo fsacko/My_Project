@@ -33,7 +33,7 @@ export class EtudiantCreateComponent implements OnInit  {
     this.data.getClasseData().subscribe(data =>{
       this.listeFiliere = data;
     });
-    this.etudiant.universite_id = this.data.users.universite_id;
+    this.etudiant.universite_id = localStorage.getItem('users');
     this.annee = this.data.annee_scolaire;
     /** spinner starts on init */
   }

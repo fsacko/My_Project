@@ -7,6 +7,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { EtudiantDataService } from '../../service/etudiant/etudiant-data.service';
 import { NgxSpinnerService } from "ngx-spinner";
+import { AuthService } from '../../service/auth/auth.service';
 
 @Component({
   selector: 'app-main',
@@ -15,13 +16,12 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class MainComponent {
 
-
   universites:any ;
   currentAction :any;
   elementsName : any;
-  users : any;
+  users : any ;
 
-  constructor(public authService: AuthentificationService, private route : Router, private data:DataService,public xss:DomSanitizer,private dataS:EtudiantDataService,public spinner: NgxSpinnerService){}
+  constructor(public authService: AuthService, private route : Router, private data:DataService,public xss:DomSanitizer,private dataS:EtudiantDataService,public spinner: NgxSpinnerService){}
 
   ngOnInit() {
     this.spinner.show();
@@ -125,13 +125,13 @@ export class MainComponent {
 
 
   // Pour le logOut :
-  // handleLogout() {
-  //   this.authService.logout().subscribe({
-  //     next: () => {
-  //       this.route.navigate(['/login']);
-  //     }
-  //   });
-  // }
+  handleLogout() {
+    this.authService.logout().subscribe({
+      next: () => {
+        this.route.navigate(['/login']);
+      }
+    });
+  }
 
 
 

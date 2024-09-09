@@ -14,7 +14,7 @@ import { LoginComponent } from './login/login.component';
 import { EtudiantFiliereComponent } from './GestionEtudiant/etudiant-filiere/etudiant-filiere.component';
 import { AccueilComponent } from './Main/accueil/accueil.component';
 import { DashbordComponent } from './Main/dashbord/dashbord.component';
-import { ListeCoursComponent } from './GestionFiliere/cours/liste-cours/liste-cours.component';
+import { ListeCoursComponent } from './GestionFiliere/cours/edite-cours/liste-cours/liste-cours.component';
 import { EditeCoursComponent } from './GestionFiliere/cours/edite-cours/edite-cours.component';
 import { CreateCoursComponent } from './GestionFiliere/cours/create-cours/create-cours.component';
 import { ClasseAccueilComponent } from './GestionFiliere/classe-accueil/classe-accueil.component';
@@ -29,6 +29,7 @@ import { CourEtudiantComponent } from './PageEtudiants/cour-etudiant/cour-etudia
 import { ModuleEtudiantComponent } from './PageEtudiants/module-etudiant/module-etudiant.component';
 import { MainComponent } from './PageEtudiants/main/main.component';
 import { EtudiantEditComponent } from './GestionEtudiant/etudiant-edit/etudiant-edit.component';
+import { UpdateCoursComponent } from './GestionFiliere/cours/update-cours/update-cours.component';
 
 const routes: Routes = [
     // {path : '', component : LoginComponent},
@@ -52,8 +53,9 @@ const routes: Routes = [
       {path : 'gestion/Cours', component : ClasseCoursComponent, children:[
         {path: '', component: ListeCoursComponent},
         {path: 'liste', component: ListeCoursComponent},
-        {path: 'edit', component: EditeCoursComponent },
-        {path: 'new', component: CreateCoursComponent }
+        {path: 'edit', component: EditeCoursComponent},
+        {path: 'update/:id', component: UpdateCoursComponent },
+        {path: 'new', component: CreateCoursComponent },
       ]},
       {path : 'gestion/Modules', component : ModuleComponent, children:[
         {path: '', component: ModuleListeComponent},

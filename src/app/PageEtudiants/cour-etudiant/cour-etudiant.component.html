@@ -6,50 +6,99 @@
     La liste des Cours Pour l'ensemble des modules
   </h2>
 </div>
-<div  class="table-responsive bg-light bg-opacity-75" >
-  <table  class="table table-striped-columns border-1">
-    <thead>
-      <tr >
-        <th scope="col">Aperçu</th><th scope="col">Chapitre</th><th scope="col">Titre</th><th scope="col">Modules</th><th scope="col">Telecharger</th>
-      </tr>
-    </thead>
-    <tbody >
-      <tr style="font-size: small;" *ngFor="let cour of cours">
-        <td *ngIf="cour.fichier">
-          <div [ngSwitch]="getFileType(cour.fichier)">
-            <img *ngSwitchCase="'image'" [src]="cour.fichier" alt="{{ cour.title }}" width="60" height="90" >
-            <video *ngSwitchCase="'video'" [src]="xss.bypassSecurityTrustUrl(cour.fichier)" controls  width="320" height="240" autoplay type="video"></video>
-            <audio *ngSwitchCase="'audio'" [src]="cour.fichier" controls></audio>
-            <object *ngSwitchCase="'pdf'" [data]="xss.bypassSecurityTrustResourceUrl(cour.fichier)" type="application/pdf"  width="320" height="240">
-               <a class="btn btn-primary small" [href]="xss.bypassSecurityTrustUrl(cour.fichier)" [download]="cour.titre" >Telecharger PDF</a>
-            </object>
-            <!-- <object *ngSwitchDefault [data]="xss.bypassSecurityTrustResourceUrl(cour.fichier)" type="application/pdf" height="280" width="320">
-               <a class="btn btn-primary small" [href]="xss.bypassSecurityTrustUrl(cour.fichier)" target="_blank">Telecharger Fichier</a>
-            </object> -->
-            <div *ngSwitchDefault>
-              <a class="btn btn-primary small" [href]="xss.bypassSecurityTrustUrl(cour.fichier)" [download]="cour.titre" target="_blank">Telecharger Fichier</a>
+@if (cours) {
+  <div  class="table-responsive bg-light bg-opacity-75" >
+    <table  class="table table-striped-columns border-1">
+      <thead>
+        <tr >
+          <!-- <th scope="col">Aperçu</th> -->
+          <th scope="col">Chapitre</th><th scope="col">Modules</th><th scope="col">Voir Contenu</th><th scope="col">Telecharger</th>
+        </tr>
+      </thead>
+      <tbody >
+        <tr style="font-size: small;" *ngFor="let cour of cours">
+          <!-- <td *ngIf="cour.fichier">
+            <div [ngSwitch]="getFileType(cour.fichier)">
+              <img *ngSwitchCase="'image'" [src]="cour.fichier" alt="{{ cour.title }}" width="60" height="90" >
+              <video *ngSwitchCase="'video'" [src]="xss.bypassSecurityTrustUrl(cour.fichier)" controls  width="320" height="240" autoplay type="video"></video>
+              <audio *ngSwitchCase="'audio'" [src]="cour.fichier" controls></audio>
+              <object *ngSwitchCase="'pdf'" [data]="xss.bypassSecurityTrustResourceUrl(cour.fichier)" type="application/pdf"  width="320" height="240">
+                 <a class="btn btn-primary small" [href]="xss.bypassSecurityTrustUrl(cour.fichier)" [download]="cour.titre" >Telecharger PDF</a>
+              </object>
+               <object *ngSwitchDefault [data]="xss.bypassSecurityTrustResourceUrl(cour.fichier)" type="application/pdf" height="280" width="320">
+                 <a class="btn btn-primary small" [href]="xss.bypassSecurityTrustUrl(cour.fichier)" target="_blank">Telecharger Fichier</a>
+              </object>
+              <div *ngSwitchDefault>
+                <a class="btn btn-primary small" [href]="xss.bypassSecurityTrustUrl(cour.fichier)" [download]="cour.titre" target="_blank">Telecharger Fichier</a>
+              </div>
             </div>
-          </div>
-        </td>
-        <td>{{cour.titre}}</td>
-        <td>{{cour.sous_titre}}</td>
-        <td><strong>{{cour.nom}}</strong><sup>{{cour.sigle}}</sup></td>
-        <td>
-          <div>
-              <a class="badge bg-success" [href]="xss.bypassSecurityTrustUrl(cour.fichier)" target="_blank" [download]="cour.titre" >Telecharger Fichier</a>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-    <tfoot class="bg-body-tertiary">
-      <tr>
-        <td>A</td>
-        <td>B</td>
-        <td>C</td>
-        <td>D</td>
-        <td>E</td>
-      </tr>
-    </tfoot>
-  </table>
+          </td> -->
+          <td>{{cour.titre}}</td>
+          <td>{{cour.nom}}</td>
+          <td>
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"  (click)="voirContenu(cour)" >Voir Cour</button>
+          </td>
+          <td>
+            <div>
+                <a class="badge bg-success" [href]="xss.bypassSecurityTrustUrl(cour.fichier)" target="_blank" download="{{cour.fichier}}" >Telecharger Fichier</a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot class="bg-body-tertiary">
+        <tr>
+          <!-- <td>A</td> -->
+          <td>B</td>
+          <td>C</td>
+          <td>D</td>
+          <td>E</td>
+        </tr>
+      </tfoot>
+    </table>
 
-</div>
+  </div>
+
+
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" *ngIf="voirCours">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasRightLabel"><strong>{{voirCours.titre}}</strong><sup>{{voirCours.sigle}}</sup></h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body" *ngIf="voirCours.contenu != null">
+      <div  *ngIf="voirCours.fichier">
+        <div [ngSwitch]="getFileType(voirCours.fichier)">
+          <img *ngSwitchCase="'image'" [src]="voirCours.fichier" alt="{{ voirCours.title }}" width="100%" height="320" >
+          <video *ngSwitchCase="'video'" [src]="xss.bypassSecurityTrustUrl(voirCours.fichier)" controls  width="320" height="240" [autoplay]=true type="video"></video>
+          <audio *ngSwitchCase="'audio'" [src]="voirCours.fichier" controls></audio>
+          <object *ngSwitchCase="'pdf'" [data]="xss.bypassSecurityTrustResourceUrl(voirCours.fichier)" type="application/pdf"  width="320" height="240">
+             <a class="btn btn-primary small" [href]="xss.bypassSecurityTrustUrl(voirCours.fichier)" download="{{xss.bypassSecurityTrustUrl(voirCours.fichier)}}" >Telecharger PDF</a>
+          </object>
+           <!-- <object *ngSwitchDefault [data]="xss.bypassSecurityTrustResourceUrl(voirCours.fichier)" type="application/pdf" height="280" width="320">
+             <a class="btn btn-primary small" [href]="xss.bypassSecurityTrustUrl(voirCours.fichier)" target="_blank">Telecharger Fichier</a>
+          </object> -->
+          <div *ngSwitchDefault>
+            <a class="btn btn-primary small" [href]="xss.bypassSecurityTrustUrl(voirCours.fichier)" download="{{xss.bypassSecurityTrustUrl(voirCours.fichier)}}" target="_blank">Telecharger Fichier</a>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="contenuHtml != null">
+        <div class="editor-container editor-container_document-editor" #editorContainerElement>
+              <div #editorElement [innerHTML]="contenuHtml">
+                <!-- <ckeditor [editor]="Editor" [config]="Config"/> -->
+              </div>
+        </div>
+      </div>
+      <div *ngIf="contenuHtml == null">
+        <i>Pas de contenu pour ce cours</i>
+        <!-- Pour donner la main au telechargement -->
+        <a class="btn btn-primary small" [href]="xss.bypassSecurityTrustUrl(voirCours.fichier)" [download]="xss.bypassSecurityTrustUrl(voirCours.fichier)" target="_blank">Telecharger Fichier</a>
+      </div>
+    </div>
+  </div>
+}
+@else {
+  <div>
+   <i>Pas de cours pour ce Module</i>
+  </div>
+}

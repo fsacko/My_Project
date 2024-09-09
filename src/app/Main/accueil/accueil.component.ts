@@ -5,6 +5,7 @@ import { DataService } from '../../service/data.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import SimpleBar from 'simplebar';
 import { NgxSpinnerService } from "ngx-spinner";
+import { AuthService } from '../../service/auth/auth.service';
 
 @Component({
   selector: 'app-accueil',
@@ -19,7 +20,7 @@ export class AccueilComponent implements OnInit {
   elementsName : any;
   users : any;
 
-  constructor(public authService: AuthentificationService, private route : Router, private data:DataService,public xss:DomSanitizer,public spinner: NgxSpinnerService){}
+  constructor(public authService: AuthService, private route : Router, private data:DataService,public xss:DomSanitizer,public spinner: NgxSpinnerService){}
 
   ngOnInit() {
 

@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Login } from '../../model/Login.model';
 import { Observable, of } from 'rxjs';
 import { Token } from '@angular/compiler';
+import { DataService } from '../data.service';
+import SimpleBar from 'simplebar';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +16,12 @@ export class AuthService {
 
   userValide: Login | undefined;
   type!:string;
+  universite : any;
+  universite_id:number|undefined;
+  users: any;
   // options : any;
 
-  constructor(private http:HttpClient)
+  constructor(private http:HttpClient,private data:DataService)
   {
 
 
@@ -36,10 +41,15 @@ export class AuthService {
 
   }
 
-  public valideUser (login:Login,type:string):Observable<boolean>
+  public valideUser (login:Login,type:string,universites:any,users:any):Observable<boolean>
   {
     this.type = type;
     this.userValide = login;
+    // const universite_id = universites;
+    // this.data.universite_id = universite_id;
+    // this.data.getUniversite().subscribe();
+    // const user = users;
+    this.data.getUser(users);
     return of(true);
   }
 
@@ -48,15 +58,61 @@ export class AuthService {
     return this.userValide!=undefined;
   }
 
-  logout()
-  {
-    const options = {
-      headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
-    };
-
-    // options.headers.Authorization = 'Bearer ' + localStorage.getItem('access_token');
-    // return this.http.get(this.apiUrl + '/token/revoke',options);
+  public logout(): Observable <boolean> {
+    this.userValide = undefined;
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("name");
+    localStorage.removeItem("email");
+    localStorage.removeItem("users");
+    return of(true);
 
   }
+
+
+ initialize()
+{
+  this.initializeSimplebar();
+  this.initializeSidebarCollapse();
+}
+
+ initializeSimplebar()
+{
+  const simplebarElement:HTMLCollectionOf<Element> = document.getElementsByClassName("js-simplebar");
+
+  if(simplebarElement){
+    const simpleNav = simplebarElement[0] as HTMLElement
+    const simplebarInstance = new SimpleBar(simpleNav);
+
+    /* Recalculate simplebar on sidebar dropdown toggle */
+    const sidebarDropdowns = document.querySelectorAll(".js-sidebar [data-bs-parent]");
+
+    sidebarDropdowns.forEach(link => {
+      link.addEventListener("shown.bs.collapse", () => {
+        simplebarInstance.recalculate();
+      });
+      link.addEventListener("hidden.bs.collapse", () => {
+        simplebarInstance.recalculate();
+      });
+    });
+  }
+}
+
+ initializeSidebarCollapse()
+{
+  const sidebarElement:HTMLCollectionOf<Element> = document.getElementsByClassName("js-sidebar");
+  const sidebarToggleElement:HTMLCollectionOf<Element>  = document.getElementsByClassName("js-sidebar-toggle");
+
+  if(sidebarElement && sidebarToggleElement) {
+    const sideBto = sidebarToggleElement[0] as HTMLElement;
+    const sideEl = sidebarElement[0] as HTMLElement;
+    sideBto.addEventListener("click", () => {
+      sideEl.classList.toggle("collapsed");
+
+      sideEl.addEventListener("transitionend", () => {
+        window.dispatchEvent(new Event("resize"));
+      });
+    });
+  }
+}
 
 }

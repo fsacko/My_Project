@@ -1,8 +1,6 @@
 <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
 <body>
-
-
-  <div action="" class="form">
+ <div action="" class="form">
     <span></span>
     <span></span>
     <span></span>
@@ -16,7 +14,7 @@
         <form [formGroup]="loginFormGroup" (ngSubmit)="login()">
               <div class="mb-3">
                 <label class="form-label">Role</label>
-                <select  name="type" class="form-control" formControlName="role">
+                <select  name="type" (click)="initialiser()" class="form-control" formControlName="role">
                   <option value="">Veillez vous identifier</option>
                   <option value="admin">Administration</option>
                   <option value="etudiant">Etudiant</option>
@@ -24,11 +22,11 @@
               </div>
                 <div class="mb-3">
                   <label class="form-label">Email</label>
-                  <input class="form-control form-control-lg input" [required]="true" type="email" name="email" placeholder="Entrer votre Email "  formControlName="email"/>
+                  <input  (click)="initialiser()" class="form-control form-control-lg input" fa-automobile type="email" name="email" placeholder="Entrer votre Email "  formControlName="email"/>
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Password</label>
-                  <input class="form-control form-control-lg input" [required]="true" type="password" name="password" value="massirekamara" placeholder="Entrer Mot de passe" formControlName="password" >
+                  <input (click)="initialiser()" class="form-control form-control-lg input" [required]="true" type="password" name="password" value="massirekamara" placeholder="Entrer Mot de passe" formControlName="password" >
                   <small>
                     <a href="#">Mot de passe oublié?</a>
                   </small>

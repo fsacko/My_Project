@@ -1,10 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../../service/data.service';
-import { Cours } from '../../../model/Cours.model';
-import { Router } from '@angular/router';
-import { NgxSpinnerService } from "ngx-spinner";
-// import { ClassicEditor, Bold, Essentials, Italic, Mention, Paragraph, Undo } from 'ckeditor5';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+// import { Cours } from '../../../CLASS/classe/classe';
 import {
 	DecoupledEditor,
 	AccessibilityHelp,
@@ -80,17 +77,16 @@ import {
 	type EditorConfig,
   ClassicEditor
 } from 'ckeditor5';
-
-import { Translations as translations } from 'ckeditor5';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Cours } from '../../../model/Cours.model';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-create-cours',
-  templateUrl: './create-cours.component.html',
-  styleUrl: './create-cours.component.css'
+  selector: 'app-update-cours',
+  templateUrl: './update-cours.component.html',
+  styleUrl: './update-cours.component.css'
 })
-export class CreateCoursComponent implements OnInit {
-
-
+export class UpdateCoursComponent implements OnInit{
 	@ViewChild('editorToolbarElement') private editorToolbar!: ElementRef<HTMLDivElement>;
 	@ViewChild('editorMenuBarElement') private editorMenuBar!: ElementRef<HTMLDivElement>;
 	@ViewChild('editorMinimapElement') private editorMinimap!: ElementRef<HTMLDivElement>;
@@ -135,7 +131,7 @@ export class CreateCoursComponent implements OnInit {
 				shouldNotGroupWhenFull: true
 			},
 			plugins: [
-				// AccessibilityHelp,
+				AccessibilityHelp,
 				Alignment,
 				Autoformat,
 				AutoImage,
@@ -155,10 +151,10 @@ export class CreateCoursComponent implements OnInit {
 				FontSize,
 				GeneralHtmlSupport,
 				Heading,
-				Highlight,
 				HorizontalLine,
 				HtmlComment,
 				HtmlEmbed,
+        Highlight,
 				ImageBlock,
 				ImageCaption,
 				ImageInline,
@@ -324,10 +320,10 @@ export class CreateCoursComponent implements OnInit {
 			menuBar: {
 				isVisible: true
 			},
-			// minimap: {
-			// 	container: this.editorMinimap.nativeElement,
-			// 	extraClasses: 'editor-container_include-minimap ck-minimap__iframe-content'
-			// },
+			minimap: {
+				container: this.editorMinimap.nativeElement,
+				extraClasses: 'editor-container_include-minimap ck-minimap__iframe-content'
+			},
 			placeholder: 'Contenu de cours ici !',
 			table: {
 				contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties']
@@ -368,67 +364,62 @@ export class CreateCoursComponent implements OnInit {
 	}
 	onChange(event: any) {
 	  const data = event?.editor?.getData();
-	  console.log('Contenu de l\'éditeur :', data);
-	  this.contenu = data;
+	  // console.log('Contenu de l\'éditeur :', data);
+	  this.cours.contenu = data;
 	}
-
 
   selectedFile!: File ;
   uploadProgress: number | null = null;
-  contenu:  any = 'Contenu du cours';
-  sous_titre: string = "";
-  titre: string = "";
-  constructor(private data: DataService,private route:Router,public spinner: NgxSpinnerService,private changeDetector: ChangeDetectorRef) {}
 
+   id: any;
+   cours= new Cours;
+  constructor(private route:ActivatedRoute,public xss:DomSanitizer,private data:DataService,private router:Router,public spinner: NgxSpinnerService,private changeDetector: ChangeDetectorRef){}
+  contenu:any;
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
+    this.cours.fichier = event.target.files[0];
     console.log(this.selectedFile);
   }
-  cours = new Cours;
-
-
-  ngOnInit():void
+  ngOnInit()
   {
-    this.spinner.show();
-    // console.log(this.config);
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 1000);
-    // this.model;
-    // this.coursFormGroup = this.formB.group({
-    //   fichier:
-    // });
-    // this.editorData = '<p>Contenu initial de l\'éditeur.</p>';
-    console.log(this.data.module_id);
-    console.log(this.data.filiere_id);
+
+    this.id= this.route.snapshot.paramMap.get('id');
+    // console.log(this.id);
+    this.data.courById(this.id).subscribe(res=>{
+      this.cours = res;
+      // this.contenu = res.contenu;
+      console.log(res);
+      this.fichierUrl = res.fichier;
+    })
   }
+  fichierUrl:string = "";
 
-  saveCours():void
-  {
-    const filiere_id = this.data.filiere_id;
-    const module_id = this.data.module_id;
-    if (this.selectedFile && this.titre && this.sous_titre) {
-
-      this.data.insertcour(this.selectedFile,this.titre,this.sous_titre,this.contenu,filiere_id,module_id).subscribe(event => {
-        if (typeof event === 'object' && event.status === 'progress') {
-          this.uploadProgress = event.message;
-        }
-        if (event.success) {
-          console.log('File uploaded successfully', event);
-        }
-        this.route.navigateByUrl('gestion/Cours/liste');
-      });
-      // this.data.insertcours(this.selectedFile,this.titre,this.sous_titre,this.contenu,filiere_id,module_id).subscribe(res=>{
-      //   this.route.navigateByUrl('gestion/Cours/liste');
-      //   console.log('Create Cours!!!');
-      // });
-    }
-    if(!this.selectedFile && this.contenu){
-      this.data.insertCourContenu(this.titre,this.sous_titre,this.contenu,filiere_id,module_id).subscribe();
-      this.route.navigateByUrl('gestion/Cours/liste');
-    }
-    else{
-      console.log("Fichier non prise en compte!!!!");
+  getFileType(filePath: string): string {
+    const fileExtension = filePath.split('.').pop();
+    switch (fileExtension) {
+      case 'jpg':
+      case 'jpeg':
+      case 'png':
+      case 'gif':
+      case 'svg':
+        return 'image';
+      case 'mp4':
+      case 'webm':
+      case 'ogg':
+        return 'video';
+      case 'mp3':
+      case 'wav':
+        return 'audio';
+      case 'pdf':
+      case 'pdfs':
+        return 'pdf';
+      default:
+        return 'other';
     }
   }
+  updateCours() {
+    this.data.updateCour(this.cours.id,this.cours).subscribe();
+    this.router.navigateByUrl("gestion/Cours/edite")
+  }
+
 }

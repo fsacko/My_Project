@@ -22,14 +22,39 @@
             <option  *ngIf="course.etat == 0"  value=""><button type="submit" (click)="active(course.id)"  class="badge bg-success">Actif</button></option>
             <option  *ngIf="course.etat == 1"  value=""><button type="submit" (click)="desactive(course.id)"  class="badge bg-danger">Inactif</button></option>
           </select> -->
-          <button  *ngIf="course.etat == 1" type="submit" class="btn btn-outline-primary m-lg-auto " style="font-size: x-small;"  data-bs-toggle="modal" data-bs-target="#modifier" (click)="desactive(course.id)">Actif</button>
-          <button  *ngIf="course.etat == 0" type="submit" class="btn btn-outline-danger m-lg-auto " style="font-size: x-small;"  data-bs-toggle="modal" data-bs-target="#modifier" (click)="active(course.id)">Inactif</button>
+          <button  *ngIf="course.etat == 1" type="submit" class="btn btn-outline-primary m-lg-auto " style="font-size: x-small;" (click)="desactive(course.id)">Actif</button>
+          <button  *ngIf="course.etat == 0" type="submit" class="btn btn-outline-danger m-lg-auto " style="font-size: x-small;" (click)="active(course.id)">Inactif</button>
         </td>
-        <td><button type="submit" class="btn btn-warning m-lg-auto " style="font-size: x-small;"  data-bs-toggle="modal" data-bs-target="#modifier" (click)="update(course.id)">Modifier</button></td>
-        <td><button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#supprimer" style="font-size: x-small;" (click)="delete(course.id)">supprimer</button></td>
+        <td><a  class="btn btn-warning m-lg-auto " style="font-size: x-small;" (click)="update(course.id)">Modifier</a></td>
+        <td><button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#supprimer" style="font-size: x-small;" (click)="getCoursId(course.id)">supprimer</button></td>
 
       </tr>
 
     </tbody>
   </table>
+</div>
+
+
+<div class="container">
+  <!-- Pour la suppression d'un Cours -->
+
+  <div class="modal fade border-danger-subtle" id="supprimer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalSuppression">Suppression</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Cours : <strong>{{Cour.titre}} </strong><br> Sous-Titre: <strong> {{Cour.sous_titre}}</strong><br>
+          Voulez-vous vraiment supprimer cet Cours ?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="submit" (click)="delete(Cour.id)" class="btn btn-danger" data-bs-dismiss="modal">Supprimer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

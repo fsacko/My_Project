@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../../service/data.service';
+import { DataService } from '../../../../service/data.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgxSpinnerService } from "ngx-spinner";
 import { Route, Router } from '@angular/router';

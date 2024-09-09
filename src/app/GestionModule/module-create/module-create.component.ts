@@ -24,7 +24,7 @@ export class ModuleCreateComponent implements OnInit {
     this.data.getUniversite().subscribe(res =>{
       this.universites = res;
     } );
-    this.module.universite_id = this.data.users.universite_id;
+    this.module.universite_id =  localStorage.getItem('users');
 
     this.data.getClasseData().subscribe(data =>{
       this.classeData = data;
@@ -37,7 +37,7 @@ export class ModuleCreateComponent implements OnInit {
   insertModule() {
     this.data.insertModule(this.module).subscribe(res =>{
       const redirect = res;
-      this.route.navigate([redirect]);
+      this.route.navigate(["gestion/Filieres/liste"]);
     });
   }
 

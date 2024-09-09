@@ -12,14 +12,11 @@ import { NgxSpinnerService } from "ngx-spinner";
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
-
+  constructor(private formB:FormBuilder, private router:Router,private auth:AuthService,private data:DataService,public spinner: NgxSpinnerService ){}
   loginFormGroup!: FormGroup;
   errorMessage: any;
   AuthentificationService: any;
   universites: any;
-
-
-  constructor(private formB:FormBuilder, private router:Router,private auth:AuthService,private data:DataService,public spinner: NgxSpinnerService ){}
   ngOnInit(): void {
     this.loginFormGroup =this.formB.group({
       role:this.formB.control(''),
@@ -27,19 +24,15 @@ export class LoginComponent implements OnInit {
       password: this.formB.control('',Validators.compose([Validators.required,Validators.minLength(4)]))
     });
   }
-
-
-
+  initialiser(){
+    this.errorMessage='';
+  }
   // Pour API laravel :
-
   login(): void
   {
-
     let email = this.loginFormGroup.value.email;
     let password = this.loginFormGroup.value.password;
     let role = this.loginFormGroup.value.role;
-    // let email = "mk79@gmail.com";
-    // let password = "xHDCNkSNv:4kh3g";
     const options = {
       headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
     };
@@ -48,58 +41,43 @@ export class LoginComponent implements OnInit {
       this.router.navigateByUrl('/login');
     }
     else{
+
       this.auth.login(email, password,role).subscribe(res => {
 
         const user = res.user ;
 
         if (user) {
-          console.log(user);
-
-
           this.data.universite_id = user.universite_id ;
           this.data.etudiantEmail = user.email;
-          console.log(this.data.etudiantEmail);
           this.data.etudiantEmail = email;
-          console.log(this.data.etudiantEmail);
 
-          const redirect = res.redirect ;
+          // const redirect = res.redirect ;
           this.data.getUser(res.user);  //Pour inserer l'utilisateur connecté dans la methode getUser du service data
           this.data.getAnnee().subscribe(annee => {this.data.annee_scolaire = annee});
-          this.auth.valideUser(res,user.type).subscribe();
+          this.auth.valideUser(res,user.type,res.user.universite_id,res.user).subscribe();
 
-          console.log(user.universite_id);
+          // console.log(res.access_token)
 
-          this.data.getUniversite().subscribe(res =>{this.data.universites = res;console.log(this.data.universites);});
-          this.spinner.show(
+          localStorage.setItem("authToken",res.access_token);
+          localStorage.setItem('name',res.user.name)
+          localStorage.setItem("email",res.user.email);
+          if (user.type == 'etudiant') {
+            const redirectUrlE = localStorage.getItem('redirectUrlE') || res.redirect;
+            localStorage.removeItem('redirectUrlE');
+            this.router.navigate([redirectUrlE]);
+          }
+          localStorage.setItem("users",res.user.universite_id);
 
-          );
-
-          setTimeout(() => {
-            /** spinner ends after 5 seconds */
-            this.spinner.hide();
-          }, 5000);
-
-          this.router.navigate([redirect]);
-
+          const redirectUrl = localStorage.getItem('redirectUrl') || res.redirect;
+          localStorage.removeItem('redirectUrl');
+          this.router.navigate([redirectUrl]);
         }
-
         else{
-          const msg = res.error;
-
-          let time = setInterval(() => {
-            this.errorMessage = msg
-            },1000);
-          // setInterval(this.errorMessage,5000);
-          console.log(this.errorMessage);
+          this.errorMessage = res.error;
         }
-
       });
     }
-
   }
-
-
-
 }
 
 // subscribe(next:(res: any) => {

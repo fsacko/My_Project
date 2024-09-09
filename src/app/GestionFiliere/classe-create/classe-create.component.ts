@@ -26,7 +26,7 @@ export class ClasseCreateComponent implements OnInit  {
     this.data.getUniversite().subscribe(res => {
       this.universite = res
     });
-    this.filiere.universite_id = this.data.users.universite_id;
+    this.filiere.universite_id =  localStorage.getItem('users');
   }
   addFiliere() {
     // console.log(this.filiere);

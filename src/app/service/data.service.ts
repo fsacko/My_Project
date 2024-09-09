@@ -10,7 +10,7 @@ import { Cours } from '../model/Cours.model';
   providedIn: 'root'
 })
 export class DataService {
-  universites: any;
+  // universites: any;
   session_success:string|undefined;
   dataEtudiants: any;
 
@@ -20,11 +20,11 @@ export class DataService {
 
 
 // *******************************POUR L'UNIVERSITE *********************************
-  universite_id:number | undefined;
+  universite_id:any = localStorage.getItem("users");
   universite_nom:string | undefined;
-  users: any | undefined;
+  users: any = localStorage.getItem('name');
   annee_scolaire: any;
-  etudiantEmail!:string;
+  etudiantEmail:any = localStorage.getItem('email');
 
   getUser(value:any){
     return this.users = value; //Pour les informations de l'utilisateur connecter
@@ -32,19 +32,21 @@ export class DataService {
 
   getData(res:any):Observable<any>
   {
+    const universite_id = localStorage.getItem('users');
     const options = {
       headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
     };
-  return this.httpClient.get<any>(`http://127.0.0.1:8000/api/${res}/`+this.universite_id);
+  return this.httpClient.get<any>(`http://127.0.0.1:8000/api/${res}/`+universite_id);
   }
 
 
   getUniversite():Observable<any>
   {
+    const universite_id = localStorage.getItem('users');
       const options = {
         headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
       };
-    return this.httpClient.get<any>('http://127.0.0.1:8000/api/universite/'+this.universite_id,options);
+    return this.httpClient.get<any>('http://127.0.0.1:8000/api/universite/'+universite_id,options);
   }
 
   getAnnee():Observable<any>
@@ -59,15 +61,17 @@ export class DataService {
     // La liste des etudiants
     getEtudiantData():Observable<any>
     {
+      const universite_id = localStorage.getItem('users');
       const options = {
         headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
       };
-      return this.httpClient.get('http://127.0.0.1:8000/api/listeEtudiants/'+this.universite_id,options);
+      return this.httpClient.get('http://127.0.0.1:8000/api/listeEtudiants/'+universite_id,options);
     }
 
     // Pour recuperer les informations d'un etudiant:
     getEtudiantDataById(id:any,filiere_id:any):Observable<any>
     {
+      const universite_id = localStorage.getItem('users');
       const options = {
         headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
       };
@@ -77,10 +81,11 @@ export class DataService {
     // Pour recuperer les informations des etudiants d'une filiere:
     getEtudiantDataByFiliere(filiere_id:any):Observable<any>
     {
+      const universite_id = localStorage.getItem('users');
       const options = {
         headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
       };
-      return this.httpClient.get<any>('http://127.0.0.1:8000/api/etudiantByFiliere/'+filiere_id+'/'+this.universite_id,options);
+      return this.httpClient.get<any>('http://127.0.0.1:8000/api/etudiantByFiliere/'+filiere_id+'/'+universite_id,options);
     }
 
     // L'insertion d'un nouveau Etudiant
@@ -116,10 +121,11 @@ export class DataService {
 
     getClasseData()
     {
+      const universite_id = localStorage.getItem('users');
       const options = {
         headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
       };
-      return this.httpClient.get<any>('http://127.0.0.1:8000/api/listeClasse/'+this.universite_id,options);
+      return this.httpClient.get<any>('http://127.0.0.1:8000/api/listeClasse/'+universite_id,options);
     }
 
     insertClasse(filiere: Classe)
@@ -132,19 +138,21 @@ export class DataService {
 
     showClasse()
     {
+      const universite_id = localStorage.getItem('users');
       const options = {
         headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
       };
-      return this.httpClient.get<any>('http://127.0.0.1:8000/api/showClasse/'+this.universite_id,options);
+      return this.httpClient.get<any>('http://127.0.0.1:8000/api/showClasse/'+universite_id,options);
     }
 
     getClasseById(id:any)
     {
+      const universite_id = localStorage.getItem('users');
 
       const options = {
         headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
       };
-      return this.httpClient.get<any>('http://127.0.0.1:8000/api/getModuleByFiliereId/'+this.universite_id+'/'+id,options);
+      return this.httpClient.get<any>('http://127.0.0.1:8000/api/getModuleByFiliereId/'+universite_id+'/'+id,options);
     }
     // Mise à jour de Classe
     updateFiliere(id:any,data:Classe)
@@ -168,10 +176,11 @@ export class DataService {
 // ***********************************POUR LES Modules******************************
   getModuleData()
   {
+    const universite_id = localStorage.getItem('users');
     const options = {
       headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
     };
-    return this.httpClient.get<any>('http://127.0.0.1:8000/api/listeModule/'+this.universite_id,options);
+    return this.httpClient.get<any>('http://127.0.0.1:8000/api/listeModule/'+universite_id,options);
   }
 
   insertModule(module: Module) {
@@ -184,12 +193,31 @@ export class DataService {
 // Pour recuperer Modules par filieres
   getModule(filiere_id:any)
   {
+    const universite_id = localStorage.getItem('users');
     const options = {
       headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
     };
-    return this.httpClient.get<any>('http://127.0.0.1:8000/api/moduleByfiliere/'+this.universite_id+'/'+filiere_id,options);
+    return this.httpClient.get<any>('http://127.0.0.1:8000/api/moduleByfiliere/'+universite_id+'/'+filiere_id,options);
   }
 
+  updateModule(id:any,module:Module)
+  {
+    const universite_id = localStorage.getItem('users');
+    const options = {
+      headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
+    };
+    return this.httpClient.put<any>('http://127.0.0.1:8000/api/moduleUpdate/'+id,module,options)
+  }
+
+  deleteModule(id:any)
+  {
+
+    const universite_id = localStorage.getItem('users');
+    const options = {
+      headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
+    };
+    return this.httpClient.get<any>('http://127.0.0.1:8000/api/moduleDelete/'+id,options);
+  }
 
 // ***********************************POUR LES COURS******************************
   module_id:any;
@@ -221,7 +249,7 @@ export class DataService {
       headers: new HttpHeaders({
         'Accept': 'application/json'
       })
-    }).pipe(
+      }).pipe(
       map(event => {
         switch (event.type) {
           case HttpEventType.UploadProgress:
@@ -236,21 +264,22 @@ export class DataService {
     );
 
   }
-  // insertcours(fichier: File,titre:string,sous_titre:string,contenu:string, filiere_id:any,module_id:any) {
-  //   const options = {
-  //     headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
-  //   };
-  //   const formData: FormData = new FormData();
-  //   formData.append('fichier', fichier);
-  //   formData.append('titre', titre);
-  //   formData.append('sous_titre', sous_titre);
-  //   formData.append('contenu', contenu);
-  //   formData.append('filiere_id', filiere_id);
-  //   formData.append('module_id', module_id);
 
-  //   return this.httpClient.post<any>('http://127.0.0.1:8000/api/cours',formData,options);
-  // }
 
+  // Pour l'insertion des cours
+  insertCourContenu(titre:string,sous_titre:string,contenu:any, filiere_id:any,module_id:any) {
+
+    const options = {
+      headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
+    };
+    const formData: FormData = new FormData();
+    formData.append('titre', titre);
+    formData.append('sous_titre', sous_titre);
+    formData.append('contenu', contenu);
+    formData.append('filiere_id', filiere_id);
+    formData.append('module_id', module_id);
+    return this.httpClient.post<any>('http://127.0.0.1:8000/api/cours',formData,options);
+  }
   // Active Cours :
   activeCour(id:any)
   {
@@ -267,6 +296,30 @@ export class DataService {
       headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
     };
     return this.httpClient.get<any>('http://127.0.0.1:8000/api/desactiveCours/'+id,options);
+  }
+  // Cours By  ID :
+  courById(id:any)
+  {
+    const options = {
+      headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
+    };
+    return this.httpClient.get<any>('http://127.0.0.1:8000/api/cours/'+id,options);
+  }
+  // Mise à jour d'un Cour
+  updateCour(id:any,data:Cours)
+  {
+    const options = {
+      headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
+    };
+    return this.httpClient.put<any>('http://127.0.0.1:8000/api/cours/'+id,data,options);
+  }
+  // Suppression d'un Cour
+  deleteCour(id:any)
+  {
+    const options = {
+      headers : new HttpHeaders({Accept: 'application/json','Content-Type': 'application/json'})
+    };
+    return this.httpClient.get<any>('http://127.0.0.1:8000/api/coursD/'+id,options);
   }
 
 }

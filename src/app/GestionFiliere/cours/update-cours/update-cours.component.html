@@ -1,0 +1,62 @@
+
+
+<script type="Java" src="script.js" async></script>
+
+
+
+<div class="container bg-light bg-opacity-75 py-4 my-1">
+  <form (submit)="updateCours()"  class="row" >
+    <div class="mb-2 col-lg-6">
+      <label class="form-label py-3" for="title">Chapitre</label>
+      <input class="form-control" type="text" id="title" [(ngModel)]="cours.titre" [ngModelOptions]="{standalone: true}" name="cours.titre">
+    </div>
+    <div class="mb-2 col-lg-6">
+      <label class="form-label py-3" for="subtitle">Titre </label>
+      <input class="form-control" type="text" id="subtitle" [(ngModel)]="cours.sous_titre" [ngModelOptions]="{standalone: true}" name="cours.sous_titre">
+    </div>
+    <div class="mb-2 col-lg-12">
+      <label class="form-label py-3" for="content">Content:</label>
+      <!-- <textarea  class="form-control"  id="content" [(ngModel)]="contenu" name="content"></textarea> -->
+      <div  class="main-container">
+
+        <div class="editor-container editor-container_document-editor editor-container_include-minimap" #editorContainerElement>
+          <div class="editor-container__menu-bar" #editorMenuBarElement></div>
+          <div class="editor-container__toolbar" #editorToolbarElement></div>
+          <div class="editor-container__minimap-wrapper">
+            <div class="editor-container__editor-wrapper">
+              <div class="editor-container__editor">
+                <div #editorElement>
+                  <ckeditor [editor]="Editor" [config]="config" [(ngModel)]="cours.contenu" (change)="onChange($event)" [ngModelOptions]="{ standalone: true }" name="cours.contenu" *ngIf="isLayoutReady" />
+                </div>
+              </div>
+            </div>
+            <div class="editor-container__sidebar editor-container__sidebar_minimap"><div #editorMinimapElement></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mb-2 col-6">
+      <label class="form-label py-3" for="file">Fichiers:</label>
+      <input class="form-control" type="file" [(ngModel)]="cours.fichier"  (change)="onFileSelected($event)" [ngModelOptions]="{standalone: true}" name="cours.fichier" >
+    </div>
+    <div class="mb-2 col-6" *ngIf="cours.fichier != null">
+      <div [ngSwitch]="getFileType(fichierUrl)">
+        <img *ngSwitchCase="'image'" [src]="fichierUrl" alt="{{ cours.titre }}" width="100%" height="320" >
+        <video *ngSwitchCase="'video'" [src]="xss.bypassSecurityTrustUrl(fichierUrl)" controls  width="320" height="240" [autoplay]=true type="video"></video>
+        <audio *ngSwitchCase="'audio'" [src]="fichierUrl" controls></audio>
+        <object *ngSwitchCase="'pdf'" [data]="xss.bypassSecurityTrustResourceUrl(fichierUrl)" type="application/pdf"  width="320" height="240">
+        </object>
+         <!-- <object *ngSwitchDefault [data]="xss.bypassSecurityTrustResourceUrl(voirfichierUrl)" type="application/pdf" height="280" width="320">
+           <a class="btn btn-primary small" [href]="xss.bypassSecurityTrustUrl(voirCours.fichier)" target="_blank">Telecharger Fichier</a>
+        </object> -->
+        <div *ngSwitchDefault>
+          <p>fichier du type non prise en compte </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center col-12 my-2">
+      <button type="submit" class="btn btn-primary">Update</button>
+    </div>
+  </form>
+</div>

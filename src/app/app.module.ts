@@ -28,7 +28,7 @@ import { DashbordComponent } from './Main/dashbord/dashbord.component';
 import { ProfilComponent } from './Profil/profil/profil.component';
 import { CreateCoursComponent } from './GestionFiliere/cours/create-cours/create-cours.component';
 import { EditeCoursComponent } from './GestionFiliere/cours/edite-cours/edite-cours.component';
-import { ListeCoursComponent } from './GestionFiliere/cours/liste-cours/liste-cours.component';
+import { ListeCoursComponent } from './GestionFiliere/cours/edite-cours/liste-cours/liste-cours.component';
 import { ClasseAccueilComponent } from './GestionFiliere/classe-accueil/classe-accueil.component';
 import { ModuleComponent } from './GestionModule/module/module.component';
 import { ModuleCreateComponent } from './GestionModule/module-create/module-create.component';
@@ -44,6 +44,7 @@ import { SimplebarAngularModule } from 'simplebar-angular';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { UpdateCoursComponent } from './GestionFiliere/cours/update-cours/update-cours.component';
 // import { CKEditorModule } from 'ckeditor4-angular';
 
 // import { ClrCheckboxModule, ClrCheckboxWrapper, ClrInputModule, ClrPassword, ClrPasswordContainer, ClrPasswordModule, ClrSelectModule } from '@clr/angular';
@@ -85,6 +86,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
         CourEtudiantComponent,
         ModuleEtudiantComponent,
         MainComponent,
+        UpdateCoursComponent,
     ],
     providers: [
         provideHttpClient(withFetch())
